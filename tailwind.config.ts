@@ -90,8 +90,11 @@ const config: Config = {
         field: '10px',
       },
       screens: {
-        // 820px is the site's primary breakpoint - 24 uses
-        nav: '820px',
+        // 820px is the live site's primary breakpoint (24 uses) and still
+        // drives layout elsewhere. The header bar is the exception: seven
+        // top-level items plus a CTA need ~980px of content, so the desktop
+        // nav only switches on once there is room for it on one line.
+        nav: '1060px',
       },
       keyframes: {
         'fade-up': {
