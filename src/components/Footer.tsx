@@ -103,17 +103,26 @@ export function Footer() {
                 );
               })}
             </ul>
-            <Image
-              src="/logo/nexcore-logo-primary.svg"
-              alt=""
-              width={160}
-              height={40}
-              className="mt-8 h-[26px] w-auto opacity-70"
-            />
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8">
+        {/* Brand lockup with the tagline.
+            This asset is a solid black rectangle with a white glow — no alpha —
+            so on the near-black footer (#001018) it would read as a faint box.
+            `mix-blend-mode: screen` drops the black to nothing and keeps the
+            glow and brand colours, so no edge shows. */}
+        <div className="mt-16 flex justify-center">
+          <Image
+            src="/img/nexcore-logo-2026-1.png"
+            alt="NexCore — The Starting Point For It All"
+            width={2172}
+            height={724}
+            sizes="(max-width: 640px) 88vw, 460px"
+            className="h-auto w-[min(460px,88vw)] mix-blend-screen"
+          />
+        </div>
+
+        <div className="mt-10 border-t border-white/10 pt-8">
           <p className="max-w-prose font-inter text-[13px] leading-relaxed text-white/45">
             Content, including images, displayed on this website is protected by copyright laws.
             Downloading, republication, retransmission or reproduction of content on this website is
