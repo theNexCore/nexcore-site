@@ -1,0 +1,499 @@
+{
+  "OFFICES": [
+    {
+      "id": "executive-suite",
+      "name": "Executive Suite",
+      "price": 1395,
+      "capacity": "Up to 6 people",
+      "window": "Private rear office with natural light",
+      "guests": "Up to two guests daily",
+      "desc": "Large executive workspace featuring an open front office, private rear office, and room for meetings, collaboration, or executive operations.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190404_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190446_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190423_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190431_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190411_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/executive-office1_orig.png"
+      ]
+    },
+    {
+      "id": "lilianas-office",
+      "name": "Liliana's Office",
+      "price": 1195,
+      "capacity": "4–5 people",
+      "window": "Two large windows, abundant natural light",
+      "guests": "Up to two guests daily",
+      "desc": "Private waiting area, reception space, and generous natural light create an ideal client-facing office.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-194427_orig.jpg"
+      ]
+    },
+    {
+      "id": "left-column-office",
+      "name": "Left Column Office",
+      "price": 995,
+      "capacity": "4–5 people",
+      "window": "Small window",
+      "guests": "One guest daily",
+      "desc": "Comfortable office with natural light, ideal for professionals needing additional space.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134854_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134832_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185937_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185947_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190002_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134822_orig.jpg"
+      ]
+    },
+    {
+      "id": "right-column-office",
+      "name": "Right Column Office",
+      "price": 995,
+      "capacity": "4–5 people",
+      "window": "Small window",
+      "guests": "One guest daily",
+      "desc": "Bright office with a flexible layout and comfortable workspace for growing businesses.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190021_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190014_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190029_orig.jpg"
+      ]
+    },
+    {
+      "id": "access-office",
+      "name": "Access Office",
+      "price": 965,
+      "capacity": "4–5 people",
+      "window": "No window",
+      "guests": "One guest daily",
+      "desc": "Spacious interior office with convenient access and room for a growing team.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185904_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134738_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185825_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185916_orig.jpg"
+      ]
+    },
+    {
+      "id": "beam-office",
+      "name": "Beam Office",
+      "price": 945,
+      "capacity": "3–4 people",
+      "window": "Two large windows, abundant natural light",
+      "guests": "One guest daily",
+      "desc": "Bright office featuring exposed architectural beams and abundant natural light.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184841_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184851_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184858_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184916_orig.jpg"
+      ]
+    },
+    {
+      "id": "corner-office",
+      "name": "Corner Office",
+      "price": 945,
+      "capacity": "3–5 people",
+      "window": "Two large windows, lots of natural light",
+      "guests": "One guest daily",
+      "desc": "Corner location with expansive windows providing one of the brightest offices in the building.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184655_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184700_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184709_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-125424_orig.jpg"
+      ]
+    },
+    {
+      "id": "window-office",
+      "name": "Window Office",
+      "price": 945,
+      "capacity": "3–5 people",
+      "window": "Large window, lots of natural light",
+      "guests": "One guest daily",
+      "desc": "Popular naturally lit office overlooking the exterior.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-201706_orig.jpg"
+      ]
+    },
+    {
+      "id": "rear-right-office",
+      "name": "Rear Right Office",
+      "price": 895,
+      "capacity": "2–4 people",
+      "window": "One window, lots of natural light",
+      "guests": "No guests",
+      "desc": "Quiet office with excellent natural lighting.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190327_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190335_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190347_orig.jpg"
+      ]
+    },
+    {
+      "id": "rear-left-office",
+      "name": "Rear Left Office",
+      "price": 845,
+      "capacity": "1–3 people",
+      "window": "One window, lots of natural light",
+      "guests": "No guests",
+      "desc": "Comfortable office ideal for independent professionals.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office5_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office1_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office2_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office3_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office4_orig.png"
+      ]
+    },
+    {
+      "id": "pool-office",
+      "name": "Pool Office",
+      "price": 795,
+      "capacity": "1–2 people",
+      "window": "Natural light",
+      "guests": "No guests",
+      "desc": "Compact office with natural light, ideal for focused work.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184756_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184740_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184748_orig.jpg"
+      ]
+    },
+    {
+      "id": "rookie-office",
+      "name": "Rookie Office",
+      "price": 715,
+      "capacity": "1–3 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Affordable starter office, perfect for entrepreneurs launching a business.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184818_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184811_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184831_orig.jpg"
+      ]
+    },
+    {
+      "id": "lg-office",
+      "name": "LG Office",
+      "price": 715,
+      "capacity": "1–3 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Efficient workspace offering privacy and affordability.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184942_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184933_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184959_orig.jpg"
+      ]
+    },
+    {
+      "id": "arch-office",
+      "name": "Arch Office",
+      "price": 685,
+      "capacity": "1–2 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Compact private office ideal for solo professionals.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191635_orig.jpg"
+      ]
+    },
+    {
+      "id": "fourscopes-office",
+      "name": "FourScopes Office",
+      "price": 685,
+      "capacity": "1–3 people",
+      "window": "No window",
+      "guests": "No guests",
+      "feature": "Abundant electrical outlets for multiple computers and equipment.",
+      "desc": "Technology-friendly office designed for equipment-heavy workflows.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-192135_orig.jpg"
+      ]
+    },
+    {
+      "id": "soco-chamber-office",
+      "name": "SoCo Chamber Office",
+      "price": 645,
+      "capacity": "1–2 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Quiet interior office suited for focused work.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191813_orig.jpg"
+      ]
+    },
+    {
+      "id": "lower-level-office-two",
+      "name": "Lower Level Office Two",
+      "price": 645,
+      "capacity": "1–2 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Private lower-level office offering affordability and privacy.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191905_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191920_orig.jpg"
+      ]
+    },
+    {
+      "id": "lower-level-office-three",
+      "name": "Lower Level Office Three",
+      "price": 645,
+      "capacity": "1–2 people",
+      "window": "No window",
+      "guests": "No guests",
+      "desc": "Private lower-level office ideal for individual professionals.",
+      "available": false,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-192003_orig.jpg"
+      ]
+    }
+  ],
+  "SPACES": [
+    {
+      "id": "event-center",
+      "name": "Event Center",
+      "tag": "Multifunction Event Center",
+      "rate": 150,
+      "member": 75,
+      "unit": "hour",
+      "minHours": 2,
+      "min": "2-hour minimum",
+      "capacity": "20 boardroom · up to 80 theater",
+      "teaser": "A custom-built venue that transforms for presentations, workshops, celebrations, and community events.",
+      "desc": "The Event Center was designed to transform for nearly any type of event—from business presentations and networking functions to workshops, training sessions, celebrations, and community gatherings.",
+      "configs": [
+        {
+          "label": "Large Boardroom",
+          "value": "20"
+        },
+        {
+          "label": "Classroom",
+          "value": "30–36"
+        },
+        {
+          "label": "Rounds",
+          "value": "40–48"
+        },
+        {
+          "label": "Theater",
+          "value": "Up to 80"
+        }
+      ],
+      "features": [
+        "Custom-built event venue",
+        "Concert-quality Bose sound system",
+        "Full professional AV system",
+        "Wireless microphones",
+        "DJ controls",
+        "Cast-enabled 75\" display",
+        "Dual-zone lighting",
+        "6000K presentation lighting",
+        "4500K ambient event lighting",
+        "Rear registration/check-in table",
+        "Exterior registration/check-in station",
+        "Premium seating options",
+        "Flexible room configurations"
+      ],
+      "quote": "For larger events or custom room configurations, contact NexCore for a customized quote.",
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214608_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171854_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171916-0_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171916_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-aug-1-2026-08-49-57-pm_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-02-174823_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214728_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214854_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors-3_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors-2_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221640_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221648_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221659_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221719_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221746_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-events-presentation_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-learning_orig.png"
+      ]
+    },
+    {
+      "id": "studio",
+      "name": "The Studio",
+      "tag": "Multipurpose Studio",
+      "rate": 75,
+      "member": 35,
+      "unit": "hour",
+      "min": null,
+      "capacity": "Photo, video, podcast & livestream",
+      "teaser": "A creative media studio for photography, videography, podcasting, interviews, and livestreaming.",
+      "desc": "Designed for photography, videography, podcasting, interviews, livestreaming, product photography, and creative media production. Bring your laptop and create.",
+      "featureGroups": [
+        {
+          "title": "Photography",
+          "items": [
+            "Canon DSLR camera",
+            "Multiple professional lenses",
+            "Professional lighting",
+            "Product display boxes",
+            "Green screen",
+            "Black backdrop"
+          ]
+        },
+        {
+          "title": "Podcast",
+          "items": [
+            "Two oversized reclining faux leather chairs",
+            "Oversized faux leather couch",
+            "Cast-enabled television",
+            "On-Air signage",
+            "Professional mixer",
+            "18 microphone options",
+            "Fully prewired"
+          ]
+        }
+      ],
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast1_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast6.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast5.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast4.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast3_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast2_orig.png",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135247_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135235_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135231_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135212_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135207_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135201_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135159_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135150.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135039_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135035_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135032_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135026_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135020_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135016_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/32_orig.png"
+      ]
+    },
+    {
+      "id": "war-room",
+      "name": "War Room",
+      "tag": "Strategy & Planning",
+      "rate": 55,
+      "member": 25,
+      "unit": "hour",
+      "min": null,
+      "capacity": "14–18 people",
+      "teaser": "Built for planning, leadership retreats, strategic sessions, and high-level collaboration.",
+      "desc": "Built specifically for planning, leadership retreats, strategic sessions, and high-level collaboration.",
+      "features": [
+        "Cast-enabled television",
+        "Two black planning boards",
+        "Beverage station",
+        "Large open wall space for strategy planning, Post-it sessions, brainstorming, and collaborative workshops"
+      ],
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185732_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185742_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185751_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185807_orig.jpg"
+      ]
+    },
+    {
+      "id": "west-conference",
+      "name": "West Conference Room",
+      "tag": "Meeting Room",
+      "rate": 40,
+      "member": 20,
+      "unit": "hour",
+      "min": null,
+      "capacity": "5–8 people",
+      "teaser": "Ideal for client meetings, interviews, presentations, and team collaboration.",
+      "desc": "Ideal for client meetings, interviews, presentations, and team collaboration.",
+      "features": [
+        "Cast-enabled TV",
+        "Whiteboard",
+        "Conference seating",
+        "Professional meeting environment"
+      ],
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190530_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190545_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190557_orig.jpg"
+      ]
+    },
+    {
+      "id": "east-conference",
+      "name": "East Conference Room",
+      "tag": "Meeting Room",
+      "rate": 40,
+      "member": 20,
+      "unit": "hour",
+      "min": null,
+      "capacity": "4–6 people",
+      "teaser": "Perfect for small meetings, coaching sessions, interviews, and focused collaboration.",
+      "desc": "Perfect for small meetings, coaching sessions, interviews, and focused collaboration.",
+      "features": [
+        "Cast-enabled TV",
+        "Whiteboard",
+        "Conference seating",
+        "Professional meeting environment"
+      ],
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190623_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190605_orig.jpg",
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190616_orig.jpg"
+      ]
+    },
+    {
+      "id": "daily-office",
+      "name": "Office Rental",
+      "tag": "Private Office, Hourly / Daily",
+      "rate": 55,
+      "member": null,
+      "unit": "hour",
+      "altRate": 150,
+      "altUnit": "day",
+      "min": null,
+      "capacity": "Available while inventory permits",
+      "teaser": "Need a private office for the day? Available whenever inventory allows.",
+      "desc": "Need a private office for the day? Multiple private offices are available for daily rental whenever inventory allows. Perfect for remote workers, traveling professionals, confidential meetings, or simply needing a quiet workspace.",
+      "features": [
+        "Available only while inventory permits",
+        "Automatically removed once permanently leased"
+      ],
+      "available": true,
+      "photos": [
+        "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office5_orig.png"
+      ]
+    }
+  ]
+}

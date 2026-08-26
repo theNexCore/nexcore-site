@@ -1,0 +1,2136 @@
+[
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/10_orig.png",
+    "clean": "10.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1045123
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/background-images/1366250879.jpg",
+    "clean": "1366250879.jpg",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 1824237
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/2_orig.png",
+    "clean": "2.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1156452
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-190733_orig.jpg",
+    "clean": "20260723-190733.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 219581
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-192026_orig.jpg",
+    "clean": "20260723-192026.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 96147
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-192038_orig.jpg",
+    "clean": "20260723-192038.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 120797
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-192535_orig.jpg",
+    "clean": "20260723-192535.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 102895
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-192559_orig.jpg",
+    "clean": "20260723-192559.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 106179
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-jpg-4_orig.jpeg",
+    "clean": "20260723-jpg-4.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 127947
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260723-jpg_orig.jpeg",
+    "clean": "20260723-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 138626
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260726-162930_orig.jpg",
+    "clean": "20260726-162930.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 87583
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171854_orig.jpg",
+    "clean": "20260728-171854.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 121884
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171916-0_orig.jpg",
+    "clean": "20260728-171916-0.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 49260
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260728-171916_orig.jpg",
+    "clean": "20260728-171916.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 48589
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260731-163137_orig.jpg",
+    "clean": "20260731-163137.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 107157
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260731-163138_orig.jpg",
+    "clean": "20260731-163138.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 108212
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-125424_orig.jpg",
+    "clean": "20260803-125424.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 52530
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134738_orig.jpg",
+    "clean": "20260803-134738.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 56028
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134822_orig.jpg",
+    "clean": "20260803-134822.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 62749
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134832_orig.jpg",
+    "clean": "20260803-134832.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 64542
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260803-134854_orig.jpg",
+    "clean": "20260803-134854.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 69501
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135016_orig.jpg",
+    "clean": "20260804-135016.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 96703
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135020_orig.jpg",
+    "clean": "20260804-135020.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 126111
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135026_orig.jpg",
+    "clean": "20260804-135026.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 139911
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135032_orig.jpg",
+    "clean": "20260804-135032.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 97133
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135035_orig.jpg",
+    "clean": "20260804-135035.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 142576
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135039_orig.jpg",
+    "clean": "20260804-135039.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 95340
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135150.jpg",
+    "clean": "20260804-135150.jpg",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 122386
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135159_orig.jpg",
+    "clean": "20260804-135159.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 203714
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135201_orig.jpg",
+    "clean": "20260804-135201.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 130587
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135207_orig.jpg",
+    "clean": "20260804-135207.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 127825
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135212_orig.jpg",
+    "clean": "20260804-135212.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 222010
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135231_orig.jpg",
+    "clean": "20260804-135231.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 281736
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135235_orig.jpg",
+    "clean": "20260804-135235.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 134036
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-135247_orig.jpg",
+    "clean": "20260804-135247.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 72053
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140221_orig.jpg",
+    "clean": "20260804-140221.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 138229
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140226_orig.jpg",
+    "clean": "20260804-140226.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 121472
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140230_orig.jpg",
+    "clean": "20260804-140230.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 172829
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140235_orig.jpg",
+    "clean": "20260804-140235.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 168977
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140238_orig.jpg",
+    "clean": "20260804-140238.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 144362
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140243_orig.jpg",
+    "clean": "20260804-140243.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 103167
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140247_orig.jpg",
+    "clean": "20260804-140247.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 132457
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140255_orig.jpg",
+    "clean": "20260804-140255.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 157716
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140305_orig.jpg",
+    "clean": "20260804-140305.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 135266
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140309_orig.jpg",
+    "clean": "20260804-140309.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 181420
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140314_orig.jpg",
+    "clean": "20260804-140314.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 163283
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-140322_orig.jpg",
+    "clean": "20260804-140322.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 266851
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144226_orig.jpg",
+    "clean": "20260804-144226.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 136815
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144230_orig.jpg",
+    "clean": "20260804-144230.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 83777
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144340_orig.jpg",
+    "clean": "20260804-144340.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 125047
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144350_orig.jpg",
+    "clean": "20260804-144350.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 217460
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144413_orig.jpg",
+    "clean": "20260804-144413.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 132717
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144418_orig.jpg",
+    "clean": "20260804-144418.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 184978
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144424_orig.jpg",
+    "clean": "20260804-144424.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 208522
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144439_orig.jpg",
+    "clean": "20260804-144439.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 217115
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144502_orig.jpg",
+    "clean": "20260804-144502.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 211947
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144514_orig.jpg",
+    "clean": "20260804-144514.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 145041
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144521_orig.jpg",
+    "clean": "20260804-144521.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 77444
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-144701_orig.jpg",
+    "clean": "20260804-144701.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 152552
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-152118_orig.jpg",
+    "clean": "20260804-152118.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 104929
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154634_orig.jpg",
+    "clean": "20260804-154634.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 151205
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154653_orig.jpg",
+    "clean": "20260804-154653.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 149090
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154703_orig.jpg",
+    "clean": "20260804-154703.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 160050
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154707_orig.jpg",
+    "clean": "20260804-154707.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 196503
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154711_orig.jpg",
+    "clean": "20260804-154711.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 179005
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154717_orig.jpg",
+    "clean": "20260804-154717.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 79633
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154731_orig.jpg",
+    "clean": "20260804-154731.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 78290
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154737_orig.jpg",
+    "clean": "20260804-154737.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 121348
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154741_orig.jpg",
+    "clean": "20260804-154741.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 140404
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154747_orig.jpg",
+    "clean": "20260804-154747.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 126577
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154801_orig.jpg",
+    "clean": "20260804-154801.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 132499
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154814_orig.jpg",
+    "clean": "20260804-154814.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 212149
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154827_orig.jpg",
+    "clean": "20260804-154827.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 73924
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154834_orig.jpg",
+    "clean": "20260804-154834.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 73434
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154838_orig.jpg",
+    "clean": "20260804-154838.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 91520
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154841_orig.jpg",
+    "clean": "20260804-154841.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 79086
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-154851_orig.jpg",
+    "clean": "20260804-154851.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 69766
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164024_orig.jpg",
+    "clean": "20260804-164024.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 116163
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164027_orig.jpg",
+    "clean": "20260804-164027.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 79801
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164119_orig.jpg",
+    "clean": "20260804-164119.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 104151
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164130_orig.jpg",
+    "clean": "20260804-164130.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 176303
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164157_orig.jpg",
+    "clean": "20260804-164157.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 186991
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164550_orig.jpg",
+    "clean": "20260804-164550.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 158691
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-164616_orig.jpg",
+    "clean": "20260804-164616.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 125033
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184655_orig.jpg",
+    "clean": "20260804-184655.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 121655
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184700_orig.jpg",
+    "clean": "20260804-184700.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 131924
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184709_orig.jpg",
+    "clean": "20260804-184709.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 107010
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184740_orig.jpg",
+    "clean": "20260804-184740.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 102201
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184748_orig.jpg",
+    "clean": "20260804-184748.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 80611
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184756_orig.jpg",
+    "clean": "20260804-184756.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 88670
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184811_orig.jpg",
+    "clean": "20260804-184811.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 64725
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184818_orig.jpg",
+    "clean": "20260804-184818.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 92833
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184831_orig.jpg",
+    "clean": "20260804-184831.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 61119
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184841_orig.jpg",
+    "clean": "20260804-184841.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 133932
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184851_orig.jpg",
+    "clean": "20260804-184851.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 96084
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184858_orig.jpg",
+    "clean": "20260804-184858.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 111703
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184916_orig.jpg",
+    "clean": "20260804-184916.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 138885
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184933_orig.jpg",
+    "clean": "20260804-184933.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 60039
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184942_orig.jpg",
+    "clean": "20260804-184942.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 80353
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-184959_orig.jpg",
+    "clean": "20260804-184959.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 66274
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185732_orig.jpg",
+    "clean": "20260804-185732.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 98821
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185742_orig.jpg",
+    "clean": "20260804-185742.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 79036
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185751_orig.jpg",
+    "clean": "20260804-185751.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 74177
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185807_orig.jpg",
+    "clean": "20260804-185807.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 82207
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185825_orig.jpg",
+    "clean": "20260804-185825.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 63344
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185904_orig.jpg",
+    "clean": "20260804-185904.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 78708
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185916_orig.jpg",
+    "clean": "20260804-185916.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 47658
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185937_orig.jpg",
+    "clean": "20260804-185937.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 73709
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-185947_orig.jpg",
+    "clean": "20260804-185947.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 66407
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190002_orig.jpg",
+    "clean": "20260804-190002.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 62597
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190014_orig.jpg",
+    "clean": "20260804-190014.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 77830
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190021_orig.jpg",
+    "clean": "20260804-190021.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 80487
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190029_orig.jpg",
+    "clean": "20260804-190029.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 58292
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190327_orig.jpg",
+    "clean": "20260804-190327.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 113709
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190335_orig.jpg",
+    "clean": "20260804-190335.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 128537
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190347_orig.jpg",
+    "clean": "20260804-190347.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 91819
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190404_orig.jpg",
+    "clean": "20260804-190404.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 97284
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190411_orig.jpg",
+    "clean": "20260804-190411.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 76858
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190423_orig.jpg",
+    "clean": "20260804-190423.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 94526
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190431_orig.jpg",
+    "clean": "20260804-190431.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 56688
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190446_orig.jpg",
+    "clean": "20260804-190446.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 97159
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190530_orig.jpg",
+    "clean": "20260804-190530.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 93006
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190545_orig.jpg",
+    "clean": "20260804-190545.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 78904
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190557_orig.jpg",
+    "clean": "20260804-190557.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 63164
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190605_orig.jpg",
+    "clean": "20260804-190605.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 78440
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190616_orig.jpg",
+    "clean": "20260804-190616.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 75500
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-190623_orig.jpg",
+    "clean": "20260804-190623.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 105963
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191635_orig.jpg",
+    "clean": "20260804-191635.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 90236
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191813_orig.jpg",
+    "clean": "20260804-191813.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 116143
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191905_orig.jpg",
+    "clean": "20260804-191905.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 72654
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-191920_orig.jpg",
+    "clean": "20260804-191920.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 86711
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-192003_orig.jpg",
+    "clean": "20260804-192003.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 60585
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-192135_orig.jpg",
+    "clean": "20260804-192135.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 60400
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-194427_orig.jpg",
+    "clean": "20260804-194427.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 76390
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-201706_orig.jpg",
+    "clean": "20260804-201706.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 110086
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221640_orig.jpg",
+    "clean": "20260804-221640.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 92986
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221648_orig.jpg",
+    "clean": "20260804-221648.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 105347
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221659_orig.jpg",
+    "clean": "20260804-221659.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 109459
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221719_orig.jpg",
+    "clean": "20260804-221719.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 106778
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/20260804-221746_orig.jpg",
+    "clean": "20260804-221746.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 99108
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/3_orig.png",
+    "clean": "3.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1001480
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/32_orig.png",
+    "clean": "32.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 512795
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/4_orig.png",
+    "clean": "4.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1184029
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/5_orig.png",
+    "clean": "5.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 895552
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/6_orig.png",
+    "clean": "6.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 892812
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/6th-ward-santa_orig.png",
+    "clean": "6th-ward-santa.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1437315
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/7_orig.png",
+    "clean": "7.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1225878
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/8_orig.png",
+    "clean": "8.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 1177709
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/9_orig.png",
+    "clean": "9.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 719332
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/a-taste-of-plaza21-october-17_orig.png",
+    "clean": "a-taste-of-plaza21-october-17.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 862177
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/august-21-2017-nexcore-opens_orig.png",
+    "clean": "august-21-2017-nexcore-opens.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1531251
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bgps_orig.png",
+    "clean": "bgps.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1094609
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro1_orig.png",
+    "clean": "bistro1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 653407
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro10_orig.png",
+    "clean": "bistro10.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 652054
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro11_orig.png",
+    "clean": "bistro11.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 777982
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro2_orig.png",
+    "clean": "bistro2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 692270
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro3_orig.png",
+    "clean": "bistro3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 660135
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro4_orig.png",
+    "clean": "bistro4.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 613431
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro5_orig.png",
+    "clean": "bistro5.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 533309
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro6_orig.png",
+    "clean": "bistro6.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 611356
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro7_orig.png",
+    "clean": "bistro7.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 436002
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro8_orig.png",
+    "clean": "bistro8.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 465154
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/bistro9_orig.png",
+    "clean": "bistro9.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 653405
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/businessgps-weekly-event-slideshow_orig.png",
+    "clean": "businessgps-weekly-event-slideshow.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 794190
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/changemakers_orig.png",
+    "clean": "changemakers.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1099120
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/changing-of-the-guard_orig.png",
+    "clean": "changing-of-the-guard.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1305330
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-aug-1-2026-08-41-36-pm_orig.png",
+    "clean": "chatgpt-image-aug-1-2026-08-41-36-pm.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 228131
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-aug-1-2026-08-49-57-pm_orig.png",
+    "clean": "chatgpt-image-aug-1-2026-08-49-57-pm.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 105015
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-aug-1-2026-09-27-29-pm_orig.png",
+    "clean": "chatgpt-image-aug-1-2026-09-27-29-pm.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 202681
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-aug-1-2026-09-43-58-pm_orig.png",
+    "clean": "chatgpt-image-aug-1-2026-09-43-58-pm.png",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 198372
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/chatgpt-image-jul-9-2026-05-54-16-pm_orig.png",
+    "clean": "chatgpt-image-jul-9-2026-05-54-16-pm.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 549368
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/coworking-at-thenexcore_orig.png",
+    "clean": "coworking-at-thenexcore.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 566212
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/dr-lance-mccarth-global-1000_orig.png",
+    "clean": "dr-lance-mccarth-global-1000.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1204333
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors-2_orig.png",
+    "clean": "ec-colors-2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 494981
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors-3_orig.png",
+    "clean": "ec-colors-3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 454207
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/ec-colors_orig.png",
+    "clean": "ec-colors.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 505290
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/executive-office1_orig.png",
+    "clean": "executive-office1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 489813
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/hurricane-2_orig.png",
+    "clean": "hurricane-2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 584717
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-1739_orig.jpeg",
+    "clean": "img-1739.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 63406
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2120_orig.jpg",
+    "clean": "img-2120.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 39207
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2122_orig.jpg",
+    "clean": "img-2122.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 177179
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2123_orig.jpg",
+    "clean": "img-2123.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 73141
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2124_orig.jpg",
+    "clean": "img-2124.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 166177
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2125_orig.jpg",
+    "clean": "img-2125.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 113402
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-2128_orig.jpg",
+    "clean": "img-2128.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 72092
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-4457-jpg_orig.jpeg",
+    "clean": "img-4457-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 55062
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-4458-jpg_orig.jpeg",
+    "clean": "img-4458-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 54328
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-4459-jpg_orig.jpeg",
+    "clean": "img-4459-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 54310
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-4460-jpg_orig.jpeg",
+    "clean": "img-4460-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 98361
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-4461-jpg_orig.jpeg",
+    "clean": "img-4461-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 102861
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-5162-jpg_orig.jpeg",
+    "clean": "img-5162-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 62087
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-5364-jpg_orig.jpeg",
+    "clean": "img-5364-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 153832
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-5365-jpg_orig.jpeg",
+    "clean": "img-5365-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 117735
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-5409-jpg_orig.jpeg",
+    "clean": "img-5409-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 40115
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-5410-jpg_orig.jpeg",
+    "clean": "img-5410-jpg.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 119364
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/img-6868_orig.jpg",
+    "clean": "img-6868.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 124502
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office1_orig.png",
+    "clean": "left-rear-office1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 545269
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office2_orig.png",
+    "clean": "left-rear-office2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 507476
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office3_orig.png",
+    "clean": "left-rear-office3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 510899
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office4_orig.png",
+    "clean": "left-rear-office4.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 598846
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/left-rear-office5_orig.png",
+    "clean": "left-rear-office5.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 511421
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/main-logo-1_orig.png",
+    "clean": "main-logo-1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 206646
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-access_orig.png",
+    "clean": "nexcore-access.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 994783
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-businesssystems_orig.jpg",
+    "clean": "nexcore-businesssystems.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 167585
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-coworking-amenitites1_orig.png",
+    "clean": "nexcore-coworking-amenitites1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1215697
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-coworking-upstairs_orig.jpg",
+    "clean": "nexcore-coworking-upstairs.jpg",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 168978
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-events-presentation_orig.png",
+    "clean": "nexcore-events-presentation.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 757538
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-grand-opening-photo-courtesy-of-debbie-langanke-4_orig.jpg",
+    "clean": "nexcore-grand-opening-photo-courtesy-of-debbie-langanke-4.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 105213
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-grand-opening-photo-courtesy-of-debbie-langanke-5_orig.jpg",
+    "clean": "nexcore-grand-opening-photo-courtesy-of-debbie-langanke-5.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 76990
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-grand-opening-photo-courtesy-of-debbie-langanke-6_orig.jpg",
+    "clean": "nexcore-grand-opening-photo-courtesy-of-debbie-langanke-6.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 102689
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-grand-opening-photo-courtesy-of-debbie-langanke-7_orig.jpg",
+    "clean": "nexcore-grand-opening-photo-courtesy-of-debbie-langanke-7.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 43640
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-hurricane1_orig.png",
+    "clean": "nexcore-hurricane1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 641903
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-learning_orig.png",
+    "clean": "nexcore-learning.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 763130
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-logo-2026-1_orig.png",
+    "clean": "nexcore-logo-2026-1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1023728
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-membership_orig.png",
+    "clean": "nexcore-membership.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1261878
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-opportunity_orig.png",
+    "clean": "nexcore-opportunity.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1150783
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-people_orig.png",
+    "clean": "nexcore-people.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1156237
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-private-offices_orig.png",
+    "clean": "nexcore-private-offices.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 774529
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-rentable-spaces_orig.png",
+    "clean": "nexcore-rentable-spaces.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 979542
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-ribbon-cutting_orig.png",
+    "clean": "nexcore-ribbon-cutting.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1062027
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-soco-is-imagined_orig.png",
+    "clean": "nexcore-soco-is-imagined.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1194435
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore-spaces_orig.png",
+    "clean": "nexcore-spaces.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1177276
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexcore26logo.png",
+    "clean": "nexcore26logo.png",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 30512
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexus-2_orig.png",
+    "clean": "nexus-2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 694383
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/nexus_orig.png",
+    "clean": "nexus.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 569660
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/our-first-ribbon-cutting-ceremony_orig.jpg",
+    "clean": "our-first-ribbon-cutting-ceremony.jpg",
+    "hadOrig": true,
+    "hadAlt": true,
+    "bytes": 58856
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast1_orig.png",
+    "clean": "podcast1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 623826
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast2_orig.png",
+    "clean": "podcast2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 590752
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast3_orig.png",
+    "clean": "podcast3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 630122
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast4.png",
+    "clean": "podcast4.png",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 581947
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast5.png",
+    "clean": "podcast5.png",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 633480
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/podcast6.png",
+    "clean": "podcast6.png",
+    "hadOrig": false,
+    "hadAlt": true,
+    "bytes": 861321
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/powering-communities_orig.png",
+    "clean": "powering-communities.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1233496
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/rvstl_orig.png",
+    "clean": "rvstl.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1278673
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-02-174823_orig.png",
+    "clean": "screenshot-2026-08-02-174823.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 756626
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214608_orig.png",
+    "clean": "screenshot-2026-08-04-214608.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 640924
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214728_orig.png",
+    "clean": "screenshot-2026-08-04-214728.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 664170
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/screenshot-2026-08-04-214854_orig.png",
+    "clean": "screenshot-2026-08-04-214854.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 966222
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/small-business-ind_orig.png",
+    "clean": "small-business-ind.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 938351
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/streamathon_orig.png",
+    "clean": "streamathon.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1061043
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-landmark-lounge_orig.png",
+    "clean": "the-landmark-lounge.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 787517
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-10_orig.png",
+    "clean": "the-timeline-10.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 749986
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-11_orig.png",
+    "clean": "the-timeline-11.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 519383
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-12_orig.png",
+    "clean": "the-timeline-12.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 457941
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-13_orig.png",
+    "clean": "the-timeline-13.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 397590
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-14_orig.png",
+    "clean": "the-timeline-14.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 456365
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-15_orig.png",
+    "clean": "the-timeline-15.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 712263
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-16_orig.png",
+    "clean": "the-timeline-16.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 768729
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-17_orig.png",
+    "clean": "the-timeline-17.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 474674
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-18_orig.png",
+    "clean": "the-timeline-18.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 479805
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-19_orig.png",
+    "clean": "the-timeline-19.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 634573
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-2_orig.png",
+    "clean": "the-timeline-2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 439619
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-20_orig.png",
+    "clean": "the-timeline-20.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 629731
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-3_orig.png",
+    "clean": "the-timeline-3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 764409
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-4_orig.png",
+    "clean": "the-timeline-4.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 557063
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-5_orig.png",
+    "clean": "the-timeline-5.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 624458
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-6_orig.png",
+    "clean": "the-timeline-6.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 704115
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-7_orig.png",
+    "clean": "the-timeline-7.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 699492
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-8_orig.png",
+    "clean": "the-timeline-8.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 495380
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline-9_orig.png",
+    "clean": "the-timeline-9.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 514402
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/the-timeline_orig.png",
+    "clean": "the-timeline.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 102534
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/thechangemakers27-event_orig.png",
+    "clean": "thechangemakers27-event.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 493962
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/thesouthcountychamberlaunchpad_orig.png",
+    "clean": "thesouthcountychamberlaunchpad.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 872737
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/time-to-experience-nexcore-week_orig.png",
+    "clean": "time-to-experience-nexcore-week.png",
+    "hadOrig": true,
+    "hadAlt": false
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-10_orig.png",
+    "clean": "tlatnc-10.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 262626
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-11_orig.png",
+    "clean": "tlatnc-11.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 904183
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-2_orig.png",
+    "clean": "tlatnc-2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 932313
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-3_orig.png",
+    "clean": "tlatnc-3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 993352
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-4_orig.png",
+    "clean": "tlatnc-4.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 768154
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-5_orig.png",
+    "clean": "tlatnc-5.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 818624
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-6_orig.png",
+    "clean": "tlatnc-6.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 692269
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-7_orig.png",
+    "clean": "tlatnc-7.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 962990
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-8_orig.png",
+    "clean": "tlatnc-8.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 238528
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc-9_orig.png",
+    "clean": "tlatnc-9.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 877185
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tlatnc_orig.png",
+    "clean": "tlatnc.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 1034622
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/tom-hanks-hard_orig.png",
+    "clean": "tom-hanks-hard.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 102534
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore_orig.png",
+    "clean": "zen-lobby-nexcore.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 747867
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore1_orig.png",
+    "clean": "zen-lobby-nexcore1.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 632833
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore10_orig.png",
+    "clean": "zen-lobby-nexcore10.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 706595
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore11_orig.png",
+    "clean": "zen-lobby-nexcore11.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 655700
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore12_orig.png",
+    "clean": "zen-lobby-nexcore12.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 716688
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore13_orig.png",
+    "clean": "zen-lobby-nexcore13.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 565223
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore14_orig.png",
+    "clean": "zen-lobby-nexcore14.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 519154
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore15_orig.png",
+    "clean": "zen-lobby-nexcore15.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 439060
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore16_orig.png",
+    "clean": "zen-lobby-nexcore16.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 693207
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore17_orig.png",
+    "clean": "zen-lobby-nexcore17.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 587911
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore18_orig.png",
+    "clean": "zen-lobby-nexcore18.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 702140
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore19_orig.png",
+    "clean": "zen-lobby-nexcore19.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 793003
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore2_orig.png",
+    "clean": "zen-lobby-nexcore2.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 743723
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore20_orig.png",
+    "clean": "zen-lobby-nexcore20.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 430080
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore21_orig.png",
+    "clean": "zen-lobby-nexcore21.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 650975
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore22_orig.png",
+    "clean": "zen-lobby-nexcore22.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 950110
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore23_orig.png",
+    "clean": "zen-lobby-nexcore23.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 743026
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore24_orig.png",
+    "clean": "zen-lobby-nexcore24.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 857354
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore25_orig.png",
+    "clean": "zen-lobby-nexcore25.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 521202
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore26_orig.png",
+    "clean": "zen-lobby-nexcore26.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 572749
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore27_orig.png",
+    "clean": "zen-lobby-nexcore27.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 800713
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore28_orig.png",
+    "clean": "zen-lobby-nexcore28.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 596633
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore3_orig.png",
+    "clean": "zen-lobby-nexcore3.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 560849
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore4_orig.png",
+    "clean": "zen-lobby-nexcore4.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 550983
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore5_orig.png",
+    "clean": "zen-lobby-nexcore5.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 561773
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore6_orig.png",
+    "clean": "zen-lobby-nexcore6.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 549170
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore7_orig.png",
+    "clean": "zen-lobby-nexcore7.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 655701
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore8_orig.png",
+    "clean": "zen-lobby-nexcore8.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 716690
+  },
+  {
+    "url": "https://www.thenexcore.com/uploads/1/4/6/2/146226961/zen-lobby-nexcore9_orig.png",
+    "clean": "zen-lobby-nexcore9.png",
+    "hadOrig": true,
+    "hadAlt": false,
+    "bytes": 521205
+  }
+]

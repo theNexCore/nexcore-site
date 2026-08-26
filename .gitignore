@@ -1,0 +1,27 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# env — never commit real credentials (.env.example is committed as the template)
+.env
+.env.local
+.env*.local
+
+# vercel
+.vercel
+
+# os
+.DS_Store
+Thumbs.db
+
+# audit working files — large crawl artifacts, regenerable.
+# The audit reports and structured data ARE committed.
+audit/raw
+audit/assets
+audit/extracted
+audit/*.local.json

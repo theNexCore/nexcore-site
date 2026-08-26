@@ -1,0 +1,10 @@
+# Normalize line endings: repo stores LF, Windows checkouts get CRLF.
+# Keeps diffs clean between local Windows work and Vercel's Linux builds.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

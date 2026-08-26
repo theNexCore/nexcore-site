@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sky: #27aae2;
+    --ink: #001018;
+    --navy: #012269;
+    --red: #e20713;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Sticky section navs offset in-page anchors; keep headings clear of them. */
+  [id] {
+    scroll-margin-top: 88px;
+  }
+
+  body {
+    @apply bg-ink font-inter text-white antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sora font-semibold;
+    /* NOTE: no text-transform anywhere in this stylesheet.
+       Capitalised headings are written as literal caps in the markup. */
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-sky ring-offset-2 ring-offset-ink;
+  }
+
+  ::selection {
+    background: var(--sky);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /**
+   * Accent span. Project convention: <span class="o">word</span>
+   * Wraps the words that should carry the NexCore sky accent.
+   */
+  .o {
+    color: var(--sky);
+  }
+
+  .container-wide {
+    @apply mx-auto w-full max-w-wide px-5 sm:px-6 lg:px-8;
+  }
+
+  .container-prose {
+    @apply mx-auto w-full max-w-prose px-5 sm:px-6;
+  }
+
+  /* Long-form editorial copy (founder letter, event descriptions). */
+  .prose-nex {
+    @apply font-inter text-[17px] leading-[1.75] text-white/80;
+  }
+  .prose-nex p {
+    @apply mb-5;
+  }
+  .prose-nex strong {
+    @apply font-semibold text-white;
+  }
+  .prose-nex h2 {
+    @apply mb-4 mt-10 font-sora text-2xl font-semibold text-white;
+  }
+  .prose-nex h3 {
+    @apply mb-3 mt-8 font-sora text-xl font-semibold text-white;
+  }
+  .prose-nex ul {
+    @apply mb-5 list-disc space-y-2 pl-5;
+  }
+  .prose-nex a {
+    @apply text-sky underline underline-offset-4 hover:text-sky-light;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
