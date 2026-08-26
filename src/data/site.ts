@@ -51,9 +51,8 @@ export const site = {
   ],
 
   // All profiles consolidated on the "follownexcore" handle.
-  // Instagram, LinkedIn, X and YouTube verified reachable 2026-08-26.
-  // Facebook could not be verified programmatically — it returns 400 to any
-  // non-browser request, including known-good pages — so confirm in a browser.
+  // All five verified 2026-08-26. Facebook confirmed manually by Jim —
+  // it returns 400 to any non-browser request, so it cannot be checked in CI.
   social: [
     { name: 'Facebook', url: 'https://www.facebook.com/follownexcore' },
     { name: 'Instagram', url: 'https://www.instagram.com/follownexcore' },
