@@ -14,21 +14,19 @@ import { site, formattedAddress } from '@/data/site';
  * CONFIRMED BY JIM (2026-08-26):
  *   - Governing law is Missouri.
  *   - The copyright paragraph is carried over verbatim from the Weebly footer.
+ *   - Signed agreements DO exist for memberships, office licences and space
+ *     rentals, so the opening paragraph's deferral to them is accurate.
  *
  * STILL UNVERIFIED — counsel should confirm before this goes live:
  *
- *   1. The opening paragraph states that membership, office licence and space
- *      rental terms "are set out in the agreements you sign with us directly".
- *      Whether those signed agreements exist was NOT confirmed. If they do not,
- *      that sentence is false AND there is a real gap: nothing would then set
- *      terms for paid memberships, office licences or space rentals. This is
- *      the single most important item on this page.
- *   2. The liability limitation and "as is" disclaimer are conventional but
+ *   1. The liability limitation and "as is" disclaimer are conventional but
  *      have not been reviewed by a lawyer.
- *   3. No refund policy is stated. Square deposits and day passes, and
+ *   2. No refund policy is stated. Square deposits and day passes, and
  *      Eventbrite registrations, are deferred to those providers — confirm
  *      that matches how refunds are actually handled, particularly the $50
  *      membership deposit and the $25 refundable vendor deposit.
+ *   3. Worth checking that this page and the signed agreements do not
+ *      contradict each other on liability or governing law.
  */
 
 const UPDATED = '26 August 2026';
