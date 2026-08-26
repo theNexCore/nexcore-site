@@ -35,11 +35,15 @@ export const metadata: Metadata = {
   creator: 'NexCore',
   publisher: 'NexCore',
   formatDetection: { telephone: true, address: true, email: true },
+  // Generated from the NexCore "CO" mark. favicon.ico carries 16/32/48px
+  // frames for legacy tabs; the PNGs cover modern browsers and PWA installs.
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   manifest: '/site.webmanifest',
   robots: {
