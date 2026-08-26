@@ -125,6 +125,14 @@ Fonts: **Sora** (400/500/600/700) and **Inter** (400/500/600) via `next/font`.
 - **Every page tested at 390px in headless Chrome — no horizontal scroll, no overflowing elements, exactly one `h1` per page.**
 - Honeypot, timing trap, validation, oversize rejection, and per-IP rate limiting unit-tested.
 
+## Deployment
+
+GitHub is the source of truth; Vercel builds from it. Pushes to `main`
+deploy automatically — no local upload.
+
+- Repo: https://github.com/theNexCore/nexcore-site
+- Staging: https://nexcore-site-omega.vercel.app (vercel.app only; DNS untouched)
+
 ## Before DNS cutover
 
 1. **Legal review** — `/terms` and `/privacy` are new first-party drafts replacing links that pointed at Thryv's boilerplate. Both carry a `REVIEW REQUIRED` comment. Jim or counsel must confirm.
