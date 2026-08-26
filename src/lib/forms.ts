@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
 /**
- * Shared form plumbing: schemas, honeypot, delivery.
+ * Shared form plumbing: schemas, honeypot, bot checks.
+ *
+ * Delivery lives in lib/apps-script.ts — the Apps Script web app logs to the
+ * Sheet and sends its own notification email, so there is no mail provider
+ * dependency here.
  * Every schema is validated server-side; the client never decides validity.
  */
 
@@ -35,6 +39,16 @@ export const contactSchema = z.object({
   member: z.enum(['Yes', 'No', 'Considering joining']).optional(),
   reason: optionalText(80),
   message: z.string().trim().min(5, 'Please tell us a little more.').max(4000),
+});
+
+export const ideaSchema = z.object({
+  ...baseFields,
+  firstName: z.string().trim().min(1, 'First name is required.').max(80),
+  lastName: z.string().trim().min(1, 'Last name is required.').max(80),
+  email: z.string().trim().email('Enter a valid email address.').max(160),
+  phone: optionalText(40),
+  idea: z.string().trim().min(3, 'Tell us the idea.').max(2000),
+  why: optionalText(2000),
 });
 
 export const tourSchema = z.object({
@@ -112,133 +126,4 @@ export function fieldErrors(err: z.ZodError): Record<string, string> {
     out[key] ??= issue.message;
   }
   return out;
-}
-
-const escapeHtml = (s: string) =>
-  s.replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string,
-  );
-
-/**
- * Deliver a submission.
- *
- * 1. Email via Resend (primary).
- * 2. Mirror to the existing Apps Script / Google Sheet when
- *    FORMS_SHEET_MIRROR_URL is set, so the historical record is preserved.
- *
- * A mirror failure never fails the submission — the email is the system of record.
- */
-export async function deliver({
-  subject,
-  formName,
-  fields,
-}: {
-  subject: string;
-  formName: string;
-  fields: Record<string, string>;
-}): Promise<{ ok: boolean; error?: string; emailDelivered?: boolean }> {
-  const rows = Object.entries(fields)
-    .filter(([, v]) => v !== '')
-    .map(
-      ([k, v]) =>
-        `<tr><td style="padding:6px 14px 6px 0;color:#6B7280;font:500 13px/1.5 system-ui;vertical-align:top;white-space:nowrap">${escapeHtml(k)}</td><td style="padding:6px 0;color:#0b1220;font:400 14px/1.6 system-ui">${escapeHtml(v).replace(/\n/g, '<br>')}</td></tr>`,
-    )
-    .join('');
-
-  const html = `<div style="background:#f6f7f9;padding:24px"><div style="max-width:640px;margin:0 auto;background:#fff;border-radius:12px;padding:28px"><p style="margin:0 0 4px;font:600 12px/1 system-ui;letter-spacing:.14em;color:#27AAE2">NEXCORE — ${escapeHtml(formName)}</p><h1 style="margin:0 0 20px;font:600 20px/1.3 system-ui;color:#001018">${escapeHtml(subject)}</h1><table style="width:100%;border-collapse:collapse">${rows}</table></div></div>`;
-
-  const text = Object.entries(fields)
-    .filter(([, v]) => v !== '')
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n');
-
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.FORM_TO_EMAIL;
-  const from = process.env.FORM_FROM_EMAIL;
-
-  let emailOk = false;
-  let emailError: string | undefined;
-
-  if (apiKey && to && from) {
-    try {
-      const { Resend } = await import('resend');
-      const resend = new Resend(apiKey);
-      const result = await resend.emails.send({
-        from: `NexCore Website <${from}>`,
-        to: [to],
-        replyTo: fields.Email || undefined,
-        subject,
-        html,
-        text,
-      });
-      if (result.error) emailError = result.error.message;
-      else emailOk = true;
-    } catch (err) {
-      emailError = err instanceof Error ? err.message : 'Email delivery failed.';
-    }
-  } else {
-    emailError = 'Email is not configured (RESEND_API_KEY / FORM_TO_EMAIL / FORM_FROM_EMAIL).';
-    if (process.env.NODE_ENV !== 'production') {
-      console.info(`[form:${formName}] Resend not configured. Payload:\n${text}`);
-      emailOk = true; // Do not block local development.
-    }
-  }
-
-  // Mirror to the existing Sheet.
-  const mirror = process.env.FORMS_SHEET_MIRROR_URL;
-  let mirrorOk = false;
-  let mirrorError: string | undefined;
-
-  if (mirror) {
-    try {
-      // text/plain matches how the old site posted, and avoids a preflight.
-      const res = await fetch(mirror, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ form: formName, ...fields }),
-        signal: AbortSignal.timeout(8000),
-      });
-
-      // Apps Script answers 200 even when it refuses the write, so the body
-      // has to be inspected. It currently returns
-      // {"ok":false,"error":"RSVP submissions are no longer accepted here."}
-      const body = await res.text();
-      if (!res.ok) {
-        mirrorError = `Sheet mirror returned ${res.status}`;
-      } else {
-        try {
-          const parsed = JSON.parse(body) as { ok?: boolean; error?: string };
-          mirrorOk = parsed.ok !== false;
-          if (!mirrorOk) mirrorError = parsed.error ?? 'Sheet mirror rejected the submission';
-        } catch {
-          // Non-JSON 200 — assume the script accepted it.
-          mirrorOk = true;
-        }
-      }
-    } catch (err) {
-      mirrorError = err instanceof Error ? err.message : 'Sheet mirror failed';
-    }
-  }
-
-  /**
-   * The question that matters is "did we capture this lead durably?", not
-   * "did email specifically work". Either channel succeeding is a success.
-   *
-   * Gating on email alone meant an unset RESEND_API_KEY showed visitors an
-   * error while their enquiry was sitting safely in the Sheet — and, worse,
-   * blocked the membership modal from ever reaching its payment step.
-   */
-  if (emailOk || mirrorOk) {
-    if (!emailOk) {
-      console.error(
-        `[form:${formName}] captured via Sheet mirror, but EMAIL FAILED: ${emailError}`,
-      );
-    }
-    return { ok: true, emailDelivered: emailOk };
-  }
-
-  return {
-    ok: false,
-    error: [emailError, mirrorError].filter(Boolean).join(' | ') || 'Delivery failed.',
-  };
 }

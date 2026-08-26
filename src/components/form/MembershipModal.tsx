@@ -14,8 +14,8 @@ import { cn } from '@/lib/cn';
  * Two-step membership join, matching the old Weebly modal.
  *
  * STEP 1 captures the lead — name, business, email, phone — and submits it
- * through the normal server action (validation, honeypot, rate limit, Resend
- * + Sheet mirror). This has to happen BEFORE payment: previously the tier
+ * through the normal server action (validation, honeypot, rate limit, then the
+ * Apps Script, which logs to the Sheet and sends its own notification). This has to happen BEFORE payment: previously the tier
  * buttons went straight to Square, so anyone who abandoned checkout was lost
  * entirely.
  *

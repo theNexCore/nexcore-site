@@ -3,6 +3,7 @@ import { Section, Eyebrow } from '@/components/Section';
 import { PageHero } from '@/components/PageHero';
 import { ButtonLink } from '@/components/Button';
 import { EventsView } from '@/components/events/EventsView';
+import { IdeaForm } from '@/components/form/IdeaForm';
 import { getEvents } from '@/lib/events';
 import {
   eventsIntro,
@@ -123,9 +124,9 @@ export default async function EventsPage() {
             The best events often start as someone&rsquo;s offhand idea. If you&rsquo;ve got one, we
             want to hear it.
           </p>
-          <ButtonLink href="/contact" className="mt-6">
-            Share an event idea
-          </ButtonLink>
+          <div className="mt-7">
+            <IdeaForm />
+          </div>
         </div>
       </Section>
 

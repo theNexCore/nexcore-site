@@ -10,8 +10,9 @@ import { site, formattedAddress } from '@/data/site';
  * former vendor's boilerplate that did not describe NexCore's practices.
  *
  * The technical description is verified against the code: enquiry forms
- * delivered by email (Resend), optionally mirrored to a Google Sheet, honeypot
- * plus timing and rate-limit checks, no cookies set by this site today.
+ * posted server-side to the NexCore Apps Script web app, which logs to the
+ * Google Sheet and sends its own notification email; honeypot plus timing and
+ * rate-limit checks; no cookies set by this site today.
  *
  * Facts confirmed by Jim, 2026-08-26: no data sharing (not sold, not shared
  * with any partner including the SOCO Chamber); 24-month retention; deletion
@@ -77,9 +78,9 @@ export default function PrivacyPage() {
 
           <h2>Where it goes</h2>
           <p>
-            Form submissions are delivered to NexCore by email through our email provider, and may
-            also be recorded in a private internal spreadsheet so we do not lose track of enquiries.
-            Both are accessible only to NexCore staff.
+            Form submissions are sent to a private NexCore application hosted on Google, which
+            records them in a private internal spreadsheet and emails the relevant NexCore staff.
+            Both the spreadsheet and the mailbox are accessible only to NexCore staff.
           </p>
 
           <h2>Payments</h2>

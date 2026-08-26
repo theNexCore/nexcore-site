@@ -4,29 +4,34 @@ import { headers } from 'next/headers';
 import { z } from 'zod';
 import {
   contactSchema,
+  ideaSchema,
   tourSchema,
   membershipSchema,
   spaceSchema,
   officeSchema,
   botCheck,
   fieldErrors,
-  deliver,
   type FormState,
 } from '@/lib/forms';
+import { postToAppsScript, type AppsScriptType } from '@/lib/apps-script';
 import { check, clientIp } from '@/lib/rate-limit';
+import { spaces } from '@/data/coworking';
 
 const GENERIC_ERROR = 'Something went wrong on our end. Please try again, or call us directly.';
 
 /**
  * Shared submission pipeline:
- *   rate limit -> bot check -> schema validation -> deliver
+ *   rate limit -> bot check -> schema validation -> POST to Apps Script
+ *
+ * The Apps Script logs to the Sheet and sends its own notification email,
+ * so there is no separate mail provider.
  */
 async function handle<T extends z.ZodTypeAny>({
   schema,
   formData,
   formName,
   bucket,
-  subject,
+  type,
   toFields,
   allowDeliveryFailure = false,
 }: {
@@ -34,8 +39,8 @@ async function handle<T extends z.ZodTypeAny>({
   formData: FormData;
   formName: string;
   bucket: string;
-  subject: (data: z.infer<T>) => string;
-  toFields: (data: z.infer<T>) => Record<string, string>;
+  type: AppsScriptType;
+  toFields: (data: z.infer<T>) => Record<string, string | number>;
   /** Payment paths proceed even if lead capture failed. */
   allowDeliveryFailure?: boolean;
 }): Promise<FormState> {
@@ -66,17 +71,12 @@ async function handle<T extends z.ZodTypeAny>({
     };
   }
 
-  const data = parsed.data as z.infer<T>;
-  const result = await deliver({
-    subject: subject(data),
-    formName,
-    fields: toFields(data),
-  });
+  const result = await postToAppsScript(type, toFields(parsed.data as z.infer<T>));
 
   if (!result.ok) {
-    console.error(`[form:${formName}] delivery failed:`, result.error);
-    // For a payment path, blocking on OUR capture failing would cost a sale.
-    // Square collects name and email at checkout, so the customer is still
+    console.error(`[form:${formName}] Apps Script rejected:`, result.error);
+    // On a payment path, blocking checkout because OUR logging failed would
+    // cost a sale. Square captures name and email, so the customer is still
     // reachable. Everything else surfaces an honest error.
     if (allowDeliveryFailure) return { status: 'success', message: 'delivery-degraded' };
     return { status: 'error', message: GENERIC_ERROR };
@@ -85,24 +85,107 @@ async function handle<T extends z.ZodTypeAny>({
   return { status: 'success' };
 }
 
+/* ------------------------------------------------------------------ *
+ * type: "contact"
+ * ------------------------------------------------------------------ */
+
 export async function submitContact(_prev: FormState, formData: FormData): Promise<FormState> {
   return handle({
     schema: contactSchema,
     formData,
     formName: 'Contact',
     bucket: 'contact',
-    subject: (d) => `Contact form — ${d.firstName} ${d.lastName}`,
+    type: 'contact',
     toFields: (d) => ({
-      Name: `${d.firstName} ${d.lastName}`,
-      Email: d.email,
-      Phone: d.phone,
-      Business: d.business,
-      'NexCore member': d.member ?? '',
-      'Reason for reaching out': d.reason,
-      Message: d.message,
+      firstName: d.firstName,
+      lastName: d.lastName,
+      email: d.email,
+      phone: d.phone,
+      business: d.business,
+      member: d.member ?? '',
+      reason: d.reason,
+      message: d.message,
     }),
   });
 }
+
+/* ------------------------------------------------------------------ *
+ * type: "idea"
+ * ------------------------------------------------------------------ */
+
+export async function submitIdea(_prev: FormState, formData: FormData): Promise<FormState> {
+  return handle({
+    schema: ideaSchema,
+    formData,
+    formName: 'Event idea',
+    bucket: 'idea',
+    type: 'idea',
+    toFields: (d) => ({
+      firstName: d.firstName,
+      lastName: d.lastName,
+      email: d.email,
+      phone: d.phone,
+      idea: d.idea,
+      why: d.why,
+    }),
+  });
+}
+
+/* ------------------------------------------------------------------ *
+ * type: "space"
+ * ------------------------------------------------------------------ */
+
+/** Decimal hours between two "HH:mm" values; 0 when either is missing. */
+function hoursBetween(start: string, end: string): number {
+  if (!start || !end) return 0;
+  const [sh, sm] = start.split(':').map(Number);
+  const [eh, em] = end.split(':').map(Number);
+  if ([sh, sm, eh, em].some((n) => Number.isNaN(n))) return 0;
+  const mins = eh * 60 + em - (sh * 60 + sm);
+  return mins > 0 ? Math.round((mins / 60) * 100) / 100 : 0;
+}
+
+export async function submitSpace(_prev: FormState, formData: FormData): Promise<FormState> {
+  return handle({
+    schema: spaceSchema,
+    formData,
+    formName: 'Space reservation request',
+    bucket: 'space',
+    type: 'space',
+    toFields: (d) => {
+      const hours = hoursBetween(d.start, d.end);
+      const match = spaces.find((s) => s.name === d.space);
+      return {
+        name: d.name,
+        company: d.company,
+        email: d.email,
+        phone: d.phone,
+        space: d.space,
+        date: d.date,
+        start: d.start,
+        end: d.end,
+        hours,
+        estPublic: match ? Math.round(match.rate * hours * 100) / 100 : 0,
+        estMember: match?.member ? Math.round(match.member * hours * 100) / 100 : 0,
+        notes: d.notes,
+      };
+    },
+  });
+}
+
+/* ------------------------------------------------------------------ *
+ * Tour, membership and office
+ *
+ * The Apps Script has no type for these — verified 2026-08-26, they hit its
+ * default branch and are rejected. They are mapped onto "contact" so no lead
+ * is dropped, with the specifics carried in `reason` and `message`. If
+ * dedicated tabs are wanted, the script needs those types added.
+ * ------------------------------------------------------------------ */
+
+const splitName = (full: string) => {
+  const parts = full.trim().split(/\s+/);
+  return { firstName: parts[0] ?? '', lastName: parts.slice(1).join(' ') };
+};
 
 export async function submitTour(_prev: FormState, formData: FormData): Promise<FormState> {
   return handle({
@@ -110,13 +193,15 @@ export async function submitTour(_prev: FormState, formData: FormData): Promise<
     formData,
     formName: 'Tour request',
     bucket: 'tour',
-    subject: (d) => `Tour request — ${d.name}`,
+    type: 'contact',
     toFields: (d) => ({
-      Name: d.name,
-      Email: d.email,
-      Phone: d.phone,
-      Business: d.business,
-      'What brings you to NexCore': d.brings,
+      ...splitName(d.name),
+      email: d.email,
+      phone: d.phone,
+      business: d.business,
+      member: 'Considering joining',
+      reason: 'I want to tour or join',
+      message: `TOUR REQUEST\n\nWhat brings you to NexCore: ${d.brings || '(not given)'}`,
     }),
   });
 }
@@ -127,35 +212,16 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
     formData,
     formName: 'Membership enquiry',
     bucket: 'membership',
+    type: 'contact',
     allowDeliveryFailure: true,
-    subject: (d) => `Membership enquiry — ${d.name}`,
     toFields: (d) => ({
-      Name: d.name,
-      Email: d.email,
-      Phone: d.phone,
-      Business: d.business,
-      'Membership tier': d.tier,
-    }),
-  });
-}
-
-export async function submitSpace(_prev: FormState, formData: FormData): Promise<FormState> {
-  return handle({
-    schema: spaceSchema,
-    formData,
-    formName: 'Space reservation request',
-    bucket: 'space',
-    subject: (d) => `Space request — ${d.space || 'unspecified'} — ${d.name}`,
-    toFields: (d) => ({
-      Name: d.name,
-      Email: d.email,
-      Phone: d.phone,
-      Company: d.company,
-      Space: d.space,
-      Date: d.date,
-      'Start time': d.start,
-      'End time': d.end,
-      Notes: d.notes,
+      ...splitName(d.name),
+      email: d.email,
+      phone: d.phone,
+      business: d.business,
+      member: 'Considering joining',
+      reason: 'I want to tour or join',
+      message: `MEMBERSHIP ENQUIRY\n\nTier: ${d.tier || '(not given)'}\nNext step: $50 deposit via Square.`,
     }),
   });
 }
@@ -166,14 +232,15 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
     formData,
     formName: 'Office enquiry',
     bucket: 'office',
-    subject: (d) => `Office enquiry — ${d.office || 'unspecified'} — ${d.name}`,
+    type: 'contact',
     toFields: (d) => ({
-      Name: d.name,
-      Email: d.email,
-      Phone: d.phone,
-      Company: d.company,
-      Office: d.office,
-      Notes: d.notes,
+      ...splitName(d.name),
+      email: d.email,
+      phone: d.phone,
+      business: d.company,
+      member: 'Considering joining',
+      reason: 'I want to tour or join',
+      message: `PRIVATE OFFICE ENQUIRY\n\nOffice: ${d.office || '(not specified)'}\n\nNotes: ${d.notes || '(none)'}`,
     }),
   });
 }
