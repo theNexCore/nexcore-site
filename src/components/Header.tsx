@@ -35,8 +35,12 @@ export function Header() {
     };
   }, [open]);
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) => {
+    // Nav hrefs may carry a hash (e.g. /events#calendar); compare paths only.
+    const path = href.split('#')[0].split('?')[0];
+    if (path === '/') return pathname === '/';
+    return pathname === path || pathname.startsWith(`${path}/`);
+  };
 
   return (
     <header

@@ -53,6 +53,16 @@ export const mainNav: NavItem[] = [
       { label: 'Systems', href: '/systems' },
       { label: 'Community', href: '/community' },
       { label: 'Events', href: '/events' },
+    ],
+  },
+  {
+    // Top-level on the live site, with these two children.
+    // events.html and event-calendar.html merged into /events, so this
+    // deep-links to the calendar section while "Events" above lands on the
+    // narrative at the top of the same page.
+    label: 'Event Calendar',
+    href: '/events#calendar',
+    children: [
       { label: 'Host an Event', href: '/coworking#spaces' },
       { label: 'Event Photo Gallery', href: '/events/gallery' },
     ],
