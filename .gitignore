@@ -7,10 +7,11 @@ out
 next-env.d.ts
 *.tsbuildinfo
 
-# env — never commit real credentials (.env.example is committed as the template)
-.env
-.env.local
-.env*.local
+# env — never commit real credentials.
+# Broad match added by `vercel link`; .env.example is the committed template
+# and is explicitly re-included so it is never silently dropped.
+.env*
+!.env.example
 
 # vercel
 .vercel

@@ -1,0 +1,8 @@
+# The CLI uploads the working directory; keep it to source.
+# Vercel installs deps and builds remotely.
+node_modules
+.next
+out
+
+# Audit crawl artifacts are not needed to build the site.
+audit
