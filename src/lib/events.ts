@@ -362,20 +362,71 @@ export interface EventsPayload {
   error: string | null;
 }
 
+/** Hard ceiling on the feed request. Next kills a static export at 60s. */
+const FEED_TIMEOUT_MS = 12_000;
+
+/**
+ * Short-lived in-process memo.
+ *
+ * getEvents() is called from generateStaticParams, generateMetadata AND the
+ * page body of every event page, plus /events and the sitemap. During a build
+ * that is dozens of calls per worker. Next's fetch cache does not always
+ * collapse them across separate page renders, and hammering the Apps Script
+ * endpoint gets it throttled — which is what failed the build.
+ *
+ * The TTL is far below the 300s ISR window, so this only ever collapses a
+ * burst; it never holds stale data past a revalidation.
+ */
+const MEMO_TTL_MS = 30_000;
+let memo: { at: number; value: EventsPayload } | null = null;
+let inflight: Promise<EventsPayload> | null = null;
+
 /**
  * Fetched at build time and revalidated by ISR every 300s.
  * Never fetched per-request.
+ *
+ * A feed failure degrades to an empty payload with `error` set — it must never
+ * fail the build, because that would take the whole site down over one
+ * third-party outage.
  */
 export async function getEvents(): Promise<EventsPayload> {
+  const now = Date.now();
+  if (memo && now - memo.at < MEMO_TTL_MS) return memo.value;
+  if (inflight) return inflight;
+
+  inflight = fetchEvents().then((value) => {
+    memo = { at: Date.now(), value };
+    inflight = null;
+    return value;
+  });
+
+  return inflight;
+}
+
+async function fetchEvents(): Promise<EventsPayload> {
   const empty: EventsPayload = { upcoming: [], past: [], all: [], seriesMap: {}, error: null };
 
   let rows: unknown;
   try {
-    const res = await fetch(FEED_URL, { next: { revalidate: 300 } });
+    const res = await fetch(FEED_URL, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+    });
     if (!res.ok) return { ...empty, error: `Events feed returned ${res.status}` };
-    rows = await res.json();
+    const text = await res.text();
+    // Google sometimes answers with an HTML interstitial instead of JSON.
+    if (!text.trimStart().startsWith('[')) {
+      return { ...empty, error: 'Events feed did not return JSON (likely a Google interstitial)' };
+    }
+    rows = JSON.parse(text);
   } catch (err) {
-    return { ...empty, error: err instanceof Error ? err.message : 'Events feed unreachable' };
+    const msg =
+      err instanceof Error
+        ? err.name === 'TimeoutError'
+          ? `Events feed timed out after ${FEED_TIMEOUT_MS}ms`
+          : err.message
+        : 'Events feed unreachable';
+    return { ...empty, error: msg };
   }
 
   if (!Array.isArray(rows)) return { ...empty, error: 'Events feed did not return an array' };
