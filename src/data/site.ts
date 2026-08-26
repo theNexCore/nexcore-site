@@ -50,11 +50,16 @@ export const site = {
     { days: ['Saturday'], opens: '09:00', closes: '13:00' },
   ],
 
+  // All profiles consolidated on the "follownexcore" handle.
+  // Instagram, LinkedIn, X and YouTube verified reachable 2026-08-26.
+  // Facebook could not be verified programmatically — it returns 400 to any
+  // non-browser request, including known-good pages — so confirm in a browser.
   social: [
-    { name: 'Facebook', url: 'https://www.facebook.com/NexCoreCoworking/' },
-    { name: 'Instagram', url: 'https://www.instagram.com/thenexcore' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/thenexcore/' },
-    { name: 'X', url: 'https://x.com/thenexcore' },
+    { name: 'Facebook', url: 'https://www.facebook.com/follownexcore' },
+    { name: 'Instagram', url: 'https://www.instagram.com/follownexcore' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/follownexcore/' },
+    { name: 'X', url: 'https://x.com/follownexcore' },
+    { name: 'YouTube', url: 'https://www.youtube.com/@follownexcore' },
   ],
 
   /** Square payment links. Coworking only - events ticket via Eventbrite. */

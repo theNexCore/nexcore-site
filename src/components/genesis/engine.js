@@ -20,7 +20,7 @@
  */
 const B = '/logo/';
 
-export function mountGenesis(hostCanvas) {
+export function mountGenesis(hostCanvas, onInvert) {
   if (!hostCanvas) return () => {};
 
   // --- teardown plumbing (added for React; engine logic untouched) --------
@@ -4729,6 +4729,8 @@ function update(dt, now) {
         if (engine.finaleCharge >= 1) {
 
             engine.inverted = true;
+            // Signal the dawn finale so the header can cross-fade with it.
+            try { onInvert && onInvert(); } catch (_) {}
             engine.finaleCharging = false;
 
             if (TRANSITION_STYLE === "DAWN") {

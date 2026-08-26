@@ -15,9 +15,10 @@
     scroll-behavior: smooth;
   }
 
-  /* Sticky section navs offset in-page anchors; keep headings clear of them. */
+  /* The sticky header is tall at rest and condenses on scroll. Offset
+     in-page anchors (e.g. /coworking#amenities) so headings clear it. */
   [id] {
-    scroll-margin-top: 88px;
+    scroll-margin-top: 120px;
   }
 
   body {

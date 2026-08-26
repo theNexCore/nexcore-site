@@ -4,7 +4,6 @@ import { buildMetadata } from '@/lib/seo';
 import { Section, Eyebrow } from '@/components/Section';
 import { Container } from '@/components/Container';
 import { ButtonLink } from '@/components/Button';
-import { SectionNav } from '@/components/SectionNav';
 import { InquiryForm } from '@/components/form/InquiryForm';
 import { offices, spaces } from '@/data/coworking';
 import { tiers, dayPass, amenityGroups } from '@/data/memberships';
@@ -19,15 +18,6 @@ export const metadata = buildMetadata({
   path: '/coworking',
 });
 
-const NAV = [
-  { id: 'amenities', label: 'Amenities' },
-  { id: 'open-spaces', label: 'Open Spaces' },
-  { id: 'memberships', label: 'Memberships' },
-  { id: 'day-pass', label: 'Day Pass' },
-  { id: 'offices', label: 'Private Offices' },
-  { id: 'spaces', label: 'Rentable Spaces' },
-];
-
 const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 
 export default function CoworkingPage() {
@@ -35,8 +25,6 @@ export default function CoworkingPage() {
 
   return (
     <>
-      <SectionNav items={NAV} />
-
       {/* Intro */}
       <Section>
         <div className="max-w-3xl">

@@ -40,6 +40,7 @@ export const mainNav: NavItem[] = [
     label: 'Coworking',
     href: '/coworking',
     children: [
+      { label: 'Amenities', href: '/coworking#amenities' },
       { label: 'Memberships', href: '/coworking#memberships' },
       { label: 'Buy a Pass', href: '/coworking#day-pass' },
       { label: 'Rent an Office', href: '/coworking#offices' },
@@ -53,6 +54,7 @@ export const mainNav: NavItem[] = [
       { label: 'Systems', href: '/systems' },
       { label: 'Community', href: '/community' },
       { label: 'Events', href: '/events' },
+      { label: 'Host an Event', href: '/coworking#spaces' },
     ],
   },
   {
@@ -63,7 +65,6 @@ export const mainNav: NavItem[] = [
     label: 'Event Calendar',
     href: '/events#calendar',
     children: [
-      { label: 'Host an Event', href: '/coworking#spaces' },
       { label: 'Event Photo Gallery', href: '/events/gallery' },
     ],
   },

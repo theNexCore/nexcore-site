@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { site, formattedAddress } from '@/data/site';
 import { footerExplore } from '@/data/nav';
+import { socialIcons, PhoneIcon, MapPinIcon } from './Icons';
 
 /** Footer copy transcribed verbatim from the live site (audit/PHASE1.md §2). */
 export function Footer() {
@@ -17,7 +18,8 @@ export function Footer() {
             <ul className="space-y-2 font-inter text-[15px] text-white/70">
               {site.phones.map((p) => (
                 <li key={p.tel}>
-                  <a href={`tel:${p.tel}`} className="hover:text-sky">
+                  <a href={`tel:${p.tel}`} className="inline-flex items-center gap-2 hover:text-sky">
+                    <PhoneIcon />
                     {p.number}
                   </a>{' '}
                   <span className="text-white/45">{p.label}</span>
@@ -47,8 +49,9 @@ export function Footer() {
               href={site.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block font-inter text-[15px] text-sky hover:text-sky-light"
+              className="mt-3 inline-flex items-center gap-2 font-inter text-[15px] text-sky hover:text-sky-light"
             >
+              <MapPinIcon />
               Get directions
             </a>
             <dl className="mt-5 space-y-1 font-inter text-[14px] text-white/55">
@@ -83,18 +86,22 @@ export function Footer() {
               Follow
             </h4>
             <ul className="space-y-2 font-inter text-[15px] text-white/70">
-              {site.social.map((s) => (
-                <li key={s.url}>
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-sky"
-                  >
-                    {s.name}
-                  </a>
-                </li>
-              ))}
+              {site.social.map((s) => {
+                const Icon = socialIcons[s.name];
+                return (
+                  <li key={s.url}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2.5 hover:text-sky"
+                    >
+                      {Icon && <Icon />}
+                      {s.name}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
             <Image
               src="/logo/nexcore-logo-primary.svg"

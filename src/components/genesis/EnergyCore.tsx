@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { setCoreState } from './core-state';
 
 /**
  * The NexCore "Energy Core" hero.
@@ -48,6 +49,12 @@ export function EnergyCore() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [running, setRunning] = useState(false);
 
+  // The core owns the page's chrome state while it is on screen.
+  useEffect(() => {
+    setCoreState('dark');
+    return () => setCoreState('none');
+  }, []);
+
   useEffect(() => {
     if (!shouldAnimate()) return;
 
@@ -62,7 +69,7 @@ export function EnergyCore() {
       import('./engine')
         .then(({ mountGenesis }) => {
           if (cancelled || !canvasRef.current) return;
-          cleanup = mountGenesis(canvasRef.current);
+          cleanup = mountGenesis(canvasRef.current, () => setCoreState('dawn'));
           setRunning(true);
         })
         .catch(() => {
