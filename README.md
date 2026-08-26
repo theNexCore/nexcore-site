@@ -135,7 +135,8 @@ deploy automatically — no local upload.
 
 ## Before DNS cutover
 
-1. **Legal review** — `/terms` and `/privacy` are new first-party drafts replacing links that pointed at Thryv's boilerplate. Both carry a `REVIEW REQUIRED` comment. Jim or counsel must confirm.
+1. ~~**Legal review**~~ — done. `/terms` and `/privacy` are first-party pages replacing links that pointed at Thryv's boilerplate. Facts confirmed by Jim and approved by counsel, 2026-08-26.
+   Two commitments now need upkeep rather than review: the stated **24-month retention** is not enforced by any code, so old enquiries must actually be deleted from the inbox and the mirrored Sheet; and the "no advertising cookies" line holds only while `NEXT_PUBLIC_GA4_ID` is unset.
 2. Set `RESEND_API_KEY`, `FORM_TO_EMAIL`, `FORM_FROM_EMAIL` in Vercel and verify the sending domain.
 3. Configure **apex → www** in Vercel; the Weebly site already 301s that way.
 4. Sheet fixes are tracked in `audit/EVENTS-SHEET-SCHEMA.md` (Night 2 ticket URL, two dead images, `startTS` backfill).

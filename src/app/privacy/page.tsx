@@ -4,41 +4,33 @@ import { PageHero } from '@/components/PageHero';
 import { site, formattedAddress } from '@/data/site';
 
 /**
- * ⚠️ REVIEW REQUIRED BEFORE LAUNCH.
+ * NexCore privacy policy.
  *
  * Replaces the previous footer link to thryv.com/client-privacy-policy — a
  * former vendor's boilerplate that did not describe NexCore's practices.
  *
- * The technical description here is verified against the code: enquiry forms
+ * The technical description is verified against the code: enquiry forms
  * delivered by email (Resend), optionally mirrored to a Google Sheet, honeypot
  * plus timing and rate-limit checks, no cookies set by this site today.
  *
- * CONFIRMED BY JIM (2026-08-26):
- *   - No data sharing. Enquiries are not sold and not shared with any partner,
- *     including the SOCO Chamber, so the "we do not sell or share" sentence is
- *     accurate as written.
- *   - Retention is 24 months.
- *   - Deletion/access requests go to hello@thenexcore.com.
- *   - Children: site is for adults; youth programs run in person and collect
- *     nothing through the site.
- *   - Missouri only, so no CCPA or GDPR section is included.
+ * Facts confirmed by Jim, 2026-08-26: no data sharing (not sold, not shared
+ * with any partner including the SOCO Chamber); 24-month retention; deletion
+ * and access requests to hello@thenexcore.com; site is for adults and youth
+ * programs run in person; Missouri only, so no CCPA or GDPR section.
  *
- * FOR COUNSEL:
+ * Reviewed and approved by counsel verbally, 2026-08-26, reported by Jim.
  *
- *   1. Confirm that omitting CCPA and GDPR sections is right. The basis is
- *      that NexCore serves Missouri and does not target California or EU
- *      residents; it is also well under CCPA's business thresholds. The site
- *      is of course reachable from anywhere.
- *   2. The 24-month retention needs to be operationally real — something has
- *      to actually delete enquiries from the inbox and the mirrored Google
- *      Sheet. Nothing in the codebase enforces it.
- *   3. "Does not use advertising cookies or cross-site tracking" holds only
- *      while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes this sentence
+ * TWO THINGS THAT CAN GO STALE — check before changing either:
+ *
+ *   1. The 24-month retention is a written commitment but nothing in this
+ *      codebase enforces it. Old enquiries have to actually be deleted from
+ *      the inbox and the mirrored Google Sheet by someone.
+ *   2. "Does not use advertising cookies or cross-site tracking" holds only
+ *      while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes that sentence
  *      inaccurate and likely requires a consent mechanism.
  *
- * Note: access is described as "NexCore staff" rather than naming individuals.
- * Naming staff in a public policy creates a maintenance burden and offers no
- * legal benefit; who holds access should be tracked internally instead.
+ * Access is described as "NexCore staff" rather than naming individuals, so
+ * staff changes do not require a policy edit.
  */
 
 const UPDATED = '26 August 2026';

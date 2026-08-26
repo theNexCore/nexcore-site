@@ -4,29 +4,25 @@ import { PageHero } from '@/components/PageHero';
 import { site, formattedAddress } from '@/data/site';
 
 /**
- * ⚠️ REVIEW REQUIRED BEFORE LAUNCH.
+ * NexCore terms of use.
  *
  * Replaces the previous footer link to thryv.com/client-terms-of-use — a
  * former vendor's boilerplate that did not describe NexCore's terms.
  *
  * Scope is deliberately narrow: this covers use of the WEBSITE only.
+ * Membership, office licence and space rental terms live in the agreements
+ * members sign directly, which Jim confirmed exist.
  *
- * CONFIRMED BY JIM (2026-08-26):
- *   - Governing law is Missouri.
- *   - The copyright paragraph is carried over verbatim from the Weebly footer.
- *   - Signed agreements DO exist for memberships, office licences and space
- *     rentals, so the opening paragraph's deferral to them is accurate.
+ * Facts confirmed by Jim, 2026-08-26: Missouri governing law; the copyright
+ * paragraph carried over verbatim from the Weebly footer; signed agreements
+ * exist for memberships, office licences and space rentals.
  *
- * STILL UNVERIFIED — counsel should confirm before this goes live:
+ * Reviewed and approved by counsel verbally, 2026-08-26, reported by Jim.
  *
- *   1. The liability limitation and "as is" disclaimer are conventional but
- *      have not been reviewed by a lawyer.
- *   2. No refund policy is stated. Square deposits and day passes, and
- *      Eventbrite registrations, are deferred to those providers — confirm
- *      that matches how refunds are actually handled, particularly the $50
- *      membership deposit and the $25 refundable vendor deposit.
- *   3. Worth checking that this page and the signed agreements do not
- *      contradict each other on liability or governing law.
+ * ONE THING THAT CAN GO STALE: no refund policy is stated here — Square
+ * deposits, day passes and Eventbrite registrations are deferred to those
+ * providers. If refund handling changes, particularly for the $50 membership
+ * deposit or a refundable vendor deposit, this page needs revisiting.
  */
 
 const UPDATED = '26 August 2026';
