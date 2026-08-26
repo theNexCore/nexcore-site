@@ -15,7 +15,7 @@ export interface Tier {
   blurb: string;
   includesLabel: string;
   includes: string[];
-  cta: { label: string; href: string; external?: boolean };
+  cta: { label: string; tier: string };
   featured?: boolean;
   badge?: string;
 }
@@ -34,10 +34,12 @@ export const tiers: Tier[] = [
       'Unique professional business address',
       'Dedicated suite number',
       'Google-verifiable business address',
-      'Professional mail handling',
-      'Access to the NexCore business ecosystem',
+      'Registered Agent service',
+      'Mail handling',
+      'Mail scanning & email forwarding',
+      'One complimentary coworking day pass each month',
     ],
-    cta: { label: 'Become a Virtual Member', href: site.square.membershipDeposit, external: true },
+    cta: { label: 'Become a Virtual Member', tier: 'virtual' },
   },
   {
     id: 'nexcore',
@@ -53,8 +55,10 @@ export const tiers: Tier[] = [
       'All member amenities',
       'Six hours of Conference Room usage each month',
       'Guest privileges (guest must remain with member)',
+      'Member pricing on rentable spaces',
+      'Access to member events',
     ],
-    cta: { label: 'Become a Member', href: site.square.membershipDeposit, external: true },
+    cta: { label: 'Become a Coworking Member', tier: 'nexcore' },
   },
   {
     id: 'founding',
@@ -74,7 +78,7 @@ export const tiers: Tier[] = [
       'Featured placement in the Member Directory',
       'Recognition as a Founding Member of NexCore',
     ],
-    cta: { label: 'Become a Founding Member', href: site.square.membershipDeposit, external: true },
+    cta: { label: 'Become a Founding Member', tier: 'founding' },
   },
 ];
 

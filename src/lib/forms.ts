@@ -136,7 +136,7 @@ export async function deliver({
   subject: string;
   formName: string;
   fields: Record<string, string>;
-}): Promise<{ ok: boolean; error?: string }> {
+}): Promise<{ ok: boolean; error?: string; emailDelivered?: boolean }> {
   const rows = Object.entries(fields)
     .filter(([, v]) => v !== '')
     .map(
@@ -184,20 +184,61 @@ export async function deliver({
     }
   }
 
-  // Mirror to the existing Sheet. Best effort - never blocks the response.
+  // Mirror to the existing Sheet.
   const mirror = process.env.FORMS_SHEET_MIRROR_URL;
+  let mirrorOk = false;
+  let mirrorError: string | undefined;
+
   if (mirror) {
     try {
-      await fetch(mirror, {
+      // text/plain matches how the old site posted, and avoids a preflight.
+      const res = await fetch(mirror, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ form: formName, ...fields }),
-        signal: AbortSignal.timeout(5000),
+        signal: AbortSignal.timeout(8000),
       });
-    } catch {
-      // Intentionally swallowed.
+
+      // Apps Script answers 200 even when it refuses the write, so the body
+      // has to be inspected. It currently returns
+      // {"ok":false,"error":"RSVP submissions are no longer accepted here."}
+      const body = await res.text();
+      if (!res.ok) {
+        mirrorError = `Sheet mirror returned ${res.status}`;
+      } else {
+        try {
+          const parsed = JSON.parse(body) as { ok?: boolean; error?: string };
+          mirrorOk = parsed.ok !== false;
+          if (!mirrorOk) mirrorError = parsed.error ?? 'Sheet mirror rejected the submission';
+        } catch {
+          // Non-JSON 200 — assume the script accepted it.
+          mirrorOk = true;
+        }
+      }
+    } catch (err) {
+      mirrorError = err instanceof Error ? err.message : 'Sheet mirror failed';
     }
   }
 
-  return emailOk ? { ok: true } : { ok: false, error: emailError };
+  /**
+   * The question that matters is "did we capture this lead durably?", not
+   * "did email specifically work". Either channel succeeding is a success.
+   *
+   * Gating on email alone meant an unset RESEND_API_KEY showed visitors an
+   * error while their enquiry was sitting safely in the Sheet — and, worse,
+   * blocked the membership modal from ever reaching its payment step.
+   */
+  if (emailOk || mirrorOk) {
+    if (!emailOk) {
+      console.error(
+        `[form:${formName}] captured via Sheet mirror, but EMAIL FAILED: ${emailError}`,
+      );
+    }
+    return { ok: true, emailDelivered: emailOk };
+  }
+
+  return {
+    ok: false,
+    error: [emailError, mirrorError].filter(Boolean).join(' | ') || 'Delivery failed.',
+  };
 }

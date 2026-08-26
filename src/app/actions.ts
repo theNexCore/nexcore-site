@@ -28,6 +28,7 @@ async function handle<T extends z.ZodTypeAny>({
   bucket,
   subject,
   toFields,
+  allowDeliveryFailure = false,
 }: {
   schema: T;
   formData: FormData;
@@ -35,6 +36,8 @@ async function handle<T extends z.ZodTypeAny>({
   bucket: string;
   subject: (data: z.infer<T>) => string;
   toFields: (data: z.infer<T>) => Record<string, string>;
+  /** Payment paths proceed even if lead capture failed. */
+  allowDeliveryFailure?: boolean;
 }): Promise<FormState> {
   const raw = Object.fromEntries(formData) as Record<string, unknown>;
 
@@ -72,6 +75,10 @@ async function handle<T extends z.ZodTypeAny>({
 
   if (!result.ok) {
     console.error(`[form:${formName}] delivery failed:`, result.error);
+    // For a payment path, blocking on OUR capture failing would cost a sale.
+    // Square collects name and email at checkout, so the customer is still
+    // reachable. Everything else surfaces an honest error.
+    if (allowDeliveryFailure) return { status: 'success', message: 'delivery-degraded' };
     return { status: 'error', message: GENERIC_ERROR };
   }
 
@@ -120,6 +127,7 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
     formData,
     formName: 'Membership enquiry',
     bucket: 'membership',
+    allowDeliveryFailure: true,
     subject: (d) => `Membership enquiry — ${d.name}`,
     toFields: (d) => ({
       Name: d.name,

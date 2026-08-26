@@ -5,9 +5,10 @@ import { Section, Eyebrow } from '@/components/Section';
 import { Container } from '@/components/Container';
 import { ButtonLink } from '@/components/Button';
 import { SquareCheckoutButton } from '@/components/SquareCheckoutButton';
+import { MembershipTiers } from '@/components/MembershipTiers';
 import { InquiryForm } from '@/components/form/InquiryForm';
 import { offices, spaces } from '@/data/coworking';
-import { tiers, dayPass, amenityGroups } from '@/data/memberships';
+import { dayPass, amenityGroups } from '@/data/memberships';
 import { site } from '@/data/site';
 import { dim } from '@/lib/img';
 import { cn } from '@/lib/cn';
@@ -150,90 +151,25 @@ export default function CoworkingPage() {
 
       {/* Memberships */}
       <Section id="memberships" tone="lift">
-        <div className="max-w-2xl">
-          <Eyebrow>MEMBERSHIPS</Eyebrow>
-          <h2 className="font-sora text-h2sm font-semibold text-white">
-            Choose the membership that fits your business today — with{' '}
-            <span className="o">room to grow tomorrow</span>.
-          </h2>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {tiers.map((t) => (
-            <div
-              key={t.id}
-              className={cn(
-                'flex flex-col rounded-card border p-8',
-                t.featured ? 'border-sky/60 bg-sky/[0.06]' : 'border-white/10 bg-ink',
-              )}
-            >
-              {t.badge && (
-                <span className="mb-4 inline-block self-start rounded-pill bg-sky px-3 py-1 font-inter text-[12px] font-semibold text-white">
-                  {t.badge}
-                </span>
-              )}
-              <h3 className="font-sora text-xl font-semibold text-white">{t.name}</h3>
-              <p className="mt-4">
-                <span className="font-sora text-[42px] font-semibold leading-none text-white">
-                  {t.priceLabel}
-                </span>
-                <span className="ml-1 font-inter text-[16px] text-white/50">{t.cadence}</span>
-              </p>
-              {t.note && <p className="mt-2 font-inter text-[14px] text-sky">{t.note}</p>}
-              <p className="mt-4 font-inter text-[15px] leading-relaxed text-white/65">{t.blurb}</p>
-
-              <p className="mt-6 font-inter text-[13px] font-semibold tracking-[0.1em] text-white/45">
-                {t.includesLabel}
-              </p>
-              <ul className="mt-3 flex-1 space-y-2">
-                {t.includes.map((i) => (
-                  <li
-                    key={i}
-                    className="flex gap-2.5 font-inter text-[15px] leading-relaxed text-white/75"
-                  >
-                    <span aria-hidden="true" className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-sky" />
-                    {i}
-                  </li>
-                ))}
-              </ul>
-
-              {/* All three tiers take the same $50 holding deposit, opened in
-                  a Square popup window rather than a tab. */}
-              <SquareCheckoutButton
-                href={t.cta.href}
-                variant={t.featured ? 'primary' : 'ghost'}
-                className="mt-7 w-full"
-              >
-                {t.cta.label}
-              </SquareCheckoutButton>
-              <p className="mt-3 text-center font-inter text-[13px] text-white/45">
-                $50 deposit, applied to your first month
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Membership enquiry */}
-        <div id="membership-enquiry" className="mt-14 rounded-card border border-white/10 bg-ink p-8">
-          <h3 className="font-sora text-2xl font-semibold text-white">
-            Let&rsquo;s get you started.
-          </h3>
-          <p className="mt-2 max-w-xl font-inter text-[15px] leading-relaxed text-white/65">
-            Tell us which membership fits and we&rsquo;ll take it from there. A {' '}
-            <strong className="text-white">$50 deposit</strong> holds your spot and is applied to
-            your first month.
+        <div className="mx-auto max-w-3xl text-center">
+          <span aria-hidden="true" className="mx-auto mb-8 block h-px w-[70px] bg-sky/40" />
+          <h2 className="font-sora text-h2sm font-semibold text-white">Memberships</h2>
+          <p className="mt-4 font-sora text-lead font-medium text-sky">
+            Build your business your way.
           </p>
-          <div className="mt-7 max-w-2xl">
-            <InquiryForm
-              kind="membership"
-              submitLabel="Send Enquiry"
-              options={tiers.map((t) => ({
-                value: `${t.name} — ${t.priceLabel}${t.cadence}`,
-                label: `${t.name} — ${t.priceLabel}${t.cadence}`,
-              }))}
-            />
-          </div>
+          <p className="mx-auto mt-6 max-w-2xl font-inter text-[17px] leading-relaxed text-white/75">
+            Whether you&rsquo;re launching a new company, growing an existing one, or simply looking
+            for a professional place to work, NexCore offers membership options designed to meet you
+            where you are.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl font-inter text-[17px] leading-relaxed text-white/75">
+            Choose the membership that fits your business today&mdash;with room to grow tomorrow.
+          </p>
         </div>
+
+        {/* Cards + two-step join modal. The old standalone enquiry form is gone —
+            the modal captures the lead before payment, which is what it was for. */}
+        <MembershipTiers />
       </Section>
 
       {/* Day pass */}
