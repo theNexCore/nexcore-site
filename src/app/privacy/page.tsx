@@ -6,15 +6,36 @@ import { site, formattedAddress } from '@/data/site';
 /**
  * ⚠️ REVIEW REQUIRED BEFORE LAUNCH.
  *
- * This replaces the previous footer links, which pointed at Thryv's own
- * boilerplate (thryv.com/client-privacy-policy) — a former vendor's policy
- * that did not describe NexCore's practices.
+ * Replaces the previous footer link to thryv.com/client-privacy-policy — a
+ * former vendor's boilerplate that did not describe NexCore's practices.
  *
- * Everything below is written to match what this site actually does today:
- * contact/enquiry forms delivered by email (Resend), optionally mirrored to a
- * Google Sheet, plus optional GA4. It makes no claims beyond that.
+ * The technical description here is verified against the code: enquiry forms
+ * delivered by email (Resend), optionally mirrored to a Google Sheet, honeypot
+ * plus timing and rate-limit checks, no cookies set by this site today.
  *
- * Jim (or counsel) must confirm accuracy before DNS cutover.
+ * CONFIRMED BY JIM (2026-08-26):
+ *   - Deletion/access requests go to hello@thenexcore.com.
+ *   - Children: site is for adults; youth programs run in person and collect
+ *     nothing through the site.
+ *
+ * STILL UNVERIFIED — these are business facts, not code, and were not
+ * answered. Counsel should confirm each before this goes live:
+ *
+ *   1. "We do not sell your information, and we do not share it with third
+ *      parties for their own marketing." Standard and probably true, but NOT
+ *      confirmed. If enquiries are shared with the SOCO Chamber or any
+ *      partner, this sentence is wrong as written.
+ *   2. Retention. The text says "as long as we need them", which is honest but
+ *      soft. No concrete period was supplied.
+ *   3. Jurisdiction. No CCPA or GDPR section. Fine if traffic is effectively
+ *      Missouri; not if California or EU residents are knowingly served.
+ *   4. Cookies. "Does not use advertising cookies or cross-site tracking" is
+ *      true only while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes this
+ *      sentence inaccurate and likely requires a consent mechanism.
+ *
+ * Note: access is described as "NexCore staff" rather than naming individuals.
+ * Naming staff in a public policy creates a maintenance burden and offers no
+ * legal benefit; who holds access should be tracked internally instead.
  */
 
 const UPDATED = '26 August 2026';
@@ -97,13 +118,16 @@ export default function PrivacyPage() {
           <h2>Your choices</h2>
           <p>
             You can ask us what information we hold about you, ask us to correct it, or ask us to
-            delete it. Contact us using the details below and we will take care of it.
+            delete it. Email <a href={`mailto:${site.email}`}>{site.email}</a> and we will take care
+            of it.
           </p>
 
           <h2>Children</h2>
           <p>
             This website is intended for adults and for people acting on behalf of a business. It is
-            not directed at children, and we do not knowingly collect information from them.
+            not directed at children, and we do not knowingly collect information from them. Youth
+            programs run by NexCore take place in person and do not collect information through this
+            site.
           </p>
 
           <h2>Changes</h2>
