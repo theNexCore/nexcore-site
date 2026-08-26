@@ -5,6 +5,7 @@ import { Section, Eyebrow } from '@/components/Section';
 import { Container } from '@/components/Container';
 import { ButtonLink } from '@/components/Button';
 import { dim } from '@/lib/img';
+import { EnergyCore } from '@/components/genesis/EnergyCore';
 
 export const metadata = buildMetadata({
   title: 'NexCore — The Starting Point For It All',
@@ -18,6 +19,10 @@ const HERO = '/img/nexcore-front-profile.png';
 export default function HomePage() {
   return (
     <>
+      {/* Section 01 — the Energy Core. First thing on the page, as on the
+          original site: full-bleed, black, ending on a flash to white. */}
+      <EnergyCore />
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink">
         <div className="absolute inset-0">
@@ -25,7 +30,6 @@ export default function HomePage() {
             src={HERO}
             alt=""
             {...dim(HERO)}
-            priority
             sizes="100vw"
             className="h-full w-full object-cover opacity-[0.28]"
           />

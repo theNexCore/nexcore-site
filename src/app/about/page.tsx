@@ -36,7 +36,7 @@ const pillars = [
   {
     title: 'Systems',
     body: 'Connected systems working quietly behind everything we do.',
-    img: '/img/nexcore-businesssystems.jpg',
+    img: '/logo/nexcore-illustration.svg',
     href: '/systems',
   },
   {

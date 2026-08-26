@@ -22,9 +22,11 @@ export const mainNav: NavItem[] = [
       { label: 'Founder Letter', href: '/about/founder-letter' },
       { label: 'Our Philosophy', href: '/about/philosophy' },
       { label: 'History', href: '/about/history' },
-      { label: 'Why It Exists', href: '/about/why-it-exists' },
     ],
   },
+  // Top-level on the live site, between "What is NexCore" and "Impact".
+  // Route stays /about/why-it-exists; the 301 from /why-it-exists.html is unchanged.
+  { label: 'Why It Exists', href: '/about/why-it-exists' },
   {
     label: 'Impact',
     href: '/impact',
