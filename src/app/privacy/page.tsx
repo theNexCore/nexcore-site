@@ -14,24 +14,27 @@ import { site, formattedAddress } from '@/data/site';
  * plus timing and rate-limit checks, no cookies set by this site today.
  *
  * CONFIRMED BY JIM (2026-08-26):
+ *   - No data sharing. Enquiries are not sold and not shared with any partner,
+ *     including the SOCO Chamber, so the "we do not sell or share" sentence is
+ *     accurate as written.
+ *   - Retention is 24 months.
  *   - Deletion/access requests go to hello@thenexcore.com.
  *   - Children: site is for adults; youth programs run in person and collect
  *     nothing through the site.
+ *   - Missouri only, so no CCPA or GDPR section is included.
  *
- * STILL UNVERIFIED — these are business facts, not code, and were not
- * answered. Counsel should confirm each before this goes live:
+ * FOR COUNSEL:
  *
- *   1. "We do not sell your information, and we do not share it with third
- *      parties for their own marketing." Standard and probably true, but NOT
- *      confirmed. If enquiries are shared with the SOCO Chamber or any
- *      partner, this sentence is wrong as written.
- *   2. Retention. The text says "as long as we need them", which is honest but
- *      soft. No concrete period was supplied.
- *   3. Jurisdiction. No CCPA or GDPR section. Fine if traffic is effectively
- *      Missouri; not if California or EU residents are knowingly served.
- *   4. Cookies. "Does not use advertising cookies or cross-site tracking" is
- *      true only while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes this
- *      sentence inaccurate and likely requires a consent mechanism.
+ *   1. Confirm that omitting CCPA and GDPR sections is right. The basis is
+ *      that NexCore serves Missouri and does not target California or EU
+ *      residents; it is also well under CCPA's business thresholds. The site
+ *      is of course reachable from anywhere.
+ *   2. The 24-month retention needs to be operationally real — something has
+ *      to actually delete enquiries from the inbox and the mirrored Google
+ *      Sheet. Nothing in the codebase enforces it.
+ *   3. "Does not use advertising cookies or cross-site tracking" holds only
+ *      while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes this sentence
+ *      inaccurate and likely requires a consent mechanism.
  *
  * Note: access is described as "NexCore staff" rather than naming individuals.
  * Naming staff in a public policy creates a maintenance burden and offers no
@@ -111,8 +114,8 @@ export default function PrivacyPage() {
 
           <h2>Retention</h2>
           <p>
-            We keep enquiries for as long as we need them to serve you and to keep an accurate record
-            of our business. You can ask us to delete yours at any time.
+            We keep enquiries for up to <strong>24 months</strong>, after which they are deleted. You
+            can ask us to delete yours sooner at any time — see below.
           </p>
 
           <h2>Your choices</h2>
