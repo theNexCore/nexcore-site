@@ -37,7 +37,7 @@ export const tiers: Tier[] = [
       'Professional mail handling',
       'Access to the NexCore business ecosystem',
     ],
-    cta: { label: 'Become a Virtual Member', href: '#membership-enquiry' },
+    cta: { label: 'Become a Virtual Member', href: site.square.membershipDeposit, external: true },
   },
   {
     id: 'nexcore',
@@ -54,7 +54,7 @@ export const tiers: Tier[] = [
       'Six hours of Conference Room usage each month',
       'Guest privileges (guest must remain with member)',
     ],
-    cta: { label: 'Become a Member', href: '#membership-enquiry' },
+    cta: { label: 'Become a Member', href: site.square.membershipDeposit, external: true },
   },
   {
     id: 'founding',

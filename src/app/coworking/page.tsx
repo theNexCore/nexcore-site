@@ -4,6 +4,7 @@ import { buildMetadata } from '@/lib/seo';
 import { Section, Eyebrow } from '@/components/Section';
 import { Container } from '@/components/Container';
 import { ButtonLink } from '@/components/Button';
+import { SquareCheckoutButton } from '@/components/SquareCheckoutButton';
 import { InquiryForm } from '@/components/form/InquiryForm';
 import { offices, spaces } from '@/data/coworking';
 import { tiers, dayPass, amenityGroups } from '@/data/memberships';
@@ -196,14 +197,18 @@ export default function CoworkingPage() {
                 ))}
               </ul>
 
-              <ButtonLink
+              {/* All three tiers take the same $50 holding deposit, opened in
+                  a Square popup window rather than a tab. */}
+              <SquareCheckoutButton
                 href={t.cta.href}
-                external={t.cta.external}
                 variant={t.featured ? 'primary' : 'ghost'}
                 className="mt-7 w-full"
               >
                 {t.cta.label}
-              </ButtonLink>
+              </SquareCheckoutButton>
+              <p className="mt-3 text-center font-inter text-[13px] text-white/45">
+                $50 deposit, applied to your first month
+              </p>
             </div>
           ))}
         </div>
@@ -260,14 +265,9 @@ export default function CoworkingPage() {
             <p className="font-inter text-[15px] leading-relaxed text-white/70">
               Payment opens in a secure Square window — this page stays right here.
             </p>
-            <ButtonLink
-              href={dayPass.checkoutUrl}
-              external
-              size="lg"
-              className="mt-6 w-full"
-            >
+            <SquareCheckoutButton href={dayPass.checkoutUrl} size="lg" className="mt-6 w-full">
               Pay {dayPass.priceLabel}
-            </ButtonLink>
+            </SquareCheckoutButton>
             <p className="mt-4 font-inter text-[13px] text-white/40">
               Questions first?{' '}
               <Link href="/contact" className="text-sky hover:text-sky-light">
