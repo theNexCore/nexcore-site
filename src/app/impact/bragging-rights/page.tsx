@@ -7,7 +7,7 @@ import { statGroups } from '@/data/impact';
 export const metadata = buildMetadata({
   title: 'Bragging Rights — The Numbers Behind The Work',
   description:
-    '550+ businesses launched, 1,000+ housed, 67,000+ calls answered each year, 1,000 events hosted. Three years in Fox Park, measured.',
+    '550+ new businesses, partnerships and community initiatives, 275 brand-new businesses launched, 1,000+ housed, 67,000+ calls answered a year. Three years in Fox Park, measured.',
   path: '/impact/bragging-rights',
 });
 

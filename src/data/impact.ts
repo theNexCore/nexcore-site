@@ -17,10 +17,13 @@ export const statGroups: StatGroup[] = [
   {
     title: 'The Businesses',
     stats: [
-      { value: '550+', label: 'new businesses launched out of NexCore' },
+      {
+        value: '550+',
+        label: 'new businesses, partnerships, collaborations, projects, and community initiatives',
+      },
+      { value: '275', label: 'of those, brand-new businesses launched' },
       { value: '1,000+', label: 'businesses and nonprofits housed over three years' },
       { value: '500+', label: 'businesses managed at a time, every aspect handled' },
-      { value: '275', label: 'brand-new businesses launched' },
       { value: '200+', label: 'businesses served as registered agent' },
       { value: '500+', label: 'websites built for our partners' },
     ],
