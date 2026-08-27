@@ -24,11 +24,29 @@ const ENDPOINT =
 
 const TIMEOUT_MS = 15_000;
 
-export type AppsScriptType = 'contact' | 'idea' | 'space';
+export type AppsScriptType =
+  | 'contact'
+  | 'idea'
+  | 'space'
+  | 'tour'
+  | 'membership'
+  | 'office';
+
+/**
+ * Types the script is known to handle today. The rest are sent optimistically
+ * and fall back to `contact` if the script has not been taught them yet, so
+ * this code works either side of that change with no coordinated deploy.
+ */
+const NATIVE_TYPES = new Set<AppsScriptType>(['contact', 'idea', 'space']);
+
+/** The script's default branch when it does not recognise a type. */
+const UNKNOWN_TYPE_ERROR = /no longer accepted here/i;
 
 export interface AppsScriptResult {
   ok: boolean;
   error?: string;
+  /** True when the specific type was unknown and the fallback was used. */
+  usedFallback?: boolean;
 }
 
 /**
@@ -37,6 +55,30 @@ export interface AppsScriptResult {
  * what matters, not the status code.
  */
 export async function postToAppsScript(
+  type: AppsScriptType,
+  fields: Record<string, string | number>,
+  /** Payload to retry with if the script does not know `type` yet. */
+  fallback?: { type: AppsScriptType; fields: Record<string, string | number> },
+): Promise<AppsScriptResult> {
+  const first = await post(type, fields);
+
+  // If the script has not been taught this type, retry as the fallback so no
+  // lead is dropped while the script is still being updated.
+  if (!first.ok && fallback && UNKNOWN_TYPE_ERROR.test(first.error ?? '')) {
+    console.warn(
+      `[apps-script] type "${type}" not recognised yet; falling back to "${fallback.type}"`,
+    );
+    const second = await post(fallback.type, fallback.fields);
+    return second.ok ? { ok: true, usedFallback: true } : second;
+  }
+
+  return first;
+}
+
+/** True when the script natively handles this type. */
+export const isNativeType = (t: AppsScriptType) => NATIVE_TYPES.has(t);
+
+async function post(
   type: AppsScriptType,
   fields: Record<string, string | number>,
 ): Promise<AppsScriptResult> {

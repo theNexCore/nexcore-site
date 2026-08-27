@@ -33,6 +33,7 @@ async function handle<T extends z.ZodTypeAny>({
   bucket,
   type,
   toFields,
+  fallback,
   allowDeliveryFailure = false,
 }: {
   schema: T;
@@ -41,6 +42,8 @@ async function handle<T extends z.ZodTypeAny>({
   bucket: string;
   type: AppsScriptType;
   toFields: (data: z.infer<T>) => Record<string, string | number>;
+  /** Used if the script does not recognise `type` yet. */
+  fallback?: { type: AppsScriptType; toFields: (data: z.infer<T>) => Record<string, string | number> };
   /** Payment paths proceed even if lead capture failed. */
   allowDeliveryFailure?: boolean;
 }): Promise<FormState> {
@@ -71,7 +74,12 @@ async function handle<T extends z.ZodTypeAny>({
     };
   }
 
-  const result = await postToAppsScript(type, toFields(parsed.data as z.infer<T>));
+  const data = parsed.data as z.infer<T>;
+  const result = await postToAppsScript(
+    type,
+    toFields(data),
+    fallback ? { type: fallback.type, fields: fallback.toFields(data) } : undefined,
+  );
 
   if (!result.ok) {
     console.error(`[form:${formName}] Apps Script rejected:`, result.error);
@@ -176,10 +184,13 @@ export async function submitSpace(_prev: FormState, formData: FormData): Promise
 /* ------------------------------------------------------------------ *
  * Tour, membership and office
  *
- * The Apps Script has no type for these — verified 2026-08-26, they hit its
- * default branch and are rejected. They are mapped onto "contact" so no lead
- * is dropped, with the specifics carried in `reason` and `message`. If
- * dedicated tabs are wanted, the script needs those types added.
+ * These send their own type first. If the script has not been taught it yet
+ * it answers with its unknown-type error, and lib/apps-script retries as
+ * `contact` with the specifics carried in `reason` and `message`.
+ *
+ * That means this works either side of the script being updated, with no
+ * coordinated deploy and no lead dropped in between. Once the script handles
+ * these natively, the fallback simply stops firing — nothing here changes.
  * ------------------------------------------------------------------ */
 
 const splitName = (full: string) => {
@@ -193,16 +204,26 @@ export async function submitTour(_prev: FormState, formData: FormData): Promise<
     formData,
     formName: 'Tour request',
     bucket: 'tour',
-    type: 'contact',
+    type: 'tour',
     toFields: (d) => ({
-      ...splitName(d.name),
+      name: d.name,
       email: d.email,
       phone: d.phone,
       business: d.business,
-      member: 'Considering joining',
-      reason: 'I want to tour or join',
-      message: `TOUR REQUEST\n\nWhat brings you to NexCore: ${d.brings || '(not given)'}`,
+      brings: d.brings,
     }),
+    fallback: {
+      type: 'contact',
+      toFields: (d) => ({
+        ...splitName(d.name),
+        email: d.email,
+        phone: d.phone,
+        business: d.business,
+        member: 'Considering joining',
+        reason: 'I want to tour or join',
+        message: `TOUR REQUEST\n\nWhat brings you to NexCore: ${d.brings || '(not given)'}`,
+      }),
+    },
   });
 }
 
@@ -212,17 +233,27 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
     formData,
     formName: 'Membership enquiry',
     bucket: 'membership',
-    type: 'contact',
+    type: 'membership',
     allowDeliveryFailure: true,
     toFields: (d) => ({
-      ...splitName(d.name),
+      name: d.name,
       email: d.email,
       phone: d.phone,
       business: d.business,
-      member: 'Considering joining',
-      reason: 'I want to tour or join',
-      message: `MEMBERSHIP ENQUIRY\n\nTier: ${d.tier || '(not given)'}\nNext step: $50 deposit via Square.`,
+      tier: d.tier,
     }),
+    fallback: {
+      type: 'contact',
+      toFields: (d) => ({
+        ...splitName(d.name),
+        email: d.email,
+        phone: d.phone,
+        business: d.business,
+        member: 'Considering joining',
+        reason: 'I want to tour or join',
+        message: `MEMBERSHIP ENQUIRY\n\nTier: ${d.tier || '(not given)'}\nNext step: $50 deposit via Square.`,
+      }),
+    },
   });
 }
 
@@ -232,15 +263,26 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
     formData,
     formName: 'Office enquiry',
     bucket: 'office',
-    type: 'contact',
+    type: 'office',
     toFields: (d) => ({
-      ...splitName(d.name),
+      name: d.name,
+      company: d.company,
       email: d.email,
       phone: d.phone,
-      business: d.company,
-      member: 'Considering joining',
-      reason: 'I want to tour or join',
-      message: `PRIVATE OFFICE ENQUIRY\n\nOffice: ${d.office || '(not specified)'}\n\nNotes: ${d.notes || '(none)'}`,
+      office: d.office,
+      notes: d.notes,
     }),
+    fallback: {
+      type: 'contact',
+      toFields: (d) => ({
+        ...splitName(d.name),
+        email: d.email,
+        phone: d.phone,
+        business: d.company,
+        member: 'Considering joining',
+        reason: 'I want to tour or join',
+        message: `PRIVATE OFFICE ENQUIRY\n\nOffice: ${d.office || '(not specified)'}\n\nNotes: ${d.notes || '(none)'}`,
+      }),
+    },
   });
 }
