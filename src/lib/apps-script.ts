@@ -76,8 +76,6 @@ export async function postToAppsScript(
   return first;
 }
 
-/** True when the script natively handles this type. */
-export const isNativeType = (t: AppsScriptType) => NATIVE_TYPES.has(t);
 
 async function post(
   type: AppsScriptType,

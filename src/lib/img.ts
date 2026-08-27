@@ -13,9 +13,3 @@ export function dim(src: string, fallback: [number, number] = [1200, 900]) {
   const [width, height] = found ?? fallback;
   return { width, height };
 }
-
-/** Scale intrinsic dimensions to a target width, preserving aspect ratio. */
-export function dimAt(src: string, targetWidth: number) {
-  const { width, height } = dim(src);
-  return { width: targetWidth, height: Math.round((height / width) * targetWidth) };
-}

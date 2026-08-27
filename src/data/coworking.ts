@@ -553,5 +553,3 @@ export const spaces: Space[] = [
   }
 ];
 
-export const officeById = (id: string) => offices.find((o) => o.id === id);
-export const spaceById = (id: string) => spaces.find((s) => s.id === id);
