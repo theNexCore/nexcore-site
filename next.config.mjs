@@ -112,6 +112,52 @@ const nextConfig = {
       { source: '/schedule-tour.html', destination: '/coworking#tour', statusCode: 301 },
 
       /**
+       * Insurance, not evidence.
+       *
+       * None of these appear in the Weebly sitemap or in any internal link in
+       * the crawled HTML, so they probably never existed. But /contact-us.html
+       * and /our-story.html did exist, were indexed, and were absent from both
+       * of those sources — so the inventory is demonstrably incomplete, and a
+       * redirect for a URL nobody requests costs nothing.
+       *
+       * Only slugs with one obvious destination are listed. Anything
+       * ambiguous (testimonials, partners, sponsors) is deliberately left to
+       * 404 rather than guessed at.
+       */
+      { source: '/rates.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/pricing.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/pricing-plans.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/virtual-office.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/virtual-membership.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/join.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/signup.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/sign-up.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/register.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/amenities.html', destination: '/coworking#amenities', statusCode: 301 },
+      { source: '/private-offices.html', destination: '/coworking#offices', statusCode: 301 },
+      { source: '/meeting-rooms.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/conference-room.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/podcast-studio.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/event-center.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/event-space.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/studio.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/war-room.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/book.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/booking.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/reserve.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/gallery.html', destination: '/events/gallery', statusCode: 301 },
+      { source: '/photos.html', destination: '/events/gallery', statusCode: 301 },
+      { source: '/businessgps.html', destination: '/about/philosophy', statusCode: 301 },
+      { source: '/focus10.html', destination: '/about/philosophy', statusCode: 301 },
+      { source: '/changemakers.html', destination: '/about/history', statusCode: 301 },
+      { source: '/streamathon.html', destination: '/about/history', statusCode: 301 },
+      { source: '/revitalize.html', destination: '/about/history', statusCode: 301 },
+      { source: '/soco-chamber.html', destination: '/about/history', statusCode: 301 },
+      { source: '/faq.html', destination: '/contact', statusCode: 301 },
+      { source: '/support.html', destination: '/contact', statusCode: 301 },
+      { source: '/legal.html', destination: '/terms', statusCode: 301 },
+
+      /**
        * Safety net for any remaining .html. Anything whose slug matches a real
        * route resolves; anything else ends in a 404, which is the correct
        * signal for a URL with no equivalent — redirecting unrelated pages to

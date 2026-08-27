@@ -19,7 +19,6 @@ export default function FounderLetterPage() {
         eyebrow="FOUNDER LETTER"
         title="A Letter from the"
         accent="Founder"
-        lead="There are moments in life that force you to ask questions you never expected to ask."
       />
 
       <Section width="prose">
