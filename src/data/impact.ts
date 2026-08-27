@@ -3,6 +3,17 @@
  * Copy transcribed verbatim from /bragging-rights.html and /in-the-news.html.
  */
 
+/**
+ * The headline counter above the page. This is a living number — update
+ * `value` and `asOf` together as it grows; nothing else needs touching.
+ */
+export const headlineStat = {
+  value: '553',
+  tail: 'and counting',
+  label: 'new businesses, partnerships, collaborations, projects, and community initiatives',
+  asOf: 'August 27, 2026',
+};
+
 export interface Stat {
   value: string;
   label: string;
@@ -17,22 +28,18 @@ export const statGroups: StatGroup[] = [
   {
     title: 'The Businesses',
     stats: [
-      {
-        value: '550+',
-        label: 'new businesses, partnerships, collaborations, projects, and community initiatives',
-      },
-      { value: '275', label: 'of those, brand-new businesses launched' },
+      { value: '275', label: 'brand-new businesses launched' },
       { value: '1,000+', label: 'businesses and nonprofits housed over three years' },
       { value: '500+', label: 'businesses managed at a time, every aspect handled' },
       { value: '200+', label: 'businesses served as registered agent' },
-      { value: '500+', label: 'websites built for our partners' },
+      { value: '502', label: 'websites built for our partners, as of August 2026' },
     ],
   },
   {
     title: 'The Work Behind Them',
     stats: [
       { value: '67,000+', label: 'phone calls answered for our partners every year' },
-      { value: '89,696', label: 'hours on the phone on their behalf' },
+      { value: '89,696', label: 'total hours on the phone on their behalf, as of July 2026' },
       { value: '2 Million+', label: 'tasks completed for our business partners' },
       { value: '5 Million+', label: 'documents stored and managed' },
       { value: '1 Million+', label: 'messages received, answered and shared' },

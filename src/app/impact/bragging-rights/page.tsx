@@ -2,12 +2,12 @@ import { buildMetadata } from '@/lib/seo';
 import { Section } from '@/components/Section';
 import { PageHero } from '@/components/PageHero';
 import { ButtonLink } from '@/components/Button';
-import { statGroups } from '@/data/impact';
+import { statGroups, headlineStat } from '@/data/impact';
 
 export const metadata = buildMetadata({
   title: 'Bragging Rights — The Numbers Behind The Work',
   description:
-    '550+ new businesses, partnerships and community initiatives, 275 brand-new businesses launched, 1,000+ housed, 67,000+ calls answered a year. Three years in Fox Park, measured.',
+    '553 new businesses, partnerships, projects and community initiatives and counting. 275 brand-new businesses launched, 1,000+ housed, 502 websites built, 67,000+ calls answered a year.',
   path: '/impact/bragging-rights',
 });
 
@@ -18,8 +18,28 @@ export default function BraggingRightsPage() {
         eyebrow="BRAGGING RIGHTS"
         title="The Numbers Behind"
         accent="The Work"
-        lead="Three years in Fox Park. This is what it looked like, measured."
+        lead="Still counting. Below that, three years in Fox Park — what it looked like, measured."
       />
+
+      {/* Running total. Lives above the fixed historical figures because it is
+          still climbing — the value and date in headlineStat are the only two
+          things that change as it grows. */}
+      <Section tone="lift" className="!pb-0">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-sora text-[clamp(72px,14vw,148px)] font-semibold leading-[0.9] tracking-[-0.03em] text-red">
+            {headlineStat.value}
+          </p>
+          <p className="mt-3 font-sora text-lead font-medium text-white">
+            {headlineStat.tail}
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-balance font-inter text-[17px] leading-relaxed text-white/75">
+            {headlineStat.label}
+          </p>
+          <p className="mt-5 font-inter text-[13px] tracking-[0.08em] text-white/45">
+            AS OF {headlineStat.asOf.toUpperCase()}
+          </p>
+        </div>
+      </Section>
 
       <Section>
         <div className="space-y-16">
