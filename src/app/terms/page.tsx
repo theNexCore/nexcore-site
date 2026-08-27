@@ -13,6 +13,9 @@ import { site, formattedAddress } from '@/data/site';
  * Membership, office licence and space rental terms live in the agreements
  * members sign directly, which Jim confirmed exist.
  *
+ * Eventbrite and Square are LINK-OUT only — nothing is embedded, and the CSP
+ * enforces that with frame-src 'none'. Confirmed by Jim 2026-08-27.
+ *
  * Facts confirmed by Jim, 2026-08-26: Missouri governing law; the copyright
  * paragraph carried over verbatim from the Weebly footer; signed agreements
  * exist for memberships, office licences and space rentals.
@@ -75,7 +78,8 @@ export default function TermsPage() {
           <h2>Payments and registration</h2>
           <p>
             Membership deposits and day passes are processed by <strong>Square</strong>. Event
-            registration is handled by <strong>Eventbrite</strong>. When you follow those links you
+            registration is handled by <strong>Eventbrite</strong>. Neither is embedded in this site — the
+            buttons are ordinary links. When you follow them you
             leave this website and are subject to that provider&rsquo;s own terms, and to any refund
             policy stated for the specific item or event.
           </p>

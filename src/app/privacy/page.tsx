@@ -59,8 +59,8 @@ export default function PrivacyPage() {
 
           <h2>Information you give us</h2>
           <p>
-            The only personal information we collect through this website is what you type into one
-            of our forms. Depending on the form, that may include your name, email address, phone
+            Almost all of the personal information we collect through this website is what you type
+            into one of our forms. Depending on the form, that may include your name, email address, phone
             number, business or organisation name, whether you are a NexCore member, the reason for
             your enquiry, and any message, notes, or dates you provide.
           </p>
@@ -86,8 +86,8 @@ export default function PrivacyPage() {
           <h2>Payments</h2>
           <p>
             Membership deposits and day passes are processed by <strong>Square</strong>, and event
-            registration is handled by <strong>Eventbrite</strong>. Those links take you to their
-            websites. We never see or store your full card details — payment information is handled
+            registration is handled by <strong>Eventbrite</strong>. This site does not embed either
+            one — the buttons are ordinary links that take you to their websites. We never see or store your full card details — payment information is handled
             entirely by those providers under their own privacy policies.
           </p>
 
@@ -102,7 +102,10 @@ export default function PrivacyPage() {
           <p>
             Our forms include basic anti-spam measures — a hidden field that real visitors never see,
             a timing check, and a limit on how many times a form can be submitted from the same
-            connection in a short period. These exist to block automated abuse, not to profile you.
+            connection in a short period. That last check reads the IP address your connection
+            presents so it can count recent submissions. It is held only in memory, for about ten
+            minutes, and is never written to the spreadsheet, included in the notification email, or
+            used to identify or profile you.
           </p>
 
           <h2>Retention</h2>

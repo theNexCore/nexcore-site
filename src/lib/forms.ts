@@ -51,6 +51,15 @@ export const ideaSchema = z.object({
   why: optionalText(2000),
 });
 
+export const dayPassSchema = z.object({
+  ...baseFields,
+  name: z.string().trim().min(1, 'Name is required.').max(120),
+  email: z.string().trim().email('Enter a valid email address.').max(160),
+  phone: optionalText(40),
+  business: optionalText(120),
+  date: z.string().trim().min(1, 'Choose a day.').max(20),
+});
+
 export const tourSchema = z.object({
   ...baseFields,
   name: z.string().trim().min(1, 'Name is required.').max(120),

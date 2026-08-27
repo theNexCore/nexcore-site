@@ -82,7 +82,41 @@ const nextConfig = {
       { source: '/contact.html', destination: '/contact', statusCode: 301 },
       { source: '/member-login.html', destination: '/contact', statusCode: 301 },
       { source: '/photo-resources.html', destination: '/', statusCode: 301 },
-      // Safety net for any stray Weebly .html URL not listed above.
+
+      /**
+       * Orphan legacy URLs — live and indexed, but absent from the Weebly
+       * sitemap, so the original crawl never saw them.
+       *
+       * /contact-us.html was linked from nowhere on the site; it surfaced in
+       * a search audit still serving the old design and the old phone number.
+       * /our-story.html was the Impact page's "Experience Our Story" doorway.
+       *
+       * Both previously fell through to the catch-all and 301'd to a path
+       * that does not exist, i.e. a redirect straight into a 404.
+       */
+      { source: '/contact-us.html', destination: '/contact', statusCode: 301 },
+      { source: '/our-story.html', destination: '/about/history', statusCode: 301 },
+
+      // Common variants of real pages, so near-miss legacy URLs land somewhere.
+      { source: '/home.html', destination: '/', statusCode: 301 },
+      { source: '/about-us.html', destination: '/about', statusCode: 301 },
+      { source: '/co-working.html', destination: '/coworking', statusCode: 301 },
+      { source: '/philosophy.html', destination: '/about/philosophy', statusCode: 301 },
+      { source: '/nexcore-foundation.html', destination: '/foundation', statusCode: 301 },
+      { source: '/membership.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/memberships.html', destination: '/coworking#memberships', statusCode: 301 },
+      { source: '/day-pass.html', destination: '/coworking#day-pass', statusCode: 301 },
+      { source: '/offices.html', destination: '/coworking#offices', statusCode: 301 },
+      { source: '/spaces.html', destination: '/coworking#spaces', statusCode: 301 },
+      { source: '/tour.html', destination: '/coworking#tour', statusCode: 301 },
+      { source: '/schedule-tour.html', destination: '/coworking#tour', statusCode: 301 },
+
+      /**
+       * Safety net for any remaining .html. Anything whose slug matches a real
+       * route resolves; anything else ends in a 404, which is the correct
+       * signal for a URL with no equivalent — redirecting unrelated pages to
+       * the homepage instead reads to Google as a soft 404.
+       */
       { source: '/:slug*.html', destination: '/:slug*', statusCode: 301 },
     ];
   },

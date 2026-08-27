@@ -30,7 +30,8 @@ export type AppsScriptType =
   | 'space'
   | 'tour'
   | 'membership'
-  | 'office';
+  | 'office'
+  | 'daypass';
 
 /**
  * Types the script is known to handle today. The rest are sent optimistically

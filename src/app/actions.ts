@@ -5,6 +5,7 @@ import { z } from 'zod';
 import {
   contactSchema,
   ideaSchema,
+  dayPassSchema,
   tourSchema,
   membershipSchema,
   spaceSchema,
@@ -252,6 +253,37 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
         member: 'Considering joining',
         reason: 'I want to tour or join',
         message: `MEMBERSHIP ENQUIRY\n\nTier: ${d.tier || '(not given)'}\nNext step: $50 deposit via Square.`,
+      }),
+    },
+  });
+}
+
+export async function submitDayPass(_prev: FormState, formData: FormData): Promise<FormState> {
+  return handle({
+    schema: dayPassSchema,
+    formData,
+    formName: 'Day pass',
+    bucket: 'daypass',
+    type: 'daypass',
+    // Payment path: never block checkout because our own logging failed.
+    allowDeliveryFailure: true,
+    toFields: (d) => ({
+      name: d.name,
+      email: d.email,
+      phone: d.phone,
+      business: d.business,
+      date: d.date,
+    }),
+    fallback: {
+      type: 'contact',
+      toFields: (d) => ({
+        ...splitName(d.name),
+        email: d.email,
+        phone: d.phone,
+        business: d.business,
+        member: 'No',
+        reason: 'I want to tour or join',
+        message: `DAY PASS\n\nDay requested: ${d.date}\nNext step: $25 via Square.`,
       }),
     },
   });

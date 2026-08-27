@@ -10,6 +10,7 @@ The site sends six form types. The script currently handles three:
 | `tour` | — | **falls back to Contact** |
 | `membership` | — | **falls back to Contact** |
 | `office` | — | **falls back to Contact** |
+| `daypass` | — | **falls back to Contact** |
 
 Until the three below are added, the site sends the specific type, gets the
 unknown-type error back, and automatically retries as `contact` so the lead is
@@ -35,6 +36,7 @@ Deploy**. That keeps the same URL.
 tour        name, email, phone, business, brings
 membership  name, email, phone, business, tier
 office      name, company, email, phone, office, notes
+daypass     name, email, phone, business, date
 ```
 
 All arrive as JSON in `e.postData.contents`, `Content-Type: text/plain`, with a
