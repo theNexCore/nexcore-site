@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useCallback, useEffect, useRef } from 'react';
+import { useActionState, useCallback, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitDayPass } from '@/app/actions';
 import { idleState } from '@/lib/forms';
@@ -22,11 +22,24 @@ import { cn } from '@/lib/cn';
 
 const SQUARE_POPUP = 'width=480,height=820,scrollbars=yes,resizable=yes';
 
-/** Today in YYYY-MM-DD, local, for the date input's min. */
-function todayLocal() {
-  const d = new Date();
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+interface Rules { busy: string[]; min: string; max: string; openDays: number[] }
+
+/** Parse "YYYY-MM-DD" as a local date, avoiding the UTC off-by-one. */
+function parseYmd(s: string) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : null;
+}
+
+/** Mirrors the server check so people find out before they submit. */
+function dateProblem(value: string, rules: Rules | null): string | null {
+  if (!value || !rules) return null;
+  const d = parseYmd(value);
+  if (!d) return null;
+  if (value < rules.min) return 'That date has passed. Please choose another day.';
+  if (value > rules.max) return 'We take bookings up to 30 days ahead. Please choose a nearer day.';
+  if (!rules.openDays.includes(d.getDay())) return "We're closed on Sundays. Please choose another day.";
+  if (rules.busy.includes(value)) return 'That day is fully booked. Please choose another.';
+  return null;
 }
 
 function SubmitButton() {
@@ -41,6 +54,24 @@ function SubmitButton() {
 export function DayPassModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [state, action] = useActionState(submitDayPass, idleState);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const [rules, setRules] = useState<Rules | null>(null);
+  const [chosen, setChosen] = useState('');
+
+  // Booking rules come from /api/availability so the Apps Script URL stays
+  // server-side. A failure leaves rules null — the server still validates.
+  useEffect(() => {
+    if (!open) return;
+    let cancelled = false;
+    fetch('/api/availability')
+      .then((r) => r.json())
+      .then((d) => {
+        if (!cancelled) setRules(d as Rules);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
 
   const openSquare = useCallback(() => {
     const w = window.open(dayPass.checkoutUrl, 'nexcore-square-checkout', SQUARE_POPUP);
@@ -133,8 +164,11 @@ export function DayPassModal({ open, onClose }: { open: boolean; onClose: () => 
                   label="Choose a day"
                   type="date"
                   required
-                  min={todayLocal()}
-                  error={err.date}
+                  min={rules?.min}
+                  max={rules?.max}
+                  value={chosen}
+                  onChange={(e) => setChosen(e.target.value)}
+                  error={err.date ?? dateProblem(chosen, rules) ?? undefined}
                 />
 
                 <div className="rounded-field border border-white/10 bg-white/[0.03] px-4 py-3">
@@ -146,6 +180,9 @@ export function DayPassModal({ open, onClose }: { open: boolean; onClose: () => 
                       {h.days} {h.time}
                     </p>
                   ))}
+                  <p className="mt-2 font-inter text-[13px] text-white/45">
+                    Closed Sundays. Bookings up to 30 days ahead.
+                  </p>
                 </div>
 
                 <Input

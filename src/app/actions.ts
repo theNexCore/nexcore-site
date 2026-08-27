@@ -17,6 +17,7 @@ import {
 import { postToAppsScript, type AppsScriptType } from '@/lib/apps-script';
 import { check, clientIp } from '@/lib/rate-limit';
 import { spaces } from '@/data/coworking';
+import { getAvailability, validateBookingDate } from '@/lib/availability';
 
 const GENERIC_ERROR = 'Something went wrong on our end. Please try again, or call us directly.';
 
@@ -155,6 +156,16 @@ function hoursBetween(start: string, end: string): number {
 }
 
 export async function submitSpace(_prev: FormState, formData: FormData): Promise<FormState> {
+  // Same building hours and booking window as the day pass.
+  const requested = String(formData.get('date') ?? '');
+  if (requested) {
+    const { busy } = await getAvailability();
+    const problem = validateBookingDate(requested, busy);
+    if (problem) {
+      return { status: 'error', errors: { date: problem } };
+    }
+  }
+
   return handle({
     schema: spaceSchema,
     formData,
@@ -259,6 +270,16 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
 }
 
 export async function submitDayPass(_prev: FormState, formData: FormData): Promise<FormState> {
+  // Authoritative date check — the browser's version is a courtesy only.
+  const requested = String(formData.get('date') ?? '');
+  if (requested) {
+    const { busy } = await getAvailability();
+    const problem = validateBookingDate(requested, busy);
+    if (problem) {
+      return { status: 'error', errors: { date: problem } };
+    }
+  }
+
   return handle({
     schema: dayPassSchema,
     formData,
