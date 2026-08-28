@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
 import { Section, Eyebrow } from '@/components/Section';
 import { InquiryForm } from '@/components/form/InquiryForm';
+import { RoomGallery } from '@/components/RoomGallery';
 import { spaces } from '@/data/coworking';
-import { dim } from '@/lib/img';
 
 export function generateStaticParams() {
   return spaces.map((s) => ({ slug: s.id }));
@@ -125,22 +124,7 @@ export default async function SpacePage({ params }: { params: Promise<{ slug: st
             </p>
           )}
 
-          {space.photos.length > 0 && (
-            <div className="mt-12 grid gap-4 sm:grid-cols-2">
-              {space.photos.map((src, i) => (
-                <div key={src} className="overflow-hidden rounded-card border border-white/10">
-                  <Image
-                    src={src}
-                    alt={`${space.name} — photo ${i + 1}`}
-                    {...dim(src)}
-                    priority={i === 0}
-                    sizes="(max-width: 640px) 100vw, 420px"
-                    className="h-auto w-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          <RoomGallery photos={space.photos} name={space.name} />
         </div>
 
         <aside className="lg:sticky lg:top-[100px] lg:self-start">
