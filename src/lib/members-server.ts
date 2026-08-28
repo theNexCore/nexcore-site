@@ -137,11 +137,22 @@ function toSocial(key: SocialKey, raw: string): string | null {
 }
 
 /**
- * Filing name: the business name without a leading article, the way a
- * directory files "The South County Chamber" under S. Falls back to the raw
- * name so a business literally called "The" still sorts somewhere.
+ * Filing name: surname first, the way a directory of people is filed, so
+ * Taylor Miller files under M.
+ *
+ * Returned as "Miller Taylor" rather than just the surname so two members who
+ * share a surname still sort against each other by first name. Only the first
+ * character is ever shown — it drives the A-Z bucket — so the reversed order
+ * is never read by anyone.
+ *
+ * Falls back down the chain when a member publishes no person: surname, then
+ * first name, then the business with any leading article stripped ("The South
+ * County Chamber" files under S), then the raw business name so a company
+ * literally called "The" still sorts somewhere.
  */
-function fileAs(business: string): string {
+function fileAs(business: string, firstName: string, lastName: string): string {
+  if (lastName) return `${lastName} ${firstName}`.trim();
+  if (firstName) return firstName;
   return business.replace(/^(the|a|an)\s+/i, '').trim() || business;
 }
 
@@ -216,7 +227,7 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
     a.localeCompare(b),
   );
 
-  const sortName = fileAs(business);
+  const sortName = fileAs(business, firstName, lastName);
 
   const weightRaw = raw.weight;
   const weight = weightRaw === '' || weightRaw == null ? 0 : Number(weightRaw) || 0;
@@ -251,7 +262,7 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
  * Ordering
  *
  * Tier rank first (Founding above Regular — see @/data/member-tiers), then
- * weight descending, then filing name A-Z — the same article-stripped name the
+ * weight descending, then filing name A-Z — the same surname-first name the
  * A-Z strip buckets on, so the strip and the list can never disagree about
  * where a member sits. `numeric` so "Studio 10" sorts after "Studio 9".
  * ------------------------------------------------------------------ */

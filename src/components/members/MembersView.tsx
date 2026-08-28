@@ -181,7 +181,7 @@ export function MembersView({
             )}
 
             {/* A-Z strip */}
-            <nav aria-label="Filter by first letter" className="mt-8">
+            <nav aria-label="Filter by surname" className="mt-8">
               <ul className="flex flex-wrap gap-1.5">
                 <li>
                   <button
@@ -207,8 +207,8 @@ export function MembersView({
                         aria-pressed={letter === l}
                         aria-label={
                           l === '#'
-                            ? 'Names starting with a number or symbol'
-                            : `Names starting with ${l}`
+                            ? 'Surnames starting with a number or symbol'
+                            : `Surnames starting with ${l}`
                         }
                         className={cn(
                           'h-8 w-8 rounded-pill font-inter text-[13px] font-semibold transition-colors',

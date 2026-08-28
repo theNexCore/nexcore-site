@@ -96,10 +96,11 @@ export interface NexMember {
   weight: number;
 
   /**
-   * Name the directory files this member under: the business name with any
-   * leading article removed, so "The South County Chamber" files under S.
-   * Both the A-Z strip and the alphabetical sort read this, so the two can
-   * never disagree about where a member belongs.
+   * Name the directory files this member under: the person's surname, so
+   * Taylor Miller files under M. Falls back to the business name (leading
+   * article stripped) when no person is published. Both the A-Z strip and the
+   * alphabetical sort read this, so the two can never disagree about where a
+   * member belongs. Not shown anywhere — only its first letter is.
    */
   sortName: string;
 
