@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     `${member.business} — ${memberSince(member)} at NexCore in South St. Louis County.`;
 
   return buildMetadata({
-    title: member.business,
+    title: member.contactName ? `${member.contactName} — ${member.business}` : member.business,
     description,
     path: `/members/${member.slug}`,
     // The logo is the sharper social card; the photo is the fallback.

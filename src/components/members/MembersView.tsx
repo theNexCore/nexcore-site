@@ -63,8 +63,12 @@ export function MembersView({
       if (selected.length && !selected.some((c) => m.categories.includes(c))) return false;
 
       if (!q) return true;
+      // The person's name is searchable too: the card leads with it, so
+      // someone who remembers "Taylor" and not the business must still find them.
       return (
-        m.business.toLowerCase().includes(q) || m.categories.some((c) => c.toLowerCase().includes(q))
+        m.business.toLowerCase().includes(q) ||
+        m.contactName.toLowerCase().includes(q) ||
+        m.categories.some((c) => c.toLowerCase().includes(q))
       );
     });
   }, [members, query, letter, selected]);
@@ -140,7 +144,7 @@ export function MembersView({
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Business name or category"
+                placeholder="Name, business or category"
                 className="w-full rounded-field border border-white/15 bg-white/[0.04] px-4 py-3 font-inter text-[15px] text-white placeholder:text-white/35 focus:border-sky focus:outline-none"
               />
             </div>

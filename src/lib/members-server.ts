@@ -53,7 +53,7 @@ const images = manifest as ImageManifest;
 
 /**
  * Look up an ingested image. Returns null when the ingest skipped or failed on
- * this file, which is what MemberArt renders the branded placeholder for.
+ * this file, which is what MemberFace renders the branded placeholder for.
  */
 function imageFor(slug: string, kind: 'logo' | 'photo'): MemberImage | null {
   const hit = images[`${slug}:${kind}`];

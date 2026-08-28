@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MemberArt } from './MemberArt';
+import { MemberFace, MemberLogo } from './MemberArt';
 import { MemberEmail } from './MemberEmail';
 import { socialIcons, GlobeIcon, PhoneIcon, MapPinIcon } from '@/components/Icons';
 import { tierConfig } from '@/data/member-tiers';
@@ -151,26 +151,23 @@ export function MemberDetail({
     <div className="grid gap-8 md:grid-cols-[240px_1fr] md:gap-10">
       {/* Photo + logo rail */}
       <div className="space-y-5">
-        <div className="overflow-hidden rounded-card border border-white/10 bg-ink">
-          <MemberArt
-            src={member.photo}
-            alt={member.contactName ? `${member.contactName}, ${member.business}` : member.business}
-            fallbackLabel={`${member.business} — no photo available`}
-            fit="cover"
-            priority={as === 'page'}
-            sizes="(max-width: 768px) 100vw, 240px"
-            className="aspect-[4/5] h-auto w-full"
-          />
-        </div>
+        <MemberFace
+          src={member.photo}
+          logo={member.logo}
+          business={member.business}
+          person={member.contactName}
+          priority={as === 'page'}
+          sizes="(max-width: 768px) 100vw, 240px"
+          className="aspect-square w-full"
+        />
 
         {member.logo && (
-          <div className="flex h-[110px] items-center justify-center rounded-card bg-white p-4">
-            <MemberArt
+          <div className="flex h-[110px] items-center">
+            <MemberLogo
               src={member.logo}
-              alt={`${member.business} logo`}
-              fallbackLabel={`${member.business} — no logo available`}
+              business={member.business}
               sizes="240px"
-              className="h-full w-full"
+              className="h-full"
             />
           </div>
         )}
@@ -187,12 +184,12 @@ export function MemberDetail({
           id={titleId}
           className="mt-3 text-balance font-sora text-h2xs font-semibold text-white"
         >
-          {member.business}
+          {member.contactName || member.business}
         </Heading>
 
         {member.contactName && (
-          <p className="mt-2 font-inter text-[17px] text-white/70">
-            {member.contactName}
+          <p className="mt-2 font-inter text-[19px] text-white/75">
+            {member.business}
             {member.title && <span className="text-white/45"> · {member.title}</span>}
           </p>
         )}

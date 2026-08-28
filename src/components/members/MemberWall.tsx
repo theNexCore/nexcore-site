@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MemberArt } from './MemberArt';
+import { MemberFace } from './MemberArt';
 import { tierConfig, type TierId } from '@/data/member-tiers';
 import type { NexMember } from '@/lib/members';
 import { cn } from '@/lib/cn';
@@ -73,28 +73,29 @@ export function MemberWall({
                 aria-haspopup="dialog"
                 className="flex h-full w-full flex-col items-center gap-3 p-4 text-center"
               >
-                <div
-                  className={cn(
-                    'flex h-[68px] w-full items-center justify-center overflow-hidden rounded-lg p-2',
-                    m.logo ? 'bg-white' : 'bg-white/[0.04]',
+                <MemberFace
+                  src={m.photo}
+                  logo={m.logo}
+                  business={m.business}
+                  person={m.contactName}
+                  sizes="120px"
+                  className="h-[84px] w-[84px]"
+                />
+                <div className="min-w-0">
+                  <h3
+                    className={cn(
+                      'font-sora text-[14px] font-semibold leading-snug transition-colors',
+                      tier.name,
+                    )}
+                  >
+                    {m.contactName || m.business}
+                  </h3>
+                  {m.contactName && (
+                    <p className="mt-1 font-inter text-[12px] leading-snug text-white/55">
+                      {m.business}
+                    </p>
                   )}
-                >
-                  <MemberArt
-                    src={m.logo}
-                    alt={`${m.business} logo`}
-                    fallbackLabel={`${m.business} — no logo available`}
-                    sizes="(max-width: 640px) 45vw, 200px"
-                    className="h-full w-full"
-                  />
                 </div>
-                <h3
-                  className={cn(
-                    'font-sora text-[14px] font-semibold leading-snug transition-colors',
-                    tier.name,
-                  )}
-                >
-                  {m.business}
-                </h3>
               </button>
             </article>
           </li>
