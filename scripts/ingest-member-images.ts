@@ -36,8 +36,10 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { loadEnvConfig } from '@next/env';
+
 import {
-  MEMBERS_FEED_URL,
+  membersFeedUrl,
   driveConfirmUrl,
   driveDownloadUrl,
   driveFileId,
@@ -52,6 +54,15 @@ import { measure, sniff, type Ext } from './image-header';
  * ------------------------------------------------------------------ */
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+/**
+ * Load .env.local / .env the same way `next` does. tsx runs this script
+ * outside Next, so without this the feed URL is invisible in local
+ * development and every image is silently skipped — while Vercel, which
+ * injects env vars into the process directly, would work fine. That gap is
+ * exactly the kind that only shows up in production.
+ */
+loadEnvConfig(ROOT, /* dev */ false, { info: () => {}, error: console.error });
 const OUT_DIR = path.join(ROOT, 'public', 'members');
 const MANIFEST_PATH = path.join(ROOT, 'src', 'data', 'member-images.json');
 const FAILURES_PATH = path.join(ROOT, 'audit', 'member-image-failures.md');
@@ -372,7 +383,7 @@ async function main(): Promise<void> {
 
   const previous = await readManifest();
 
-  if (!MEMBERS_FEED_URL) {
+  if (!membersFeedUrl()) {
     console.warn(
       '[members] MEMBERS_FEED_URL is not set — skipping image ingest.\n' +
         '[members] The directory will build and render placeholders. Set it in .env.local (see .env.example).',

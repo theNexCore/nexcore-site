@@ -21,8 +21,13 @@ export const str = (v: unknown): string =>
  *
  * There is no hard-coded fallback: an unset variable is a configuration
  * problem we want to see reported, not paper over with a stale endpoint.
+ *
+ * Read through a function, not a module-scope const, deliberately. The ingest
+ * script has to call loadEnvConfig() to pick up .env.local (tsx does not do it
+ * the way `next` does), and a const would have been frozen to '' at import
+ * time — ESM hoists imports above anything the script body can run first.
  */
-export const MEMBERS_FEED_URL = process.env.MEMBERS_FEED_URL ?? '';
+export const membersFeedUrl = (): string => process.env.MEMBERS_FEED_URL?.trim() ?? '';
 
 /** Hard ceiling on the feed request. Next kills a static export at 60s. */
 export const FEED_TIMEOUT_MS = 12_000;
@@ -81,12 +86,13 @@ export interface FeedResult {
  * the app; the script passes nothing and gets a plain fetch.
  */
 export async function fetchMemberRows(init?: RequestInit): Promise<FeedResult> {
-  if (!MEMBERS_FEED_URL) {
+  const url = membersFeedUrl();
+  if (!url) {
     return { rows: [], error: 'MEMBERS_FEED_URL is not set' };
   }
 
   try {
-    const res = await fetch(MEMBERS_FEED_URL, {
+    const res = await fetch(url, {
       signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
       ...init,
     });
