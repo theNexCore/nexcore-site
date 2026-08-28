@@ -18,7 +18,7 @@ import { MailIcon } from '@/components/Icons';
  * After the first click the plain address is revealed as text, so anyone
  * without a mail client configured can still copy it.
  */
-export function MemberEmail({ token, business }: { token: string; business: string }) {
+export function MemberEmail({ token, label }: { token: string; label: string }) {
   const [revealed, setRevealed] = useState<string | null>(null);
 
   const decode = (): string | null => {
@@ -44,7 +44,7 @@ export function MemberEmail({ token, business }: { token: string; business: stri
         className="inline-flex items-center gap-2.5 font-inter text-[15px] text-sky transition-colors hover:text-sky-light"
       >
         <MailIcon />
-        Email {business}
+        {label}
       </button>
 
       {revealed && (

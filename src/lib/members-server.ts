@@ -4,7 +4,13 @@ import { abs, site } from '@/data/site';
 import { toTier, tierRank } from '@/data/member-tiers';
 import { slugify } from './slug';
 import { str, memberSlug, fetchMemberRows } from './members-source';
-import { SOCIAL_KEYS, type MemberImage, type NexMember, type SocialKey } from './members';
+import {
+  SOCIAL_KEYS,
+  type ContactBlock,
+  type MemberImage,
+  type NexMember,
+  type SocialKey,
+} from './members';
 import manifest from '@/data/member-images.json';
 
 /**
@@ -143,6 +149,46 @@ function firstLetter(business: string): string {
  * is publishable and every other column is optional.
  * ------------------------------------------------------------------ */
 
+const obj = (v: unknown): Record<string, unknown> =>
+  v && typeof v === 'object' ? (v as Record<string, unknown>) : {};
+
+/**
+ * Build one contact block.
+ *
+ * `fallback` carries the flat top-level fields the Apps Script used before it
+ * grew separate company/contact blocks. Reading them as a fallback means a
+ * deployment still serving the older shape degrades to a populated company
+ * block instead of a member with no contact details at all — and costs nothing
+ * once every row is on the current shape.
+ */
+function contactBlock(
+  src: Record<string, unknown>,
+  fallback: Record<string, unknown> = {},
+): ContactBlock {
+  const pick = (key: string) => str(src[key]) || str(fallback[key]);
+
+  const phone = pick('phone');
+  const website = toUrl(pick('website'));
+
+  const rawSocials = { ...obj(fallback.socials), ...obj(src.socials) };
+  const socials: Partial<Record<SocialKey, string>> = {};
+  for (const key of SOCIAL_KEYS) {
+    // Blank cells must not render, so only resolved URLs are kept.
+    const url = toSocial(key, str(rawSocials[key]));
+    if (url) socials[key] = url;
+  }
+
+  return {
+    address: pick('address'),
+    phone,
+    phoneTel: toTel(phone),
+    emailToken: encodeEmail(pick('email')),
+    website,
+    websiteLabel: website ? hostLabel(website) : null,
+    socials,
+  };
+}
+
 function normalise(raw: Record<string, unknown>): NexMember | null {
   const business = str(raw.business);
   if (!business) return null;
@@ -157,18 +203,6 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
   const yearMatch = /(\d{4})/.exec(since);
   const sinceYear = yearMatch ? Number(yearMatch[1]) : null;
 
-  const phone = str(raw.phone);
-  const website = toUrl(str(raw.website));
-
-  const rawSocials =
-    raw.socials && typeof raw.socials === 'object' ? (raw.socials as Record<string, unknown>) : {};
-  const socials: Partial<Record<SocialKey, string>> = {};
-  for (const key of SOCIAL_KEYS) {
-    // Blank cells must not render, so only resolved URLs are kept.
-    const url = toSocial(key, str(rawSocials[key]));
-    if (url) socials[key] = url;
-  }
-
   const categories = [...new Set(splitList(raw.categories).map(normaliseCategory))].sort((a, b) =>
     a.localeCompare(b),
   );
@@ -182,20 +216,20 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
     firstName,
     lastName,
     contactName: [firstName, lastName].filter(Boolean).join(' '),
+    title: str(raw.title),
     tier: toTier(raw.tier),
     since,
     sinceYear,
     logo: imageFor(slug, 'logo'),
     photo: imageFor(slug, 'photo'),
     categories,
-    address: str(raw.address),
-    phone,
-    phoneTel: toTel(phone),
-    website,
-    websiteLabel: website ? hostLabel(website) : null,
-    socials,
+    // The person's block never falls back to the flat fields: those described
+    // the business, and copying them onto the person would invent a direct
+    // line that nobody published.
+    company: contactBlock(obj(raw.company), raw),
+    contact: contactBlock(obj(raw.contact)),
     desc: str(raw.desc),
-    emailToken: encodeEmail(str(raw.email)),
+    funFact: str(raw.funFact),
     weight,
     letter: firstLetter(business),
   };
@@ -308,8 +342,8 @@ export async function getMemberBySlug(slug: string): Promise<NexMember | null> {
  * including it would undo the obfuscation the detail card exists to provide.
  */
 export function memberJsonLd(m: NexMember) {
-  const socialUrls = Object.values(m.socials);
-  const sameAs = m.website ? [m.website, ...socialUrls] : socialUrls;
+  const socialUrls = Object.values(m.company.socials);
+  const sameAs = m.company.website ? [m.company.website, ...socialUrls] : socialUrls;
 
   return {
     '@context': 'https://schema.org',
@@ -320,9 +354,19 @@ export function memberJsonLd(m: NexMember) {
     ...(m.logo ? { logo: abs(m.logo.src) } : {}),
     ...(m.photo ? { image: abs(m.photo.src) } : {}),
     ...(sameAs.length ? { sameAs } : {}),
-    ...(m.phoneTel ? { telephone: m.phoneTel } : {}),
-    ...(m.address ? { address: { '@type': 'PostalAddress', streetAddress: m.address } } : {}),
-    ...(m.contactName ? { employee: { '@type': 'Person', name: m.contactName } } : {}),
+    ...(m.company.phoneTel ? { telephone: m.company.phoneTel } : {}),
+    ...(m.company.address
+      ? { address: { '@type': 'PostalAddress', streetAddress: m.company.address } }
+      : {}),
+    ...(m.contactName
+      ? {
+          employee: {
+            '@type': 'Person',
+            name: m.contactName,
+            ...(m.title ? { jobTitle: m.title } : {}),
+          },
+        }
+      : {}),
     memberOf: { '@type': 'Organization', name: site.name, url: abs('/') },
   };
 }

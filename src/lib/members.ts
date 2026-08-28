@@ -26,6 +26,35 @@ export interface MemberImage {
 }
 
 /**
+ * One contact block. The sheet gives the company and the person each their
+ * own, so both are rendered separately and a member can publish either, both,
+ * or neither.
+ *
+ * `emailToken` rather than an address, for the same reason as everywhere else:
+ * the raw address must not reach the DOM. See encodeEmail in members-server.
+ */
+export interface ContactBlock {
+  /** Company only; the person block has no address of its own. */
+  address: string;
+  /** Display form, exactly as the sheet has it. */
+  phone: string;
+  /** E.164 form for tel:, e.g. "+13144339330". Null when unparseable. */
+  phoneTel: string | null;
+  emailToken: string | null;
+  website: string | null;
+  /** Website host, for display: "acme.com". */
+  websiteLabel: string | null;
+  socials: Partial<Record<SocialKey, string>>;
+}
+
+/** True when a block has anything worth rendering. */
+export function hasContact(c: ContactBlock): boolean {
+  return Boolean(
+    c.address || c.phone || c.emailToken || c.website || Object.keys(c.socials).length,
+  );
+}
+
+/**
  * A member as the site renders it.
  *
  * NOTE the absence of an `email` field. The raw address never enters this
@@ -40,6 +69,8 @@ export interface NexMember {
   lastName: string;
   /** "Jane Doe", or "" when the sheet has neither name. */
   contactName: string;
+  /** The person's role, e.g. "Owner". */
+  title: string;
 
   tier: TierId;
   /** Raw `since` value from the sheet, e.g. "2019" or "2019-04-12". */
@@ -51,20 +82,15 @@ export interface NexMember {
   photo: MemberImage | null;
 
   categories: string[];
-  address: string;
-  /** Display form, exactly as the sheet has it. */
-  phone: string;
-  /** E.164 form for tel:, e.g. "+13144339330". Null when unparseable. */
-  phoneTel: string | null;
-  website: string | null;
-  /** Website host, for display: "acme.com". */
-  websiteLabel: string | null;
 
-  socials: Partial<Record<SocialKey, string>>;
+  /** The business's own contact details. */
+  company: ContactBlock;
+  /** The named person's details. Often empty — render only when hasContact(). */
+  contact: ContactBlock;
+
   desc: string;
-
-  /** Obfuscated email. Never the plain address. Null when the sheet is blank. */
-  emailToken: string | null;
+  /** Free text, shown on the detail card only. */
+  funFact: string;
 
   /** Sheet ordering weight. Higher sorts first within a tier. */
   weight: number;

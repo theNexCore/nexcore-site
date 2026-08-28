@@ -3,7 +3,14 @@ import { MemberArt } from './MemberArt';
 import { MemberEmail } from './MemberEmail';
 import { socialIcons, GlobeIcon, PhoneIcon, MapPinIcon } from '@/components/Icons';
 import { tierConfig } from '@/data/member-tiers';
-import { SOCIAL_KEYS, memberSince, type NexMember, type SocialKey } from '@/lib/members';
+import {
+  SOCIAL_KEYS,
+  hasContact,
+  memberSince,
+  type ContactBlock,
+  type NexMember,
+  type SocialKey,
+} from '@/lib/members';
 import { cn } from '@/lib/cn';
 
 /**
@@ -13,6 +20,10 @@ import { cn } from '@/lib/cn';
  * directory modal, and as the body of /members/[slug] for sharing. The only
  * difference is the heading level and the permalink, which the modal shows and
  * the page does not need.
+ *
+ * The sheet gives the business and the named person separate contact blocks,
+ * so both are rendered separately. A member who only publishes company details
+ * simply gets one block — nothing is invented to fill the other.
  */
 
 /** Display names, which double as the keys into `socialIcons`. */
@@ -24,6 +35,96 @@ const SOCIAL_LABELS: Record<SocialKey, string> = {
   x: 'X',
   linkedin: 'LinkedIn',
 };
+
+function Socials({ block, owner }: { block: ContactBlock; owner: string }) {
+  // Blank socials are dropped during normalisation, so anything still here has
+  // a real URL. SOCIAL_KEYS fixes the display order.
+  const keys = SOCIAL_KEYS.filter((k) => block.socials[k]);
+  if (!keys.length) return null;
+
+  return (
+    <ul className="mt-5 flex flex-wrap gap-2.5">
+      {keys.map((key) => {
+        const label = SOCIAL_LABELS[key];
+        const Icon = socialIcons[label];
+        return (
+          <li key={key}>
+            <a
+              href={block.socials[key]}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${owner} on ${label}`}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-white/60 transition-colors hover:border-sky hover:text-sky"
+            >
+              {Icon ? <Icon /> : <span aria-hidden="true">{label.charAt(0)}</span>}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function ContactDetails({
+  block,
+  owner,
+  emailLabel,
+}: {
+  block: ContactBlock;
+  owner: string;
+  emailLabel: string;
+}) {
+  return (
+    <>
+      <div className="space-y-3.5">
+        {block.address && (
+          <p className="flex items-start gap-2.5 font-inter text-[15px] leading-relaxed text-white/70">
+            <span className="mt-1 shrink-0 text-white/40">
+              <MapPinIcon />
+            </span>
+            <span>{block.address}</span>
+          </p>
+        )}
+
+        {block.phoneTel ? (
+          <a
+            href={`tel:${block.phoneTel}`}
+            className="inline-flex items-center gap-2.5 font-inter text-[15px] text-white/70 hover:text-sky"
+          >
+            <PhoneIcon />
+            {block.phone}
+          </a>
+        ) : (
+          block.phone && (
+            <p className="flex items-center gap-2.5 font-inter text-[15px] text-white/70">
+              <PhoneIcon />
+              {block.phone}
+            </p>
+          )
+        )}
+
+        {block.website && (
+          <div>
+            <a
+              href={block.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 font-inter text-[15px] text-sky hover:text-sky-light"
+            >
+              <GlobeIcon />
+              {block.websiteLabel}
+            </a>
+          </div>
+        )}
+
+        {/* Address is assembled on click — never present in the markup. */}
+        {block.emailToken && <MemberEmail token={block.emailToken} label={emailLabel} />}
+      </div>
+
+      <Socials block={block} owner={owner} />
+    </>
+  );
+}
 
 export function MemberDetail({
   member,
@@ -38,14 +139,13 @@ export function MemberDetail({
   const tier = tierConfig(member.tier);
   const Heading = as === 'modal' ? 'h2' : 'h1';
 
-  // Blank socials are dropped during normalisation, so anything still here
-  // has a real URL. SOCIAL_KEYS fixes the display order.
-  const socials = SOCIAL_KEYS.filter((k) => member.socials[k]);
-
   const paragraphs = member.desc
     .split(/\n+/)
     .map((p) => p.trim())
     .filter(Boolean);
+
+  const personName = member.contactName || 'Contact';
+  const showPerson = hasContact(member.contact);
 
   return (
     <div className="grid gap-8 md:grid-cols-[240px_1fr] md:gap-10">
@@ -91,7 +191,10 @@ export function MemberDetail({
         </Heading>
 
         {member.contactName && (
-          <p className="mt-2 font-inter text-[17px] text-white/70">{member.contactName}</p>
+          <p className="mt-2 font-inter text-[17px] text-white/70">
+            {member.contactName}
+            {member.title && <span className="text-white/45"> · {member.title}</span>}
+          </p>
         )}
 
         {member.categories.length > 0 && (
@@ -115,74 +218,42 @@ export function MemberDetail({
           </div>
         )}
 
-        {/* Contact */}
-        <div className="mt-8 space-y-3.5 border-t border-white/10 pt-7">
-          {member.address && (
-            <p className="flex items-start gap-2.5 font-inter text-[15px] leading-relaxed text-white/70">
-              <span className="mt-1 shrink-0 text-white/40">
-                <MapPinIcon />
-              </span>
-              <span>{member.address}</span>
+        {member.funFact && (
+          <div className="mt-7 rounded-card border border-sky/25 bg-sky/[0.06] p-5">
+            <p className="font-inter text-[12px] font-semibold tracking-[0.12em] text-sky">
+              FUN FACT
             </p>
-          )}
+            <p className="mt-2 font-inter text-[15px] leading-relaxed text-white/75">
+              {member.funFact}
+            </p>
+          </div>
+        )}
 
-          {member.phoneTel ? (
-            <a
-              href={`tel:${member.phoneTel}`}
-              className="inline-flex items-center gap-2.5 font-inter text-[15px] text-white/70 hover:text-sky"
-            >
-              <PhoneIcon />
-              {member.phone}
-            </a>
-          ) : (
-            member.phone && (
-              <p className="flex items-center gap-2.5 font-inter text-[15px] text-white/70">
-                <PhoneIcon />
-                {member.phone}
-              </p>
-            )
-          )}
-
-          {member.website && (
-            <div>
-              <a
-                href={member.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 font-inter text-[15px] text-sky hover:text-sky-light"
-              >
-                <GlobeIcon />
-                {member.websiteLabel}
-              </a>
-            </div>
-          )}
-
-          {/* Address is assembled on click — never present in the markup. */}
-          {member.emailToken && (
-            <MemberEmail token={member.emailToken} business={member.business} />
-          )}
+        {/* Company */}
+        <div className="mt-8 border-t border-white/10 pt-7">
+          <h3 className="mb-4 font-inter text-[13px] font-semibold tracking-[0.08em] text-white/45">
+            {member.business}
+          </h3>
+          <ContactDetails
+            block={member.company}
+            owner={member.business}
+            emailLabel={`Email ${member.business}`}
+          />
         </div>
 
-        {socials.length > 0 && (
-          <ul className="mt-7 flex flex-wrap gap-2.5">
-            {socials.map((key) => {
-              const label = SOCIAL_LABELS[key];
-              const Icon = socialIcons[label];
-              return (
-                <li key={key}>
-                  <a
-                    href={member.socials[key]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${member.business} on ${label}`}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-white/60 transition-colors hover:border-sky hover:text-sky"
-                  >
-                    {Icon ? <Icon /> : <span aria-hidden="true">{label.charAt(0)}</span>}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+        {/* The named person, when they publish their own details */}
+        {showPerson && (
+          <div className="mt-8 border-t border-white/10 pt-7">
+            <h3 className="mb-4 font-inter text-[13px] font-semibold tracking-[0.08em] text-white/45">
+              {personName}
+              {member.title && ` · ${member.title}`}
+            </h3>
+            <ContactDetails
+              block={member.contact}
+              owner={personName}
+              emailLabel={`Email ${personName}`}
+            />
+          </div>
         )}
 
         {as === 'modal' && (
