@@ -1,1 +1,20 @@
-{}
+{
+  "the-south-county-chamber:logo": {
+    "file": "/members/the-south-county-chamber-logo.png",
+    "width": 2000,
+    "height": 2000,
+    "hash": "7d325f8673554f71",
+    "driveId": "1z7_SIIGcqDT1ccTSe6NorUgtUazRPcNd",
+    "ext": "png",
+    "bytes": 941991
+  },
+  "the-south-county-chamber:photo": {
+    "file": "/members/the-south-county-chamber-photo.jpg",
+    "width": 400,
+    "height": 400,
+    "hash": "e2739014d5f82afe",
+    "driveId": "1OB9JJ5UkRMNa5l_7ewugMs49Z1tGE6DU",
+    "ext": "jpg",
+    "bytes": 39557
+  }
+}

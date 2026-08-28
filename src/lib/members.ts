@@ -95,7 +95,15 @@ export interface NexMember {
   /** Sheet ordering weight. Higher sorts first within a tier. */
   weight: number;
 
-  /** First character of the business name, uppercased; "#" for non-letters. */
+  /**
+   * Name the directory files this member under: the business name with any
+   * leading article removed, so "The South County Chamber" files under S.
+   * Both the A-Z strip and the alphabetical sort read this, so the two can
+   * never disagree about where a member belongs.
+   */
+  sortName: string;
+
+  /** First character of `sortName`, uppercased; "#" for non-letters. */
   letter: string;
 }
 

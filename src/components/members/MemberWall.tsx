@@ -73,7 +73,12 @@ export function MemberWall({
                 aria-haspopup="dialog"
                 className="flex h-full w-full flex-col items-center gap-3 p-4 text-center"
               >
-                <div className="flex h-[64px] w-full items-center justify-center overflow-hidden rounded-lg bg-white/[0.04] p-2">
+                <div
+                  className={cn(
+                    'flex h-[68px] w-full items-center justify-center overflow-hidden rounded-lg p-2',
+                    m.logo ? 'bg-white' : 'bg-white/[0.04]',
+                  )}
+                >
                   <MemberArt
                     src={m.logo}
                     alt={`${m.business} logo`}

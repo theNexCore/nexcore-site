@@ -136,9 +136,18 @@ function toSocial(key: SocialKey, raw: string): string | null {
   return `${SOCIAL_BASE[key]}${handle}`;
 }
 
-/** Bucket for the A-Z strip. Leading articles are ignored; non-letters go to "#". */
-function firstLetter(business: string): string {
-  const ch = business.replace(/^(the|a|an)\s+/i, '').trim().charAt(0).toUpperCase();
+/**
+ * Filing name: the business name without a leading article, the way a
+ * directory files "The South County Chamber" under S. Falls back to the raw
+ * name so a business literally called "The" still sorts somewhere.
+ */
+function fileAs(business: string): string {
+  return business.replace(/^(the|a|an)\s+/i, '').trim() || business;
+}
+
+/** Bucket for the A-Z strip. Non-letters go to "#". */
+function firstLetter(sortName: string): string {
+  const ch = sortName.charAt(0).toUpperCase();
   return /[A-Z]/.test(ch) ? ch : '#';
 }
 
@@ -207,6 +216,8 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
     a.localeCompare(b),
   );
 
+  const sortName = fileAs(business);
+
   const weightRaw = raw.weight;
   const weight = weightRaw === '' || weightRaw == null ? 0 : Number(weightRaw) || 0;
 
@@ -231,7 +242,8 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
     desc: str(raw.desc),
     funFact: str(raw.funFact),
     weight,
-    letter: firstLetter(business),
+    sortName,
+    letter: firstLetter(sortName),
   };
 }
 
@@ -239,15 +251,16 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
  * Ordering
  *
  * Tier rank first (Founding above Regular — see @/data/member-tiers), then
- * weight descending, then business name A-Z. `numeric` so "Studio 10" sorts
- * after "Studio 9" rather than before it.
+ * weight descending, then filing name A-Z — the same article-stripped name the
+ * A-Z strip buckets on, so the strip and the list can never disagree about
+ * where a member sits. `numeric` so "Studio 10" sorts after "Studio 9".
  * ------------------------------------------------------------------ */
 
 export function compareMembers(a: NexMember, b: NexMember): number {
   return (
     tierRank(a.tier) - tierRank(b.tier) ||
     b.weight - a.weight ||
-    a.business.localeCompare(b.business, 'en', { numeric: true, sensitivity: 'base' })
+    a.sortName.localeCompare(b.sortName, 'en', { numeric: true, sensitivity: 'base' })
   );
 }
 

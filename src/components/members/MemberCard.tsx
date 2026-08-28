@@ -32,7 +32,12 @@ export function MemberCard({
         aria-haspopup="dialog"
         className="flex h-full w-full flex-col p-6 text-left"
       >
-        <div className="flex h-[76px] items-center justify-center overflow-hidden rounded-lg bg-white/[0.04] p-3">
+        <div
+          className={cn(
+            'flex h-[84px] items-center justify-center overflow-hidden rounded-lg p-3',
+            member.logo ? 'bg-white' : 'bg-white/[0.04]',
+          )}
+        >
           <MemberArt
             src={member.logo}
             alt={`${member.business} logo`}

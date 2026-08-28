@@ -164,7 +164,7 @@ export function MemberDetail({
         </div>
 
         {member.logo && (
-          <div className="flex h-[68px] items-center justify-center rounded-card border border-white/10 bg-white/[0.04] p-3">
+          <div className="flex h-[110px] items-center justify-center rounded-card bg-white p-4">
             <MemberArt
               src={member.logo}
               alt={`${member.business} logo`}
