@@ -91,10 +91,21 @@ const config: Config = {
       },
       screens: {
         // 820px is the live site's primary breakpoint (24 uses) and still
-        // drives layout elsewhere. The header bar is the exception: seven
-        // top-level items plus a CTA need ~980px of content, so the desktop
-        // nav only switches on once there is room for it on one line.
-        nav: '1060px',
+        // drives layout elsewhere. The header bar is the exception: eight
+        // top-level items plus a CTA need ~1085px on one line, so the desktop
+        // nav only switches on once there is room for it.
+        //
+        // Measured, not guessed. The row lives inside max-w-wide, so the space
+        // available to it tops out at 1180 - 64px of gutter = 1116px no matter
+        // how wide the window gets. At 1085px needed that leaves ~31px spare,
+        // and 1180px is the narrowest viewport that yields the full 1116.
+        // Below it the mobile menu takes over, which lists every item anyway.
+        //
+        // Watch out: an overflowing row does NOT overflow visibly here. The
+        // items shrink and each label wraps to two lines inside its own pill,
+        // which scrollWidth cannot detect — compare item heights instead.
+        // Re-measure if a top-level item is added or renamed.
+        nav: '1180px',
       },
       keyframes: {
         'fade-up': {

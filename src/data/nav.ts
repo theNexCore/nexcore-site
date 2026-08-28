@@ -45,7 +45,6 @@ export const mainNav: NavItem[] = [
       { label: 'Buy a Pass', href: '/coworking#day-pass' },
       { label: 'Rent an Office', href: '/coworking#offices' },
       { label: 'Book A Space', href: '/coworking#spaces' },
-      { label: 'Member Directory', href: '/members' },
     ],
   },
   {
@@ -70,13 +69,16 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: 'Contact', href: '/contact' },
+  // Own tab rather than a child: the directory is a destination in its
+  // own right, and it sits last so it reads next to the Join CTA.
+  { label: 'Member Directory', href: '/members' },
 ];
 
 /** Footer "Explore" column - matches the live site's footer links. */
 export const footerExplore: NavChild[] = [
   { label: 'Event Calendar', href: '/events' },
   { label: 'Member Directory', href: '/members' },
-  { label: 'Become a Member', href: '/coworking#memberships' },
+  { label: 'Join NexCore', href: '/coworking#memberships' },
   { label: 'Contact Us', href: '/contact' },
   { label: 'What Is NexCore', href: '/about' },
   { label: 'Our Philosophy', href: '/about/philosophy' },

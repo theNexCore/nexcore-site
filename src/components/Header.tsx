@@ -143,7 +143,7 @@ export function Header() {
               <Link
                 href={item.href}
                 className={cn(
-                  'inline-flex items-center gap-1 rounded-pill px-2.5 py-2 font-inter text-[14px] font-medium transition-colors xl:px-3 xl:text-[15px]',
+                  'inline-flex items-center gap-1 rounded-pill px-2.5 py-2 font-inter text-[14px] font-medium transition-colors',
                   isActive(item.href) ? 'text-navy' : 'text-ink/75 hover:text-navy',
                 )}
               >
@@ -184,7 +184,7 @@ export function Header() {
           ))}
 
           <ButtonLink href="/coworking#memberships" size="sm" className="ml-2 shrink-0 xl:ml-3">
-            Become a Member
+            Join NexCore
           </ButtonLink>
         </nav>
 
@@ -264,7 +264,7 @@ export function Header() {
             ))}
 
             <ButtonLink href="/coworking#memberships" className="mt-6 w-full" size="md">
-              Become a Member
+              Join NexCore
             </ButtonLink>
           </nav>
         </div>
