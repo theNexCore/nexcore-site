@@ -1,4 +1,5 @@
 import { abs, site, formattedAddress } from '@/data/site';
+import { slugify } from './slug';
 
 /* ------------------------------------------------------------------ *
  * Types
@@ -59,17 +60,7 @@ export interface NexEvent {
 
 const str = (v: unknown): string => (typeof v === 'string' ? v.trim() : v == null ? '' : String(v).trim());
 
-export const slugify = (s: string, max = 60): string =>
-  s
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[‘’']/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, max)
-    // Re-trim: slicing can leave a dangling hyphen, which would otherwise
-    // produce "...presented-by--2026-09-05" once the date is appended.
-    .replace(/-+$/, '');
+export { slugify } from './slug';
 
 /** Parse "9:00 AM" / "6:30 PM" / "9 AM" into "HH:mm". Returns null if unparseable. */
 function parseClock(input: string): string | null {

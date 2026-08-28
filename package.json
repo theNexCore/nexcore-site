@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ingest:members": "tsx scripts/ingest-member-images.ts",
+    "prebuild": "tsx scripts/ingest-member-images.ts"
   },
   "dependencies": {
     "next": "^16.3.3",

@@ -87,6 +87,52 @@ export function MapPinIcon({ className = base }: IconProps) {
   );
 }
 
+export function TikTokIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06v-3.1a5.66 5.66 0 0 0-.77-.05 5.66 5.66 0 1 0 5.66 5.66V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.28 4.28 0 0 1-3.21-1.48Z" />
+    </svg>
+  );
+}
+
+/** Globe — a member's own website link. */
+export function GlobeIcon({ className = base }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z" />
+    </svg>
+  );
+}
+
+/** Envelope — the protected click-to-email control. */
+export function MailIcon({ className = base }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={className}
+    >
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m2.5 6.5 8.4 5.6a2 2 0 0 0 2.2 0l8.4-5.6" />
+    </svg>
+  );
+}
+
 /** Maps social name -> icon, so data drives the markup. */
 export const socialIcons: Record<string, (p: IconProps) => React.JSX.Element> = {
   Facebook: FacebookIcon,
@@ -94,4 +140,5 @@ export const socialIcons: Record<string, (p: IconProps) => React.JSX.Element> = 
   LinkedIn: LinkedInIcon,
   X: XIcon,
   YouTube: YouTubeIcon,
+  TikTok: TikTokIcon,
 };

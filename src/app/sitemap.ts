@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { abs } from '@/data/site';
 import { offices, spaces } from '@/data/coworking';
 import { getEvents } from '@/lib/events';
+import { getMembers } from '@/lib/members-server';
 
 export const revalidate = 300;
 
@@ -12,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ['/', 'weekly', 1],
     ['/coworking', 'weekly', 0.9],
     ['/events', 'daily', 0.9],
+    ['/members', 'weekly', 0.8],
     ['/beyond-coworking', 'monthly', 0.8],
     ['/about', 'monthly', 0.8],
     ['/contact', 'monthly', 0.8],
@@ -64,6 +66,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: now,
         changeFrequency: e.isPast ? 'yearly' : 'weekly',
         priority: e.isPast ? 0.3 : 0.8,
+      });
+    }
+  } catch {
+    // Static routes still ship.
+  }
+
+  // Members come from the sheet; a feed outage must not break the sitemap.
+  try {
+    const { members } = await getMembers();
+    for (const m of members) {
+      entries.push({
+        url: abs(`/members/${m.slug}`),
+        lastModified: now,
+        changeFrequency: 'monthly',
+        priority: 0.6,
       });
     }
   } catch {
