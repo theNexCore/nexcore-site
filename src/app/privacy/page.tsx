@@ -2,6 +2,7 @@ import { buildMetadata } from '@/lib/seo';
 import { Section } from '@/components/Section';
 import { PageHero } from '@/components/PageHero';
 import { site, formattedAddress } from '@/data/site';
+import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
 
 /**
  * NexCore privacy policy.
@@ -24,7 +25,9 @@ import { site, formattedAddress } from '@/data/site';
  * for A2P 10DLC registration, after that review. The "No mobile information
  * will be shared..." paragraph is the carrier-required wording: do not
  * paraphrase it. The contact paragraph answers GoTo's review asking for a
- * direct SMS contact method and clear sender identification.
+ * direct SMS contact method and clear sender identification. SMS message
+ * types come from data/sms.ts. "How we protect your information" is GoTo's
+ * recommended safeguards wording, added 2026-09-12, also after counsel's review.
  *
  * TWO THINGS THAT CAN GO STALE — check before changing either:
  *
@@ -83,8 +86,8 @@ export default function PrivacyPage() {
 
           <h2>Text messaging (SMS)</h2>
           <p>
-            If you opt in to receive text messages from NexCore Coworking, we use your mobile number to send
-            you customer care messages. Consent is not a condition of any purchase or membership. Message
+            If you opt in to receive text messages from {SMS_BRAND}, we use your mobile number to send
+            you {SMS_MESSAGE_TYPES}. Consent is not a condition of any purchase or membership. Message
             frequency varies, and message and data rates may apply. Reply STOP to any message to opt
             out, or HELP for help.
           </p>
@@ -115,6 +118,28 @@ export default function PrivacyPage() {
             records them in a private internal spreadsheet and emails the relevant NexCore staff.
             Both the spreadsheet and the mailbox are accessible only to NexCore staff.
           </p>
+
+          <h2>How we protect your information</h2>
+          <p>
+            We take reasonable steps to prevent unauthorized sharing of personal information. Access
+            to personal information is limited to authorized personnel who need it to perform their
+            duties.
+          </p>
+          <ul>
+            <li>
+              <strong>Access Limits:</strong> Personal information is accessible only to individuals
+              with a legitimate business need.
+            </li>
+            <li>
+              <strong>Safeguards:</strong> We use appropriate administrative, technical, and physical
+              safeguards to help protect personal information against unauthorized access, use, or
+              disclosure.
+            </li>
+            <li>
+              <strong>Controlled Handling:</strong> We maintain processes designed to reduce the risk
+              of improper sharing or misuse of personal information.
+            </li>
+          </ul>
 
           <h2>Payments</h2>
           <p>

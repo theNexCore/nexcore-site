@@ -3,17 +3,14 @@ import { buildMetadata } from '@/lib/seo';
 import { Section } from '@/components/Section';
 import { PageHero } from '@/components/PageHero';
 import { site } from '@/data/site';
+import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
 
 /**
  * NexCore SMS program terms, for A2P 10DLC registration through GoTo.
  * Not reviewed by counsel.
  *
- * The program is registered as CUSTOMER CARE ONLY. GoTo's opt-in review
- * (2026-09-12) rejected any message type beyond exactly "customer care
- * messages". That phrase is the only message type named here, on /privacy,
- * and in the form checkbox (components/form/Fields.tsx, SmsConsent). Do not
- * add promotional, marketing, or notification wording to any of the three
- * unless the GoTo campaign is re-registered to cover it first.
+ * Message types and sender name come from data/sms.ts so this page, /privacy
+ * and the form checkbox can never describe the program differently.
  */
 
 const UPDATED = '12 September 2026';
@@ -21,7 +18,7 @@ const UPDATED = '12 September 2026';
 export const metadata = buildMetadata({
   title: 'NexCore SMS Program — Terms & Conditions',
   description:
-    'Terms for the NexCore Coworking SMS program: customer care messages, message frequency, costs, and how to opt out.',
+    'Terms for the NexCore Coworking SMS program: what we send, message frequency, costs, and how to opt out.',
   path: '/sms-terms',
 });
 
@@ -38,7 +35,7 @@ export default function SmsTermsPage() {
 
           <p>
             By providing your mobile number and opting in to receive SMS messages from{' '}
-            <strong>NexCore Coworking</strong>, you agree to receive customer care messages.
+            <strong>{SMS_BRAND}</strong>, you agree to receive {SMS_MESSAGE_TYPES}.
           </p>
 
           <h3>Message frequency</h3>
@@ -63,8 +60,8 @@ export default function SmsTermsPage() {
           <h3>Program details</h3>
 
           <p>
-            <strong>Program Description:</strong> NexCore Coworking sends customer care messages to
-            members and customers who opt in.
+            <strong>Program Description:</strong> {SMS_BRAND} sends {SMS_MESSAGE_TYPES} to members
+            and customers who opt in.
           </p>
 
           <p>
@@ -86,8 +83,8 @@ export default function SmsTermsPage() {
 
           <p>
             <strong>Help:</strong> Reply <strong>HELP</strong> to any message for assistance, or
-            contact NexCore Coworking at <a href={`mailto:${site.email}`}>hello@thenexcore.com</a>{' '}
-            or <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].number}</a>.
+            contact {SMS_BRAND} at <a href={`mailto:${site.email}`}>hello@thenexcore.com</a> or{' '}
+            <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].number}</a>.
           </p>
 
           <p>

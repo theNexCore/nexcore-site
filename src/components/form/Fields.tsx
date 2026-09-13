@@ -3,6 +3,7 @@
 import { useId } from 'react';
 import { cn } from '@/lib/cn';
 import { HONEYPOT } from '@/lib/forms';
+import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
 
 const fieldBase =
   'w-full rounded-field border bg-white/[0.04] px-4 py-3 font-inter text-[15px] text-white ' +
@@ -184,11 +185,10 @@ export function RadioGroup({
  * A2P 10DLC carrier approval requires: unchecked by default, never required,
  * and live links to /privacy and /sms-terms.
  *
- * The copy is GoTo's recommended SMS opt-in disclosure (2026-09-12), after its
- * review rejected anything but exactly "customer care messages". Brand name,
- * message type, frequency, STOP/HELP keywords and both links are all required
- * for the form to pass. Keep the message type in step with /sms-terms and
- * /privacy, and do not broaden it without re-registering the campaign.
+ * The copy follows GoTo's recommended SMS opt-in disclosure (2026-09-12).
+ * Brand name, message types, frequency, STOP/HELP keywords and both links are
+ * all required for the form to pass. Brand and message types come from
+ * data/sms.ts, shared with /sms-terms and /privacy.
  *
  * Unchecked boxes are omitted from FormData; lib/forms reads absence as false.
  * The links open in a new tab so a half-filled form is not lost.
@@ -208,8 +208,8 @@ export function SmsConsent({ className }: { className?: string }) {
       />
       <label htmlFor={id} className="cursor-pointer font-inter text-[13px] leading-relaxed text-white/60">
         <span className="block">
-          By providing your mobile number and opting in, you agree to receive customer care messages
-          from NexCore Coworking.
+          By providing your mobile number and opting in, you agree to receive {SMS_MESSAGE_TYPES}{' '}
+          from {SMS_BRAND}.
         </span>
         <span className="block">Message frequency may vary. On average, 1-2 messages per month.</span>
         <span className="block">Message and data rates may apply.</span>
