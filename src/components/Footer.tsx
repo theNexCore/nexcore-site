@@ -15,14 +15,17 @@ export function Footer() {
             <h4 className="mb-4 font-sora text-[15px] font-semibold tracking-[0.06em] text-white">
               Contact
             </h4>
-            <ul className="space-y-2 font-inter text-[15px] text-white/70">
+            <ul className="space-y-4 font-inter text-[15px] text-white/70">
               {site.phones.map((p) => (
                 <li key={p.tel}>
+                  <span className="block text-white">{p.footerName}</span>
                   <a href={`tel:${p.tel}`} className="inline-flex items-center gap-2 hover:text-sky">
                     <PhoneIcon />
                     {p.number}
-                  </a>{' '}
-                  <span className="text-white/45">{p.label}</span>
+                  </a>
+                  {'footerNote' in p && (
+                    <span className="block text-[14px] text-white/45">{p.footerNote}</span>
+                  )}
                 </li>
               ))}
               <li>

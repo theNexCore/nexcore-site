@@ -30,8 +30,21 @@ export const site = {
   geo: { lat: 38.4906, lng: -90.3548 },
 
   phones: [
-    { label: 'NexCore CoWorking', number: '314.433.9330', tel: '+13144339330' },
-    { label: 'NexCore Solutions', number: '314.433.9550', tel: '+13144339550' },
+    // `label` is shown on /contact; the footer uses `footerName` above the
+    // number and the optional `footerNote` below it.
+    {
+      label: 'NexCore CoWorking',
+      footerName: 'NexCore Coworking',
+      number: '314.433.9330',
+      tel: '+13144339330',
+    },
+    {
+      label: 'NexCore Solutions',
+      footerName: 'The NexCore Companies',
+      footerNote: '(Business Solutions Division)',
+      number: '314.433.9550',
+      tel: '+13144339550',
+    },
   ],
 
   // Cloudflare-obfuscated as "[email protected]" in the Weebly source.
