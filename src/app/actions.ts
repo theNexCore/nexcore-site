@@ -43,9 +43,9 @@ async function handle<T extends z.ZodTypeAny>({
   formName: string;
   bucket: string;
   type: AppsScriptType;
-  toFields: (data: z.infer<T>) => Record<string, string | number>;
+  toFields: (data: z.infer<T>) => Record<string, string | number | boolean>;
   /** Used if the script does not recognise `type` yet. */
-  fallback?: { type: AppsScriptType; toFields: (data: z.infer<T>) => Record<string, string | number> };
+  fallback?: { type: AppsScriptType; toFields: (data: z.infer<T>) => Record<string, string | number | boolean> };
   /** Payment paths proceed even if lead capture failed. */
   allowDeliveryFailure?: boolean;
 }): Promise<FormState> {
@@ -111,6 +111,7 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
       lastName: d.lastName,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       business: d.business,
       member: d.member ?? '',
       reason: d.reason,
@@ -135,6 +136,7 @@ export async function submitIdea(_prev: FormState, formData: FormData): Promise<
       lastName: d.lastName,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       idea: d.idea,
       why: d.why,
     }),
@@ -180,6 +182,7 @@ export async function submitSpace(_prev: FormState, formData: FormData): Promise
         company: d.company,
         email: d.email,
         phone: d.phone,
+        smsConsent: d.smsConsent,
         space: d.space,
         date: d.date,
         start: d.start,
@@ -221,6 +224,7 @@ export async function submitTour(_prev: FormState, formData: FormData): Promise<
       name: d.name,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       business: d.business,
       brings: d.brings,
     }),
@@ -230,6 +234,7 @@ export async function submitTour(_prev: FormState, formData: FormData): Promise<
         ...splitName(d.name),
         email: d.email,
         phone: d.phone,
+        smsConsent: d.smsConsent,
         business: d.business,
         member: 'Considering joining',
         reason: 'I want to tour or join',
@@ -251,6 +256,7 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
       name: d.name,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       business: d.business,
       tier: d.tier,
     }),
@@ -260,6 +266,7 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
         ...splitName(d.name),
         email: d.email,
         phone: d.phone,
+        smsConsent: d.smsConsent,
         business: d.business,
         member: 'Considering joining',
         reason: 'I want to tour or join',
@@ -292,6 +299,7 @@ export async function submitDayPass(_prev: FormState, formData: FormData): Promi
       name: d.name,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       business: d.business,
       date: d.date,
     }),
@@ -301,6 +309,7 @@ export async function submitDayPass(_prev: FormState, formData: FormData): Promi
         ...splitName(d.name),
         email: d.email,
         phone: d.phone,
+        smsConsent: d.smsConsent,
         business: d.business,
         member: 'No',
         reason: 'I want to tour or join',
@@ -322,6 +331,7 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
       company: d.company,
       email: d.email,
       phone: d.phone,
+      smsConsent: d.smsConsent,
       office: d.office,
       notes: d.notes,
     }),
@@ -331,6 +341,7 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
         ...splitName(d.name),
         email: d.email,
         phone: d.phone,
+        smsConsent: d.smsConsent,
         business: d.company,
         member: 'Considering joining',
         reason: 'I want to tour or join',

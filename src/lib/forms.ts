@@ -23,6 +23,14 @@ const optionalText = (max: number) =>
     .optional()
     .transform((v) => v || '');
 
+/**
+ * SMS opt-in checkbox. Optional by law and by carrier rules: an unchecked box
+ * is simply absent from FormData, which must parse as false, never an error.
+ */
+const smsConsent = z
+  .unknown()
+  .transform((v) => v === 'true' || v === 'on' || v === true);
+
 export const baseFields = {
   [HONEYPOT]: z.string().max(0, 'Rejected.').optional().default(''),
   /** Client-rendered timestamp, used for the timing check. */
@@ -35,6 +43,7 @@ export const contactSchema = z.object({
   lastName: z.string().trim().min(1, 'Last name is required.').max(80),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   business: optionalText(120),
   member: z.enum(['Yes', 'No', 'Considering joining']).optional(),
   reason: optionalText(80),
@@ -47,6 +56,7 @@ export const ideaSchema = z.object({
   lastName: z.string().trim().min(1, 'Last name is required.').max(80),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   idea: z.string().trim().min(3, 'Tell us the idea.').max(2000),
   why: optionalText(2000),
 });
@@ -56,6 +66,7 @@ export const dayPassSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(120),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   business: optionalText(120),
   date: z.string().trim().min(1, 'Choose a day.').max(20),
 });
@@ -65,6 +76,7 @@ export const tourSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(120),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: z.string().trim().min(7, 'Phone number is required.').max(40),
+  smsConsent,
   business: optionalText(120),
   brings: optionalText(2000),
 });
@@ -74,6 +86,7 @@ export const membershipSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(120),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   business: optionalText(120),
   tier: optionalText(80),
 });
@@ -83,6 +96,7 @@ export const spaceSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(120),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   company: optionalText(120),
   space: optionalText(80),
   date: optionalText(20),
@@ -96,6 +110,7 @@ export const officeSchema = z.object({
   name: z.string().trim().min(1, 'Name is required.').max(120),
   email: z.string().trim().email('Enter a valid email address.').max(160),
   phone: optionalText(40),
+  smsConsent,
   company: optionalText(120),
   office: optionalText(80),
   notes: optionalText(2000),

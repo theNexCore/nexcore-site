@@ -136,6 +136,13 @@ export function Footer() {
               className="text-white/60 underline underline-offset-2 hover:text-sky"
             >
               Privacy Policy
+            </Link>{' '}
+            |{' '}
+            <Link
+              href="/sms-terms"
+              className="text-white/60 underline underline-offset-2 hover:text-sky"
+            >
+              SMS Terms
             </Link>
           </p>
           <p className="mt-4 font-inter text-[13px] text-white/35">

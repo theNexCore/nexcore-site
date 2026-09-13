@@ -6,7 +6,7 @@ import { useFormStatus } from 'react-dom';
 import { submitMembership } from '@/app/actions';
 import { idleState } from '@/lib/forms';
 import { Button } from '@/components/Button';
-import { Input, BotTrap } from './Fields';
+import { Input, BotTrap, SmsConsent } from './Fields';
 import { tiers, foundingDeposit } from '@/data/memberships';
 import { cn } from '@/lib/cn';
 
@@ -172,6 +172,7 @@ export function MembershipModal({
                   placeholder="Your phone number"
                   error={err.phone}
                 />
+                <SmsConsent />
               </div>
 
               <div className="mt-6">

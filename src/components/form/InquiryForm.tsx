@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { submitTour, submitMembership, submitOffice, submitSpace } from '@/app/actions';
 import { idleState, type FormState } from '@/lib/forms';
 import { Button } from '@/components/Button';
-import { Input, Textarea, Select, BotTrap } from './Fields';
+import { Input, Textarea, Select, BotTrap, SmsConsent } from './Fields';
 
 type Kind = 'tour' | 'membership' | 'office' | 'space';
 
@@ -123,6 +123,9 @@ export function InquiryForm({
           placeholder="Your business or organization"
           error={err.business ?? err.company}
         />
+        {/* Full width, so it sits directly under the phone field on mobile and
+            spans the phone/business row on desktop. */}
+        <SmsConsent className="sm:col-span-2" />
 
         {options && options.length > 0 && (
           <Select

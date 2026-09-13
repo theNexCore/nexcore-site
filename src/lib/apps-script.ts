@@ -57,9 +57,9 @@ export interface AppsScriptResult {
  */
 export async function postToAppsScript(
   type: AppsScriptType,
-  fields: Record<string, string | number>,
+  fields: Record<string, string | number | boolean>,
   /** Payload to retry with if the script does not know `type` yet. */
-  fallback?: { type: AppsScriptType; fields: Record<string, string | number> },
+  fallback?: { type: AppsScriptType; fields: Record<string, string | number | boolean> },
 ): Promise<AppsScriptResult> {
   const first = await post(type, fields);
 
@@ -79,7 +79,7 @@ export async function postToAppsScript(
 
 async function post(
   type: AppsScriptType,
-  fields: Record<string, string | number>,
+  fields: Record<string, string | number | boolean>,
 ): Promise<AppsScriptResult> {
   try {
     const res = await fetch(ENDPOINT, {

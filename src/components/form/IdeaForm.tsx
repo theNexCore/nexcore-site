@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { submitIdea } from '@/app/actions';
 import { idleState } from '@/lib/forms';
 import { Button } from '@/components/Button';
-import { Input, Textarea, BotTrap } from './Fields';
+import { Input, Textarea, BotTrap, SmsConsent } from './Fields';
 
 /**
  * Event idea submission. Posts type:"idea" to the Apps Script, which logs to
@@ -85,6 +85,7 @@ export function IdeaForm() {
           placeholder="Your phone number"
           error={err.phone}
         />
+        <SmsConsent className="sm:col-span-2" />
         <Textarea
           name="idea"
           label="The idea"

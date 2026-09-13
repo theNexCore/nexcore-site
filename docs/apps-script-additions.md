@@ -42,6 +42,13 @@ daypass     name, email, phone, business, date
 All arrive as JSON in `e.postData.contents`, `Content-Type: text/plain`, with a
 `type` field alongside — same shape as `contact`, `idea` and `space`.
 
+**Every type, including `contact`, `idea` and `space`, also sends
+`smsConsent`** — a JSON boolean, `true` only when the person ticked the SMS
+opt-in box (added 2026-09-12). The script ignores it until a handler writes it
+to the Sheet. It is the record of TCPA / A2P 10DLC consent, so add an
+`SMS Consent` column to every tab and a line to every notification email, and
+never text a number whose row does not say `true`.
+
 ---
 
 ## Code

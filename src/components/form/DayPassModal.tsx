@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { submitDayPass } from '@/app/actions';
 import { idleState } from '@/lib/forms';
 import { Button } from '@/components/Button';
-import { Input, BotTrap } from './Fields';
+import { Input, BotTrap, SmsConsent } from './Fields';
 import { dayPass } from '@/data/memberships';
 import { site } from '@/data/site';
 import { cn } from '@/lib/cn';
@@ -217,6 +217,7 @@ export function DayPassModal({ open, onClose }: { open: boolean; onClose: () => 
                   placeholder="Your phone number"
                   error={err.phone}
                 />
+                <SmsConsent />
               </div>
 
               <div className="mt-6">

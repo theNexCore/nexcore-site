@@ -179,6 +179,47 @@ export function RadioGroup({
 }
 
 /**
+ * SMS opt-in, placed after the phone field on every form that collects one.
+ *
+ * A2P 10DLC carrier approval requires: unchecked by default, never required,
+ * and live links to /privacy and /sms-terms. The label copy is the approved
+ * wording from the SMS Compliance Pack — do not edit it.
+ *
+ * Unchecked boxes are omitted from FormData; lib/forms reads absence as false.
+ * The links open in a new tab so a half-filled form is not lost.
+ */
+export function SmsConsent({ className }: { className?: string }) {
+  const id = useId();
+  const link = 'text-sky underline underline-offset-2 hover:text-sky-light';
+  return (
+    <div className={cn('flex items-start gap-3', className)}>
+      <input
+        id={id}
+        type="checkbox"
+        name="smsConsent"
+        value="true"
+        defaultChecked={false}
+        className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-sky"
+      />
+      <label htmlFor={id} className="cursor-pointer font-inter text-[13px] leading-relaxed text-white/60">
+        I agree to receive text messages from NexCore at the phone number provided, including
+        booking confirmations, event reminders, and membership updates. Message frequency varies.
+        Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a
+        condition of purchase. View our{' '}
+        <a href="/privacy" target="_blank" rel="noopener noreferrer" className={link}>
+          Privacy Policy
+        </a>{' '}
+        and{' '}
+        <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className={link}>
+          SMS Terms
+        </a>
+        .
+      </label>
+    </div>
+  );
+}
+
+/**
  * Honeypot + timing trap.
  * Hidden from users and assistive tech; bots that fill it are silently dropped.
  */

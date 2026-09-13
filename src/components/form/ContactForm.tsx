@@ -5,7 +5,7 @@ import { useFormStatus } from 'react-dom';
 import { submitContact } from '@/app/actions';
 import { idleState } from '@/lib/forms';
 import { Button, ButtonLink } from '@/components/Button';
-import { Input, Textarea, Select, RadioGroup, BotTrap } from './Fields';
+import { Input, Textarea, Select, RadioGroup, BotTrap, SmsConsent } from './Fields';
 import { site } from '@/data/site';
 
 const REASONS = [
@@ -98,6 +98,7 @@ export function ContactForm() {
           placeholder="Your phone number"
           error={err.phone}
         />
+        <SmsConsent className="sm:col-span-2" />
         <Input
           name="business"
           label="Business Name (if applicable)"
