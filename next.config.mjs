@@ -158,6 +158,18 @@ const nextConfig = {
       { source: '/legal.html', destination: '/terms', statusCode: 301 },
 
       /**
+       * Second orphan sweep (Search Console, 2026-09-10). Same story as
+       * /contact-us.html and /our-story.html above: indexed, absent from the
+       * Weebly sitemap and from every internal link, and previously falling
+       * through the catch-all into a redirect that lands on a 404.
+       *
+       * These use permanent: true (308) at Jim's request, unlike the 301s
+       * above. Both are permanent and both pass link equity.
+       */
+      { source: '/phone/team.html', destination: '/members', permanent: true },
+      { source: '/energy-core.html', destination: '/', permanent: true },
+
+      /**
        * Safety net for any remaining .html. Anything whose slug matches a real
        * route resolves; anything else ends in a 404, which is the correct
        * signal for a URL with no equivalent — redirecting unrelated pages to
