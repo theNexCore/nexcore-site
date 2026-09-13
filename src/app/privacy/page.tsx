@@ -21,8 +21,10 @@ import { site, formattedAddress } from '@/data/site';
  *
  * Reviewed and approved by counsel verbally, 2026-08-26, reported by Jim.
  * The "Text messaging (SMS)" section was added 2026-09-12 at Jim's direction
- * for A2P 10DLC registration, after that review. Its second paragraph is the
- * carrier-required wording: do not paraphrase it.
+ * for A2P 10DLC registration, after that review. The "No mobile information
+ * will be shared..." paragraph is the carrier-required wording: do not
+ * paraphrase it. The contact paragraph answers GoTo's review asking for a
+ * direct SMS contact method and clear sender identification.
  *
  * TWO THINGS THAT CAN GO STALE — check before changing either:
  *
@@ -81,17 +83,30 @@ export default function PrivacyPage() {
 
           <h2>Text messaging (SMS)</h2>
           <p>
-            If you opt in to receive text messages from NexCore, we use your mobile number to send
-            the messages you signed up for, such as booking confirmations, event reminders, and
-            membership updates. Consent is not a condition of any purchase or membership. Message
+            If you opt in to receive text messages from NexCore Coworking, we use your mobile number to send
+            you customer care messages. Consent is not a condition of any purchase or membership. Message
             frequency varies, and message and data rates may apply. Reply STOP to any message to opt
             out, or HELP for help.
+          </p>
+          <p>
+            Example message:{' '}
+            <em>
+              &ldquo;Thanks for contacting NexCore Coworking. We&rsquo;ve received your message and
+              will get back to you shortly. Is there anything else I can help you with? Reply STOP
+              to unsubscribe, or HELP for more information.&rdquo;
+            </em>
           </p>
           <p>
             No mobile information will be shared with third parties or affiliates for marketing or
             promotional purposes. All the above categories exclude text messaging originator opt-in
             data and consent; this information will not be shared with, or sold to, any third
             parties.
+          </p>
+          <p>
+            Our text messages identify the sender as NexCore Coworking. If you have questions about
+            our text messages, including the privacy of SMS communications, reply HELP to any
+            message, email <a href={`mailto:${site.email}`}>{site.email}</a>, or call{' '}
+            <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].number}</a>.
           </p>
 
           <h2>Where it goes</h2>

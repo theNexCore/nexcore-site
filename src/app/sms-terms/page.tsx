@@ -5,17 +5,15 @@ import { PageHero } from '@/components/PageHero';
 import { site } from '@/data/site';
 
 /**
- * NexCore SMS program terms.
+ * NexCore SMS program terms, for A2P 10DLC registration through GoTo.
+ * Not reviewed by counsel.
  *
- * Text is Part 2 of the NexCore SMS Compliance Pack, published verbatim at
- * Jim's direction on 2026-09-12 for A2P 10DLC carrier registration. Not
- * reviewed by counsel.
- *
- * The two "customer care messages" disclosures at the top were added
- * verbatim at Jim's request on 2026-09-12. Keep their wording as given.
- *
- * Linked from the footer and from the SMS opt-in checkbox on every
- * phone-collecting form (components/form/Fields.tsx, SmsConsent).
+ * The program is registered as CUSTOMER CARE ONLY. GoTo's opt-in review
+ * (2026-09-12) rejected any message type beyond exactly "customer care
+ * messages". That phrase is the only message type named here, on /privacy,
+ * and in the form checkbox (components/form/Fields.tsx, SmsConsent). Do not
+ * add promotional, marketing, or notification wording to any of the three
+ * unless the GoTo campaign is re-registered to cover it first.
  */
 
 const UPDATED = '12 September 2026';
@@ -23,7 +21,7 @@ const UPDATED = '12 September 2026';
 export const metadata = buildMetadata({
   title: 'NexCore SMS Program — Terms & Conditions',
   description:
-    'Terms for the NexCore SMS program: what we send, message frequency, costs, and how to opt out.',
+    'Terms for the NexCore Coworking SMS program: customer care messages, message frequency, costs, and how to opt out.',
   path: '/sms-terms',
 });
 
@@ -39,32 +37,22 @@ export default function SmsTermsPage() {
           <h2 className="!mt-0">NexCore SMS Program — Terms &amp; Conditions</h2>
 
           <p>
-            By opting in to receive SMS messages from <strong>NexCore Coworking</strong>, you agree
-            to receive customer care messages.
+            By providing your mobile number and opting in to receive SMS messages from{' '}
+            <strong>NexCore Coworking</strong>, you agree to receive customer care messages.
           </p>
-          <ul>
-            <li>
-              <strong>Message frequency:</strong> Message frequency may vary. On average, 1-2
-              messages per month.
-            </li>
-            <li>
-              <strong>Message and data rates:</strong> Message and data rates may apply.
-            </li>
-            <li>
-              <strong>Privacy Policy:</strong>{' '}
-              <Link href="/privacy">https://www.thenexcore.com/privacy</Link>
-            </li>
-          </ul>
 
-          <p>
-            By providing your mobile number and opting in, you agree to receive{' '}
-            <strong>customer care messages</strong> from <strong>NexCore Coworking</strong>.
-          </p>
+          <h3>Message frequency</h3>
+          <p>Message frequency may vary. On average, 1-2 messages per month.</p>
+
+          <h3>Additional terms</h3>
           <ul>
-            <li>Message frequency may vary. On average, 1-2 messages per month.</li>
             <li>Message and data rates may apply.</li>
+            <li>Consent is not a condition of purchase.</li>
+            <li>Reply STOP to opt out at any time.</li>
+            <li>Reply HELP for help.</li>
             <li>
-              Privacy Policy: <Link href="/privacy">https://www.thenexcore.com/privacy</Link>
+              For privacy information, please review:{' '}
+              <Link href="/privacy">https://www.thenexcore.com/privacy</Link>
             </li>
             <li>
               Terms and Conditions:{' '}
@@ -72,21 +60,17 @@ export default function SmsTermsPage() {
             </li>
           </ul>
 
+          <h3>Program details</h3>
+
           <p>
-            <strong>Program Description:</strong> NexCore sends text messages to members and
-            customers who opt in, including booking confirmations, event reminders, membership
-            updates, and occasional promotional offers from NexCore.
+            <strong>Program Description:</strong> NexCore Coworking sends customer care messages to
+            members and customers who opt in.
           </p>
 
           <p>
             <strong>Opt-In:</strong> You can opt in by checking the SMS consent box on a form at
             thenexcore.com, or by providing written or verbal consent in person at our location.
             Consent is not a condition of any purchase or membership.
-          </p>
-
-          <p>
-            <strong>Message Frequency:</strong> Message frequency varies based on your bookings,
-            memberships, and preferences.
           </p>
 
           <p>
@@ -102,7 +86,8 @@ export default function SmsTermsPage() {
 
           <p>
             <strong>Help:</strong> Reply <strong>HELP</strong> to any message for assistance, or
-            contact us at <a href={`mailto:${site.email}`}>hello@thenexcore.com</a>.
+            contact NexCore Coworking at <a href={`mailto:${site.email}`}>hello@thenexcore.com</a>{' '}
+            or <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].number}</a>.
           </p>
 
           <p>

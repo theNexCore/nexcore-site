@@ -182,15 +182,20 @@ export function RadioGroup({
  * SMS opt-in, placed after the phone field on every form that collects one.
  *
  * A2P 10DLC carrier approval requires: unchecked by default, never required,
- * and live links to /privacy and /sms-terms. The label copy is the approved
- * wording from the SMS Compliance Pack — do not edit it.
+ * and live links to /privacy and /sms-terms.
+ *
+ * The copy is GoTo's recommended SMS opt-in disclosure (2026-09-12), after its
+ * review rejected anything but exactly "customer care messages". Brand name,
+ * message type, frequency, STOP/HELP keywords and both links are all required
+ * for the form to pass. Keep the message type in step with /sms-terms and
+ * /privacy, and do not broaden it without re-registering the campaign.
  *
  * Unchecked boxes are omitted from FormData; lib/forms reads absence as false.
  * The links open in a new tab so a half-filled form is not lost.
  */
 export function SmsConsent({ className }: { className?: string }) {
   const id = useId();
-  const link = 'text-sky underline underline-offset-2 hover:text-sky-light';
+  const link = 'text-sky underline underline-offset-2 hover:text-sky-light break-all';
   return (
     <div className={cn('flex items-start gap-3', className)}>
       <input
@@ -202,18 +207,27 @@ export function SmsConsent({ className }: { className?: string }) {
         className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-sky"
       />
       <label htmlFor={id} className="cursor-pointer font-inter text-[13px] leading-relaxed text-white/60">
-        I agree to receive text messages from NexCore at the phone number provided, including
-        booking confirmations, event reminders, and membership updates. Message frequency varies.
-        Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a
-        condition of purchase. View our{' '}
-        <a href="/privacy" target="_blank" rel="noopener noreferrer" className={link}>
-          Privacy Policy
-        </a>{' '}
-        and{' '}
-        <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className={link}>
-          SMS Terms
-        </a>
-        .
+        <span className="block">
+          By providing your mobile number and opting in, you agree to receive customer care messages
+          from NexCore Coworking.
+        </span>
+        <span className="block">Message frequency may vary. On average, 1-2 messages per month.</span>
+        <span className="block">Message and data rates may apply.</span>
+        <span className="block">Reply STOP to opt out at any time.</span>
+        <span className="block">Reply HELP for help.</span>
+        <span className="block">Consent is not a condition of purchase.</span>
+        <span className="block">
+          Privacy Policy:{' '}
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" className={link}>
+            https://www.thenexcore.com/privacy
+          </a>
+        </span>
+        <span className="block">
+          Terms and Conditions:{' '}
+          <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className={link}>
+            https://www.thenexcore.com/sms-terms
+          </a>
+        </span>
       </label>
     </div>
   );
