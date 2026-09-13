@@ -1,29 +1,48 @@
 import { buildMetadata } from '@/lib/seo';
 import { Section } from '@/components/Section';
 import { PageHero } from '@/components/PageHero';
-import { site } from '@/data/site';
+import { site, formattedAddress } from '@/data/site';
 
 /**
  * NexCore privacy policy.
  *
- * Text is Part 1 of the NexCore SMS Compliance Pack, published verbatim at
- * Jim's direction on 2026-09-12 for A2P 10DLC carrier registration. It
- * replaces the 2026-08-26 policy that counsel approved verbally; this text has
- * NOT been through that review (the pack itself recommends attorney review).
+ * Replaces the previous footer link to thryv.com/client-privacy-policy — a
+ * former vendor's boilerplate that did not describe NexCore's practices.
  *
- * DO NOT PARAPHRASE section 3. Carrier reviewers look for the bolded
- * "No mobile information will be shared..." sentence word for word.
+ * The technical description is verified against the code: enquiry forms
+ * posted server-side to the NexCore Apps Script web app, which logs to the
+ * Google Sheet and sends its own notification email; honeypot plus timing and
+ * rate-limit checks; no cookies set by this site today.
  *
- * The SMS opt-in checkbox on every phone-collecting form links here and to
- * /sms-terms (components/form/Fields.tsx, SmsConsent).
+ * Facts confirmed by Jim, 2026-08-26: no data sharing (not sold, not shared
+ * with any partner including the SOCO Chamber); 24-month retention; deletion
+ * and access requests to hello@thenexcore.com; site is for adults and youth
+ * programs run in person; Missouri only, so no CCPA or GDPR section.
+ *
+ * Reviewed and approved by counsel verbally, 2026-08-26, reported by Jim.
+ * The "Text messaging (SMS)" section was added 2026-09-12 at Jim's direction
+ * for A2P 10DLC registration, after that review. Its second paragraph is the
+ * carrier-required wording: do not paraphrase it.
+ *
+ * TWO THINGS THAT CAN GO STALE — check before changing either:
+ *
+ *   1. The 24-month retention is a written commitment but nothing in this
+ *      codebase enforces it. Old enquiries have to actually be deleted from
+ *      the inbox and the mirrored Google Sheet by someone.
+ *   2. "Does not use advertising cookies or cross-site tracking" holds only
+ *      while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes that sentence
+ *      inaccurate and likely requires a consent mechanism.
+ *
+ * Access is described as "NexCore staff" rather than naming individuals, so
+ * staff changes do not require a policy edit.
  */
 
-const EFFECTIVE = 'September 12, 2026';
+const UPDATED = '12 September 2026';
 
 export const metadata = buildMetadata({
   title: 'Privacy Policy',
   description:
-    'How NexCore collects, uses, and protects your information, including SMS / text messaging.',
+    'How NexCore collects, uses, and protects information submitted through thenexcore.com.',
   path: '/privacy',
 });
 
@@ -33,118 +52,115 @@ export default function PrivacyPage() {
       <PageHero eyebrow="LEGAL" title="Privacy" accent="Policy" />
 
       <Section width="prose">
-        <p className="font-inter text-[14px] text-white/45">
-          <strong className="font-semibold text-white/70">Effective Date:</strong> {EFFECTIVE}
-        </p>
+        <p className="font-inter text-[14px] text-white/45">Last updated: {UPDATED}</p>
 
         <div className="prose-nex mt-8">
           <p>
-            NexCore (&ldquo;NexCore,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;)
-            operates the website thenexcore.com and provides coworking space, meeting rooms, and
-            business services at 11820 Tesson Ferry Rd, Ste 1000, St. Louis, MO 63128. This Privacy
-            Policy explains what information we collect, how we use it, and the choices you have.
+            This policy explains what information NexCore collects through this website, how we use
+            it, and the choices you have. It applies to <strong>thenexcore.com</strong> only.
           </p>
 
-          <h2>1. Information We Collect</h2>
+          <h2>Information you give us</h2>
           <p>
-            We collect information you provide directly to us, including: your name, email address,
-            phone number, company name, and mailing address when you submit a contact form, book a
-            room or office tour, register for an event, apply for membership, or sign up to receive
-            text messages from us. We also collect standard technical information automatically when
-            you visit our website, such as IP address, browser type, pages visited, and referring
-            pages, through cookies and similar analytics technologies.
+            Almost all of the personal information we collect through this website is what you type
+            into one of our forms. Depending on the form, that may include your name, email address, phone
+            number, business or organisation name, whether you are a NexCore member, the reason for
+            your enquiry, and any message, notes, or dates you provide.
           </p>
-
-          <h2>2. How We Use Your Information</h2>
           <p>
-            We use the information we collect to: respond to your inquiries; process bookings,
-            memberships, and event registrations; send transactional communications such as booking
-            confirmations and account notices; send marketing communications you have opted in to
-            receive; operate, maintain, and improve our website and services; and comply with legal
-            obligations.
+            You do not need to submit a form to browse this site. If you would rather not use a form,
+            you can call or email us using the details below.
           </p>
 
-          <h2>3. SMS / Text Messaging</h2>
+          <h2>How we use it</h2>
           <p>
-            If you opt in to receive text messages from NexCore, we will use your mobile number to
-            send the messages you signed up for, such as booking confirmations, event reminders, and
-            membership updates. Consent to receive text messages is not a condition of any purchase
-            or membership. Message frequency varies. Message and data rates may apply. You can opt
-            out at any time by replying STOP, or get help by replying HELP.
-          </p>
-          <p className="rounded-field border border-sky/35 bg-sky/[0.07] px-5 py-4">
-            <strong>
-              No mobile information will be shared with third parties or affiliates for marketing or
-              promotional purposes. All the above categories exclude text messaging originator
-              opt-in data and consent; this information will not be shared with, or sold to, any
-              third parties.
-            </strong>
+            We use what you submit to respond to you and to provide the thing you asked about — a
+            tour, a membership, an office, a space booking, or a general question. We do not sell
+            your information, and we do not share it with third parties for their own marketing.
           </p>
 
-          <h2>4. How We Share Information</h2>
+          <h2>Text messaging (SMS)</h2>
           <p>
-            We do not sell your personal information. We share information only with: service
-            providers who perform services on our behalf (such as website hosting, email delivery,
-            payment processing, and scheduling tools), who are permitted to use it only to provide
-            those services; law enforcement or government authorities when required by law; and a
-            successor entity in the event of a merger, acquisition, or sale of assets, in which case
-            this Policy will continue to apply to your information.
+            If you opt in to receive text messages from NexCore, we use your mobile number to send
+            the messages you signed up for, such as booking confirmations, event reminders, and
+            membership updates. Consent is not a condition of any purchase or membership. Message
+            frequency varies, and message and data rates may apply. Reply STOP to any message to opt
+            out, or HELP for help.
           </p>
-
-          <h2>5. Cookies and Analytics</h2>
           <p>
-            Our website uses cookies and similar technologies to operate the site and understand how
-            visitors use it. You can control cookies through your browser settings; disabling cookies
-            may affect some site features.
+            No mobile information will be shared with third parties or affiliates for marketing or
+            promotional purposes. All the above categories exclude text messaging originator opt-in
+            data and consent; this information will not be shared with, or sold to, any third
+            parties.
           </p>
 
-          <h2>6. Data Security and Retention</h2>
+          <h2>Where it goes</h2>
           <p>
-            We use commercially reasonable administrative, technical, and physical safeguards to
-            protect your information. No method of transmission or storage is completely secure, and
-            we cannot guarantee absolute security. We retain personal information for as long as
-            needed to provide our services, comply with legal obligations, resolve disputes, and
-            enforce agreements.
+            Form submissions are sent to a private NexCore application hosted on Google, which
+            records them in a private internal spreadsheet and emails the relevant NexCore staff.
+            Both the spreadsheet and the mailbox are accessible only to NexCore staff.
           </p>
 
-          <h2>7. Children&apos;s Privacy</h2>
+          <h2>Payments</h2>
           <p>
-            Our website and services are not directed to children under 13, and we do not knowingly
-            collect personal information from children under 13. If you believe a child has provided
-            us personal information, contact us and we will delete it.
+            Membership deposits and day passes are processed by <strong>Square</strong>, and event
+            registration is handled by <strong>Eventbrite</strong>. This site does not embed either
+            one — the buttons are ordinary links that take you to their websites. We never see or store your full card details — payment information is handled
+            entirely by those providers under their own privacy policies.
           </p>
 
-          <h2>8. Your Choices and Rights</h2>
+          <h2>Analytics and cookies</h2>
           <p>
-            You may opt out of marketing emails by using the unsubscribe link in any marketing email.
-            You may opt out of text messages by replying STOP to any message. You may request access
-            to, correction of, or deletion of your personal information by contacting us at{' '}
-            <a href={`mailto:${site.email}`}>hello@thenexcore.com</a>. We will respond within a
-            reasonable timeframe consistent with applicable law.
+            This site does not use advertising cookies or cross-site tracking. If website analytics
+            are enabled, they are used only in aggregate to understand which pages are useful. Your
+            browser&rsquo;s Do Not Track and cookie controls are respected.
           </p>
 
-          <h2>9. Third-Party Links</h2>
+          <h2>Automated protections</h2>
           <p>
-            Our website may link to third-party websites. We are not responsible for the privacy
-            practices of those sites, and this Policy does not apply to them.
+            Our forms include basic anti-spam measures — a hidden field that real visitors never see,
+            a timing check, and a limit on how many times a form can be submitted from the same
+            connection in a short period. That last check reads the IP address your connection
+            presents so it can count recent submissions. It is held only in memory, for about ten
+            minutes, and is never written to the spreadsheet, included in the notification email, or
+            used to identify or profile you.
           </p>
 
-          <h2>10. Changes to This Policy</h2>
+          <h2>Retention</h2>
           <p>
-            We may update this Privacy Policy from time to time. We will post the updated version on
-            this page with a revised effective date. Continued use of our website or services after
-            changes take effect constitutes acceptance of the updated Policy.
+            We keep enquiries for up to <strong>24 months</strong>, after which they are deleted. You
+            can ask us to delete yours sooner at any time — see below.
           </p>
 
-          <h2>11. Contact Us</h2>
+          <h2>Your choices</h2>
+          <p>
+            You can ask us what information we hold about you, ask us to correct it, or ask us to
+            delete it. Email <a href={`mailto:${site.email}`}>{site.email}</a> and we will take care
+            of it.
+          </p>
+
+          <h2>Children</h2>
+          <p>
+            This website is intended for adults and for people acting on behalf of a business. It is
+            not directed at children, and we do not knowingly collect information from them. Youth
+            programs run by NexCore take place in person and do not collect information through this
+            site.
+          </p>
+
+          <h2>Changes</h2>
+          <p>
+            If we change this policy we will update the date at the top of this page.
+          </p>
+
+          <h2>Contact</h2>
           <p>
             NexCore
             <br />
-            11820 Tesson Ferry Rd, Ste 1000
+            {formattedAddress}
             <br />
-            St. Louis, MO 63128
+            <a href={`mailto:${site.email}`}>{site.email}</a>
             <br />
-            Email: <a href={`mailto:${site.email}`}>hello@thenexcore.com</a>
+            <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].number}</a>
           </p>
         </div>
       </Section>

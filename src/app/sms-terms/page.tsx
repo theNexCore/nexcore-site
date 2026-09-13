@@ -15,10 +15,10 @@ import { site } from '@/data/site';
  * phone-collecting form (components/form/Fields.tsx, SmsConsent).
  */
 
-const EFFECTIVE = 'September 12, 2026';
+const UPDATED = '12 September 2026';
 
 export const metadata = buildMetadata({
-  title: 'SMS Terms & Conditions',
+  title: 'NexCore SMS Program — Terms & Conditions',
   description:
     'Terms for the NexCore SMS program: what we send, message frequency, costs, and how to opt out.',
   path: '/sms-terms',
@@ -30,9 +30,7 @@ export default function SmsTermsPage() {
       <PageHero eyebrow="LEGAL" title="SMS" accent="Terms" />
 
       <Section width="prose">
-        <p className="font-inter text-[14px] text-white/45">
-          <strong className="font-semibold text-white/70">Effective Date:</strong> {EFFECTIVE}
-        </p>
+        <p className="font-inter text-[14px] text-white/45">Last updated: {UPDATED}</p>
 
         <div className="prose-nex mt-8">
           <h2 className="!mt-0">NexCore SMS Program — Terms &amp; Conditions</h2>
