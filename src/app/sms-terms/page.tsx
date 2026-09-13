@@ -11,6 +11,9 @@ import { site } from '@/data/site';
  * Jim's direction on 2026-09-12 for A2P 10DLC carrier registration. Not
  * reviewed by counsel.
  *
+ * The two "customer care messages" disclosures at the top were added
+ * verbatim at Jim's request on 2026-09-12. Keep their wording as given.
+ *
  * Linked from the footer and from the SMS opt-in checkbox on every
  * phone-collecting form (components/form/Fields.tsx, SmsConsent).
  */
@@ -34,6 +37,40 @@ export default function SmsTermsPage() {
 
         <div className="prose-nex mt-8">
           <h2 className="!mt-0">NexCore SMS Program — Terms &amp; Conditions</h2>
+
+          <p>
+            By opting in to receive SMS messages from <strong>NexCore Coworking</strong>, you agree
+            to receive customer care messages.
+          </p>
+          <ul>
+            <li>
+              <strong>Message frequency:</strong> Message frequency may vary. On average, 1-2
+              messages per month.
+            </li>
+            <li>
+              <strong>Message and data rates:</strong> Message and data rates may apply.
+            </li>
+            <li>
+              <strong>Privacy Policy:</strong>{' '}
+              <Link href="/privacy">https://www.thenexcore.com/privacy</Link>
+            </li>
+          </ul>
+
+          <p>
+            By providing your mobile number and opting in, you agree to receive{' '}
+            <strong>customer care messages</strong> from <strong>NexCore Coworking</strong>.
+          </p>
+          <ul>
+            <li>Message frequency may vary. On average, 1-2 messages per month.</li>
+            <li>Message and data rates may apply.</li>
+            <li>
+              Privacy Policy: <Link href="/privacy">https://www.thenexcore.com/privacy</Link>
+            </li>
+            <li>
+              Terms and Conditions:{' '}
+              <Link href="/sms-terms">https://www.thenexcore.com/sms-terms</Link>
+            </li>
+          </ul>
 
           <p>
             <strong>Program Description:</strong> NexCore sends text messages to members and
