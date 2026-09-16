@@ -2,8 +2,8 @@
 
 // Content-Security-Policy.
 // Eventbrite and Square are LINK-OUT only (no iframes), so neither needs a
-// frame-src entry. script.google.com is fetched server-side at build/ISR time
-// and from the client only for the coworking availability lookup.
+// frame-src entry. script.google.com is reached server-side for form
+// submissions and from the client only for the coworking availability lookup.
 const csp = [
   "default-src 'self'",
   // Next.js requires 'unsafe-inline' for its bootstrap script and

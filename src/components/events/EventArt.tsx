@@ -4,8 +4,8 @@ import { cn } from '@/lib/cn';
 /**
  * Event artwork, with a branded fallback.
  *
- * Some sheet rows carry Eventbrite CDN URLs, which are hotlink-blocked (403
- * for every origin). `repairImageUrl` nulls those out, so this renders a
+ * `src` is null when an event has no image, or its file has not been added to
+ * public/events/ yet (see scripts/images.ts). Either way this renders a
  * NexCore-branded panel instead of a broken image.
  */
 export function EventArt({

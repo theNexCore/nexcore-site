@@ -1,8 +1,8 @@
 /**
  * Minimal image header reader: format sniffing and intrinsic dimensions for
- * the three formats the member ingest accepts.
+ * the three formats the site accepts for member and event images.
  *
- * Split out of ingest-member-images.ts so it can be exercised directly
+ * Kept separate from scripts/images.ts so it can be exercised directly
  * (`npx tsx scripts/image-header.test.ts`) against real files.
  *
  * Why not an image library: the site's convention is that every <Image>

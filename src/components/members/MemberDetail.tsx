@@ -21,7 +21,7 @@ import { cn } from '@/lib/cn';
  * difference is the heading level and the permalink, which the modal shows and
  * the page does not need.
  *
- * The sheet gives the business and the named person separate contact blocks,
+ * The data gives the business and the named person separate contact blocks,
  * so both are rendered separately. A member who only publishes company details
  * simply gets one block — nothing is invented to fill the other.
  */

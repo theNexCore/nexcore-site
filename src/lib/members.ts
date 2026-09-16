@@ -1,13 +1,13 @@
 /**
  * Member types and display helpers.
  *
- * Client-safe by construction: this module must never import the feed, the
- * image manifest, or anything that touches `process.env` or `Buffer`. The
+ * Client-safe by construction: this module must never import the member data,
+ * the image manifest, or anything that touches `Buffer`. The
  * directory's card, modal and detail components are client components and
  * import from here, so anything added to this file ships to the browser.
  *
- * Everything that reads the feed lives in members-server.ts, which is marked
- * `server-only` so the Apps Script URL can never be pulled into a client
+ * Everything that reads @/data/members lives in members-server.ts, which is marked
+ * `server-only` so raw member emails can never be pulled into a client
  * bundle by an accidental import.
  */
 
@@ -17,7 +17,7 @@ import type { TierId } from '@/data/member-tiers';
 export const SOCIAL_KEYS = ['instagram', 'tiktok', 'youtube', 'facebook', 'x', 'linkedin'] as const;
 export type SocialKey = (typeof SOCIAL_KEYS)[number];
 
-/** A local image written by the build-time Drive ingest. */
+/** A local image from public/members/, measured by scripts/images.ts. */
 export interface MemberImage {
   /** Site-absolute path, e.g. "/members/acme-co-logo.png". */
   src: string;
@@ -26,7 +26,7 @@ export interface MemberImage {
 }
 
 /**
- * One contact block. The sheet gives the company and the person each their
+ * One contact block. The data gives the company and the person each their
  * own, so both are rendered separately and a member can publish either, both,
  * or neither.
  *
@@ -36,7 +36,7 @@ export interface MemberImage {
 export interface ContactBlock {
   /** Company only; the person block has no address of its own. */
   address: string;
-  /** Display form, exactly as the sheet has it. */
+  /** Display form, exactly as the data has it. */
   phone: string;
   /** E.164 form for tel:, e.g. "+13144339330". Null when unparseable. */
   phoneTel: string | null;
@@ -67,13 +67,13 @@ export interface NexMember {
   business: string;
   firstName: string;
   lastName: string;
-  /** "Jane Doe", or "" when the sheet has neither name. */
+  /** "Jane Doe", or "" when the data has neither name. */
   contactName: string;
   /** The person's role, e.g. "Owner". */
   title: string;
 
   tier: TierId;
-  /** Raw `since` value from the sheet, e.g. "2019" or "2019-04-12". */
+  /** Raw `since` value from the data, e.g. "2019" or "2019-04-12". */
   since: string;
   /** Four-digit year pulled out of `since`, or null when unparseable. */
   sinceYear: number | null;
@@ -92,7 +92,7 @@ export interface NexMember {
   /** Free text, shown on the detail card only. */
   funFact: string;
 
-  /** Sheet ordering weight. Higher sorts first within a tier. */
+  /** Ordering weight. Higher sorts first within a tier. */
   weight: number;
 
   /**
@@ -108,7 +108,7 @@ export interface NexMember {
   letter: string;
 }
 
-/** "Member since 2019", or "Member" when the sheet has no usable date. */
+/** "Member since 2019", or "Member" when the data has no usable date. */
 export function memberSince(m: NexMember): string {
   return m.sinceYear ? `Member since ${m.sinceYear}` : 'Member';
 }

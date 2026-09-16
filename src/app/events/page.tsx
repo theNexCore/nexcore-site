@@ -4,7 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { ButtonLink } from '@/components/Button';
 import { EventsView } from '@/components/events/EventsView';
 import { IdeaForm } from '@/components/form/IdeaForm';
-import { getEvents } from '@/lib/events';
+import { getEvents } from '@/lib/events-server';
 import {
   eventsIntro,
   eventsIntroLead,
@@ -16,8 +16,9 @@ import {
 } from '@/data/events-copy';
 
 /**
- * ISR: the events feed is fetched at build and revalidated every 300s.
- * It is never fetched per-request.
+ * ISR: events come from @/data/events, but recurring events are expanded
+ * relative to "now", so the page regenerates every 300s to roll the calendar
+ * forward and move finished events under Past.
  */
 export const revalidate = 300;
 
@@ -39,7 +40,7 @@ function EventKind({ label }: { label: string }) {
 }
 
 export default async function EventsPage() {
-  const { upcoming, past, error } = await getEvents();
+  const { upcoming, past } = await getEvents();
 
   return (
     <>
@@ -164,25 +165,7 @@ export default async function EventsPage() {
         </div>
 
         <div className="mt-12">
-          {error ? (
-            <div
-              role="alert"
-              className="rounded-card border border-red-bright/30 bg-red/10 p-8 text-center"
-            >
-              <p className="font-sora text-lg font-semibold text-white">
-                We couldn&rsquo;t load the calendar just now.
-              </p>
-              <p className="mt-2 font-inter text-[15px] text-white/65">
-                Please try again shortly, or{' '}
-                <a href="/contact" className="text-sky hover:text-sky-light">
-                  get in touch
-                </a>{' '}
-                and we&rsquo;ll help.
-              </p>
-            </div>
-          ) : (
-            <EventsView upcoming={upcoming} past={past} />
-          )}
+          <EventsView upcoming={upcoming} past={past} />
         </div>
       </Section>
 

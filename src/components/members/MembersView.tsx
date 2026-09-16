@@ -35,13 +35,10 @@ export function MembersView({
   members,
   categories,
   letters,
-  error,
 }: {
   members: NexMember[];
   categories: string[];
   letters: string[];
-  /** Feed failure message, or null. The wall renders either way. */
-  error: string | null;
 }) {
   const [query, setQuery] = useState('');
   const [letter, setLetter] = useState<string | null>(null);
@@ -94,7 +91,6 @@ export function MembersView({
           tierId={WALL_TIER}
           members={members}
           onOpen={setOpen}
-          unavailable={error !== null}
         />
       </Section>
 
@@ -109,23 +105,7 @@ export function MembersView({
           </p>
         </div>
 
-        {error ? (
-          <div
-            role="alert"
-            className="mt-12 rounded-card border border-red-bright/30 bg-red/10 p-8 text-center"
-          >
-            <p className="font-sora text-lg font-semibold text-white">
-              We couldn&rsquo;t load the directory just now.
-            </p>
-            <p className="mt-2 font-inter text-[15px] text-white/65">
-              Please try again shortly, or{' '}
-              <a href="/contact" className="text-sky hover:text-sky-light">
-                get in touch
-              </a>{' '}
-              and we&rsquo;ll point you to the right member.
-            </p>
-          </div>
-        ) : members.length === 0 ? (
+        {members.length === 0 ? (
           <p className="mt-12 rounded-card border border-white/10 bg-ink p-8 text-center font-inter text-[16px] text-white/60">
             The directory is being put together right now. Check back shortly.
           </p>

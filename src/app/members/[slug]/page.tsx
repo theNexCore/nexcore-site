@@ -8,8 +8,6 @@ import { MemberDetail } from '@/components/members/MemberDetail';
 import { getMembers, getMemberBySlug, memberJsonLd } from '@/lib/members-server';
 import { memberSince } from '@/lib/members';
 
-export const revalidate = 300;
-
 export async function generateStaticParams() {
   const { members } = await getMembers();
   return members.map((m) => ({ slug: m.slug }));

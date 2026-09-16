@@ -3,7 +3,6 @@
 Next.js (App Router) + TypeScript + Tailwind. Migrated from Weebly, deploys to Vercel.
 
 Phase 1 audit: [`audit/PHASE1.md`](audit/PHASE1.md)
-Approved events schema: [`audit/EVENTS-SHEET-SCHEMA.md`](audit/EVENTS-SHEET-SCHEMA.md)
 
 ---
 
@@ -15,6 +14,7 @@ cp .env.example .env.local     # then fill in the values below
 npm run dev                    # http://localhost:3000
 npm run build && npm start     # production
 npm run typecheck
+npm run images                 # list member/event images missing from public/
 ```
 
 ## Environment
@@ -22,7 +22,6 @@ npm run typecheck
 | Variable | Required | Purpose |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | yes | Origin for canonical, OG, and JSON-LD absolute URLs |
-| `EVENTS_FEED_URL` | yes | Apps Script endpoint backing the events Sheet |
 | `AVAILABILITY_URL` | no | Room availability lookup (coworking) |
 | `RESEND_API_KEY` | **yes, to send mail** | Resend API key |
 | `FORM_TO_EMAIL` | yes | Where form submissions land |
@@ -42,33 +41,42 @@ src/
   components/    Button, Section, Container, Header, Footer, SectionNav,
                  form/*, events/*
   data/          typed content — site, nav, coworking, memberships,
-                 history, impact, founder-letter, gallery, image-sizes.json
-  lib/           events.ts (feed + ISR), forms.ts, rate-limit.ts, seo.ts, img.ts
+                 history, impact, founder-letter, gallery, image-sizes.json,
+                 members, events, local-images.json (generated)
+  lib/           events-server.ts, members-server.ts, forms.ts, rate-limit.ts,
+                 seo.ts, img.ts
+scripts/
+  images.ts      measures member/event images, writes local-images.json,
+                 lists missing files (runs on predev and prebuild)
 public/
   img/           309 raster assets pulled from Weebly, renamed lowercase-hyphen
   logo/          16 vectors recovered from inline base64 SVG in the old markup
 ```
 
-No CMS. All content lives in typed files under `src/data`, except events.
+No CMS. All content lives in typed files under `src/data`, including events and members.
 
 ### Events
 
 The page opens with the full events.html narrative (`src/data/events-copy.ts`) — intro, the six Ways In, the 27 event-kind tags, the idea CTA, and Signature Events — with the merged calendar beneath it under "Stay connected with everything happening at NexCore."
 
-`src/lib/events.ts` fetches the Sheet-backed Apps Script feed **at build time and via ISR (`revalidate: 300`)** — never per request.
+Events live in `src/data/events.ts`; the format, including recurring events, is documented at the top of that file. `src/lib/events-server.ts` reads it and the page regenerates via ISR (`revalidate: 300`) so the calendar rolls forward.
 
-It implements the approved schema (recurrence, series, location types, price, summary, slug) and is **deliberately tolerant of the current sheet**, deriving new fields from the legacy columns so the site is correct before the columns are backfilled:
-
-- `startTS` derived from `timeRange` when the column is absent
-- `priceLabel` / `priceValue` derived from the old `type` column
-- `summary` truncated from `desc` at 160 chars
+- A one-off event has `start` / `end`; a recurring one adds `repeat` (daily / weekly / monthly, weekdays, nth weekday, `until`, `count`) plus optional `skip` dates, expanded with `rrule`
+- Times are NexCore wall-clock (America/Chicago)
+- `summary` defaults to `desc` truncated at 160 chars; `priceLabel` defaults to Free
 - `locationType` defaults to `nexcore`, so `Event` JSON-LD always has a valid `location`
 
-Recurring rows expand to occurrences capped **8 weeks ahead**. Events move to Past automatically once `endTS` passes.
+Recurring events expand to occurrences capped **8 weeks ahead**, each at `/events/<slug>-<date>`. Events move to Past automatically once `end` passes.
+
+### Members
+
+Members live in `src/data/members.ts`, read only by the server-only `src/lib/members-server.ts` (the file holds raw emails, which are obfuscated before reaching the page).
+
+### Images
+
+Member logos/headshots go in `public/members/` (`company-name-logo.png`, `firstname-lastname.jpg`), event images in `public/events/` (`event-name.jpg`). `npm run images` lists every referenced file that is missing; until a file exists, the page shows the branded placeholder.
 
 **Ticketing is Eventbrite, as outbound links only.** No iframes, no `checkout-external`. `frame-src 'none'` in the CSP enforces this.
-
-**Image repair.** Four sheet rows hold URLs copied from Eventbrite's own image optimiser (`eventbrite.com/e/_next/image?url=…`). `repairImageUrl()` unwraps them, then rejects `evbuc.com`/`eventbrite.com` hosts because that CDN returns 403 to every origin — verified in a real browser. Those events render a branded fallback (`EventArt`) instead of a broken image.
 
 ### Forms
 
@@ -139,4 +147,4 @@ deploy automatically — no local upload.
    Two commitments now need upkeep rather than review: the stated **24-month retention** is not enforced by any code, so old enquiries must actually be deleted from the inbox and the mirrored Sheet; and the "no advertising cookies" line holds only while `NEXT_PUBLIC_GA4_ID` is unset.
 2. Set `RESEND_API_KEY`, `FORM_TO_EMAIL`, `FORM_FROM_EMAIL` in Vercel and verify the sending domain.
 3. Configure **apex → www** in Vercel; the Weebly site already 301s that way.
-4. Sheet fixes are tracked in `audit/EVENTS-SHEET-SCHEMA.md` (Night 2 ticket URL, two dead images, `startTS` backfill).
+4. Changemakers27 Night 2's ticket link in `src/data/events.ts` still points at the Night 3 Eventbrite page.

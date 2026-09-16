@@ -6,7 +6,8 @@ import { Section, Eyebrow } from '@/components/Section';
 import { JsonLd } from '@/components/JsonLd';
 import { EventArt } from '@/components/events/EventArt';
 import { ButtonLink } from '@/components/Button';
-import { getEvents, getEventBySlug, eventJsonLd, formatEventDate } from '@/lib/events';
+import { formatEventDate } from '@/lib/events';
+import { getEvents, getEventBySlug, eventJsonLd } from '@/lib/events-server';
 import { site, formattedAddress } from '@/data/site';
 
 export const revalidate = 300;
@@ -40,7 +41,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const { seriesMap } = await getEvents();
   const siblings = event.series ? (seriesMap[event.series] ?? []).filter((e) => e.slug !== event.slug) : [];
 
-  // Sheet descriptions arrive as plain text with newlines.
+  // Descriptions are plain text with newlines.
   const paragraphs = event.desc.split(/\n{1,}/).map((p) => p.trim()).filter(Boolean);
 
   const locationLine =

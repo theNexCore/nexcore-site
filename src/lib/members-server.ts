@@ -3,7 +3,6 @@ import 'server-only';
 import { abs, site } from '@/data/site';
 import { toTier, tierRank } from '@/data/member-tiers';
 import { slugify } from './slug';
-import { str, memberSlug, fetchMemberRows } from './members-source';
 import {
   SOCIAL_KEYS,
   type ContactBlock,
@@ -11,13 +10,14 @@ import {
   type NexMember,
   type SocialKey,
 } from './members';
-import manifest from '@/data/member-images.json';
+import { members as records, type MemberRecord } from '@/data/members';
+import localImages from '@/data/local-images.json';
 
 /**
  * Server-side member data access.
  *
- * `server-only` is the point of this file: the members feed URL must never
- * reach client code, so the module that reads it refuses to be bundled for the
+ * `server-only` is the point of this file: @/data/members holds raw email
+ * addresses, so the module that reads it refuses to be bundled for the
  * browser. Client components import types and display helpers from
  * ./members instead, which has no such dependency.
  */
@@ -48,26 +48,19 @@ function encodeEmail(email: string): string | null {
  * Helpers
  * ------------------------------------------------------------------ */
 
-type ImageManifest = Record<string, { file: string; width: number; height: number }>;
-const images = manifest as ImageManifest;
+const str = (v: string | undefined): string => (v ?? '').trim();
+
+const images = localImages as Record<string, { width: number; height: number }>;
 
 /**
- * Look up an ingested image. Returns null when the ingest skipped or failed on
- * this file, which is what MemberFace renders the branded placeholder for.
+ * Look up a local image. Returns null when the file is not in public/ yet
+ * (scripts/images.ts only lists files that exist), which is what MemberFace
+ * renders the branded placeholder for.
  */
-function imageFor(slug: string, kind: 'logo' | 'photo'): MemberImage | null {
-  const hit = images[`${slug}:${kind}`];
-  return hit ? { src: hit.file, width: hit.width, height: hit.height } : null;
-}
-
-function splitList(v: unknown): string[] {
-  if (Array.isArray(v)) return v.map(str).filter(Boolean);
-  const s = str(v);
-  if (!s) return [];
-  return s
-    .split(/[\n,;|]+/)
-    .map((x) => x.trim())
-    .filter(Boolean);
+function imageFor(src: string): MemberImage | null {
+  const path = src.trim();
+  const hit = path ? images[path] : undefined;
+  return hit ? { src: path, width: hit.width, height: hit.height } : null;
 }
 
 /**
@@ -117,7 +110,7 @@ function hostLabel(url: string): string | null {
   }
 }
 
-/** Per-network profile root, used when the sheet holds a handle not a URL. */
+/** Per-network profile root, used when the data holds a handle not a URL. */
 const SOCIAL_BASE: Record<SocialKey, string> = {
   instagram: 'https://www.instagram.com/',
   tiktok: 'https://www.tiktok.com/@',
@@ -165,55 +158,44 @@ function firstLetter(sortName: string): string {
 /* ------------------------------------------------------------------ *
  * Normalisation
  *
- * Tolerant by design, matching the events feed: a member with a business name
- * is publishable and every other column is optional.
+ * Tolerant by design: a member with a business name is publishable and every
+ * other field may be blank.
  * ------------------------------------------------------------------ */
 
-const obj = (v: unknown): Record<string, unknown> =>
-  v && typeof v === 'object' ? (v as Record<string, unknown>) : {};
+/** Build one contact block. The person's block has no address or website. */
+function contactBlock(src: {
+  address?: string;
+  phone: string;
+  email: string;
+  website?: string;
+  socials: MemberRecord['company']['socials'];
+}): ContactBlock {
+  const phone = str(src.phone);
+  const website = toUrl(str(src.website));
 
-/**
- * Build one contact block.
- *
- * `fallback` carries the flat top-level fields the Apps Script used before it
- * grew separate company/contact blocks. Reading them as a fallback means a
- * deployment still serving the older shape degrades to a populated company
- * block instead of a member with no contact details at all — and costs nothing
- * once every row is on the current shape.
- */
-function contactBlock(
-  src: Record<string, unknown>,
-  fallback: Record<string, unknown> = {},
-): ContactBlock {
-  const pick = (key: string) => str(src[key]) || str(fallback[key]);
-
-  const phone = pick('phone');
-  const website = toUrl(pick('website'));
-
-  const rawSocials = { ...obj(fallback.socials), ...obj(src.socials) };
   const socials: Partial<Record<SocialKey, string>> = {};
   for (const key of SOCIAL_KEYS) {
-    // Blank cells must not render, so only resolved URLs are kept.
-    const url = toSocial(key, str(rawSocials[key]));
+    // Blank fields must not render, so only resolved URLs are kept.
+    const url = toSocial(key, str(src.socials[key]));
     if (url) socials[key] = url;
   }
 
   return {
-    address: pick('address'),
+    address: str(src.address),
     phone,
     phoneTel: toTel(phone),
-    emailToken: encodeEmail(pick('email')),
+    emailToken: encodeEmail(str(src.email)),
     website,
     websiteLabel: website ? hostLabel(website) : null,
     socials,
   };
 }
 
-function normalise(raw: Record<string, unknown>): NexMember | null {
+function normalise(raw: MemberRecord): NexMember | null {
   const business = str(raw.business);
   if (!business) return null;
 
-  const slug = memberSlug(raw) || slugify(business);
+  const slug = slugify(str(raw.slug)) || slugify(business);
   if (!slug) return null;
 
   const firstName = str(raw.firstName);
@@ -223,14 +205,13 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
   const yearMatch = /(\d{4})/.exec(since);
   const sinceYear = yearMatch ? Number(yearMatch[1]) : null;
 
-  const categories = [...new Set(splitList(raw.categories).map(normaliseCategory))].sort((a, b) =>
+  const categories = [...new Set(raw.categories.map(str).filter(Boolean).map(normaliseCategory))].sort((a, b) =>
     a.localeCompare(b),
   );
 
   const sortName = fileAs(business, firstName, lastName);
 
-  const weightRaw = raw.weight;
-  const weight = weightRaw === '' || weightRaw == null ? 0 : Number(weightRaw) || 0;
+  const weight = Number(raw.weight) || 0;
 
   return {
     slug,
@@ -242,14 +223,11 @@ function normalise(raw: Record<string, unknown>): NexMember | null {
     tier: toTier(raw.tier),
     since,
     sinceYear,
-    logo: imageFor(slug, 'logo'),
-    photo: imageFor(slug, 'photo'),
+    logo: imageFor(raw.logo),
+    photo: imageFor(raw.photo),
     categories,
-    // The person's block never falls back to the flat fields: those described
-    // the business, and copying them onto the person would invent a direct
-    // line that nobody published.
-    company: contactBlock(obj(raw.company), raw),
-    contact: contactBlock(obj(raw.contact)),
+    company: contactBlock(raw.company),
+    contact: contactBlock(raw.contact),
     desc: str(raw.desc),
     funFact: str(raw.funFact),
     weight,
@@ -276,7 +254,7 @@ export function compareMembers(a: NexMember, b: NexMember): number {
 }
 
 /* ------------------------------------------------------------------ *
- * Fetch
+ * Load
  * ------------------------------------------------------------------ */
 
 export interface MembersPayload {
@@ -285,53 +263,22 @@ export interface MembersPayload {
   categories: string[];
   /** Every first letter present, A-Z with "#" last. Drives the A-Z strip. */
   letters: string[];
-  error: string | null;
 }
 
-/**
- * Short-lived in-process memo, for the same reason events.ts has one:
- * getMembers() is called from generateStaticParams, generateMetadata, every
- * member page body, /members and the sitemap. That is dozens of calls per
- * build worker, and hammering Apps Script gets the endpoint throttled.
- *
- * The TTL sits far below the 300s ISR window, so this only ever collapses a
- * burst — it never holds stale data past a revalidation.
- */
-const MEMO_TTL_MS = 30_000;
-let memo: { at: number; value: MembersPayload } | null = null;
-let inflight: Promise<MembersPayload> | null = null;
+let cached: MembersPayload | null = null;
 
-/**
- * Fetched at build time and revalidated by ISR every 300s. Never per-request.
- *
- * A feed failure degrades to an empty payload with `error` set — it must never
- * fail the build, because that would take the whole site down over one
- * third-party outage.
- */
+/** Built once per process from @/data/members. */
 export async function getMembers(): Promise<MembersPayload> {
-  const now = Date.now();
-  if (memo && now - memo.at < MEMO_TTL_MS) return memo.value;
-  if (inflight) return inflight;
-
-  inflight = load().then((value) => {
-    memo = { at: Date.now(), value };
-    inflight = null;
-    return value;
-  });
-
-  return inflight;
+  return (cached ??= load());
 }
 
-async function load(): Promise<MembersPayload> {
-  const { rows, error } = await fetchMemberRows({ next: { revalidate: 300 } });
-  if (error) return { members: [], categories: [], letters: [], error };
-
+function load(): MembersPayload {
   const seen = new Set<string>();
   const members: NexMember[] = [];
-  for (const row of rows) {
+  for (const row of records) {
     const m = normalise(row);
-    // De-dupe on slug; two rows with the same business name would otherwise
-    // collide on /members/[slug]. First row wins, as in the events feed.
+    // De-dupe on slug; two entries with the same slug would otherwise collide
+    // on /members/[slug]. First entry wins.
     if (!m || seen.has(m.slug)) continue;
     seen.add(m.slug);
     members.push(m);
@@ -347,7 +294,7 @@ async function load(): Promise<MembersPayload> {
     a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b),
   );
 
-  return { members, categories, letters, error: null };
+  return { members, categories, letters };
 }
 
 export async function getMemberBySlug(slug: string): Promise<NexMember | null> {

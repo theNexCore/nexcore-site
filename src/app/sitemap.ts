@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { abs } from '@/data/site';
 import { offices, spaces } from '@/data/coworking';
-import { getEvents } from '@/lib/events';
+import { getEvents } from '@/lib/events-server';
 import { getMembers } from '@/lib/members-server';
 
 export const revalidate = 300;
@@ -58,34 +58,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  // Events come from the sheet; a feed outage must not break the sitemap.
-  try {
-    const { all } = await getEvents();
-    for (const e of all) {
-      entries.push({
-        url: abs(`/events/${e.slug}`),
-        lastModified: now,
-        changeFrequency: e.isPast ? 'yearly' : 'weekly',
-        priority: e.isPast ? 0.3 : 0.8,
-      });
-    }
-  } catch {
-    // Static routes still ship.
+  const { all } = await getEvents();
+  for (const e of all) {
+    entries.push({
+      url: abs(`/events/${e.slug}`),
+      lastModified: now,
+      changeFrequency: e.isPast ? 'yearly' : 'weekly',
+      priority: e.isPast ? 0.3 : 0.8,
+    });
   }
 
-  // Members come from the sheet; a feed outage must not break the sitemap.
-  try {
-    const { members } = await getMembers();
-    for (const m of members) {
-      entries.push({
-        url: abs(`/members/${m.slug}`),
-        lastModified: now,
-        changeFrequency: 'monthly',
-        priority: 0.6,
-      });
-    }
-  } catch {
-    // Static routes still ship.
+  const { members } = await getMembers();
+  for (const m of members) {
+    entries.push({
+      url: abs(`/members/${m.slug}`),
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    });
   }
 
   return entries;

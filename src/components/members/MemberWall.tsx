@@ -19,19 +19,11 @@ export function MemberWall({
   tierId,
   members,
   onOpen,
-  unavailable = false,
 }: {
   tierId: TierId;
   /** The full member list; this filters to the tier itself. */
   members: NexMember[];
   onOpen: (member: NexMember) => void;
-  /**
-   * True when the feed could not be read. The spots still render — they are a
-   * fixed set that exists whether or not the feed answers — but the claimed
-   * count is suppressed, because "0 of 20 claimed" during an outage would
-   * state something false rather than merely unknown.
-   */
-  unavailable?: boolean;
 }) {
   const tier = tierConfig(tierId);
 
@@ -52,14 +44,8 @@ export function MemberWall({
           {tier.group.blurb}
         </p>
         <p className="mt-4 font-inter text-[14px] text-white/45">
-          {unavailable ? (
-            <>We couldn&rsquo;t load the current list just now — {tier.slots} spots in total.</>
-          ) : (
-            <>
-              <span className="font-semibold text-sky">{claimed.length}</span> of {tier.slots} spots
-              claimed
-            </>
-          )}
+          <span className="font-semibold text-sky">{claimed.length}</span> of {tier.slots} spots
+          claimed
         </p>
       </div>
 

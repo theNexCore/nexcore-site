@@ -3,8 +3,7 @@ import 'server-only';
 /**
  * Server-side bridge to the NexCore Apps Script web app.
  *
- * The same /exec URL the events feed reads from also accepts POSTs. The
- * script logs to the Google Sheet and sends its own notification email via
+ * Form submissions are POSTed to its /exec URL. The script logs to the Google Sheet and sends its own notification email via
  * MailApp, so no separate mail provider is involved.
  *
  * This module is server-only: the endpoint URL must never reach client code,
@@ -19,7 +18,6 @@ import 'server-only';
 
 const ENDPOINT =
   process.env.APPS_SCRIPT_URL ??
-  process.env.EVENTS_FEED_URL ??
   'https://script.google.com/macros/s/AKfycbxdRxfYdYe9QErC8UfjaI-nnqFYnjuP4YDWkEAN9rwE9SvILVIjrFIVhgNeXG3YT_jY/exec';
 
 const TIMEOUT_MS = 15_000;
