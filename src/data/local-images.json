@@ -1,4 +1,56 @@
 {
+  "/events/a-taste-of-plaza21.jpg": {
+    "width": 1100,
+    "height": 619
+  },
+  "/events/businessgps-weekly-networking.jpg": {
+    "width": 2160,
+    "height": 1080
+  },
+  "/events/changemakers27.jpg": {
+    "width": 1100,
+    "height": 619
+  },
+  "/events/media-cavern-grand-opening.jpg": {
+    "width": 2160,
+    "height": 1080
+  },
+  "/events/nexcore-returns-grand-opening.jpg": {
+    "width": 1717,
+    "height": 916
+  },
+  "/events/nexcore-sessions-episode-1.jpg": {
+    "width": 1774,
+    "height": 887
+  },
+  "/events/soco-chamber-launchpad.jpg": {
+    "width": 1659,
+    "height": 948
+  },
+  "/members/blake-mueller.jpg": {
+    "width": 400,
+    "height": 400
+  },
+  "/members/datotel-logo.png": {
+    "width": 1536,
+    "height": 768
+  },
+  "/members/four-scopes-logo.png": {
+    "width": 1254,
+    "height": 1254
+  },
+  "/members/lilianas-italian-kitchen-logo.png": {
+    "width": 315,
+    "height": 315
+  },
+  "/members/matt-overmann.jpg": {
+    "width": 1536,
+    "height": 2048
+  },
+  "/members/overmann-all-around-services-logo.png": {
+    "width": 7392,
+    "height": 3696
+  },
   "/members/taylor-miller.jpg": {
     "width": 400,
     "height": 400
@@ -6,5 +58,9 @@
   "/members/the-south-county-chamber-logo.png": {
     "width": 2000,
     "height": 2000
+  },
+  "/members/tim-peri.jpg": {
+    "width": 720,
+    "height": 960
   }
 }
