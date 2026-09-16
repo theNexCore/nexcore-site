@@ -161,7 +161,8 @@ export function MemberDetail({
           className="aspect-square w-full"
         />
 
-        {member.logo && (
+        {/* Without a photo the face above already falls back to the logo. */}
+        {member.logo && member.photo && (
           <div className="flex h-[110px] items-center">
             <MemberLogo
               src={member.logo}

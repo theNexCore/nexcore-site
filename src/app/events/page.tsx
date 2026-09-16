@@ -4,7 +4,7 @@ import { PageHero } from '@/components/PageHero';
 import { ButtonLink } from '@/components/Button';
 import { EventsView } from '@/components/events/EventsView';
 import { IdeaForm } from '@/components/form/IdeaForm';
-import { getEvents } from '@/lib/events-server';
+import { getAllSeries, getEvents } from '@/lib/events-server';
 import {
   eventsIntro,
   eventsIntroLead,
@@ -165,7 +165,7 @@ export default async function EventsPage() {
         </div>
 
         <div className="mt-12">
-          <EventsView upcoming={upcoming} past={past} />
+          <EventsView upcoming={upcoming} past={past} series={getAllSeries()} />
         </div>
       </Section>
 

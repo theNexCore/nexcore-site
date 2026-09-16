@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { abs } from '@/data/site';
 import { offices, spaces } from '@/data/coworking';
-import { getEvents } from '@/lib/events-server';
+import { getAllSeries, getEvents } from '@/lib/events-server';
 import { getMembers } from '@/lib/members-server';
 
 export const revalidate = 300;
@@ -54,6 +54,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: abs(`/coworking/spaces/${s.id}`),
       lastModified: now,
       changeFrequency: 'monthly',
+      priority: 0.7,
+    });
+  }
+
+  for (const s of getAllSeries()) {
+    entries.push({
+      url: abs(`/events/${s.id}`),
+      lastModified: now,
+      changeFrequency: 'weekly',
       priority: 0.7,
     });
   }

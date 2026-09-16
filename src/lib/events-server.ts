@@ -3,9 +3,9 @@ import 'server-only';
 import { RRule, RRuleSet, type Options, type Weekday as RWeekday } from 'rrule';
 
 import { abs, site, formattedAddress } from '@/data/site';
-import { events as records, type EventRecord, type Weekday } from '@/data/events';
+import { events as records, eventSeries, type EventRecord, type Weekday } from '@/data/events';
 import localImages from '@/data/local-images.json';
-import type { LocationType, NexEvent } from './events';
+import type { EventSeriesInfo, LocationType, NexEvent } from './events';
 
 /**
  * Server-side event data access: reads @/data/events and expands recurring
@@ -82,6 +82,25 @@ function truncate(s: string, n: number): string {
   const cut = clean.slice(0, n - 1);
   const sp = cut.lastIndexOf(' ');
   return `${(sp > n * 0.6 ? cut.slice(0, sp) : cut).trim()}…`;
+}
+
+/* ------------------------------------------------------------------ *
+ * Series
+ * ------------------------------------------------------------------ */
+
+const seriesById = new Map<string, EventSeriesInfo>(
+  eventSeries.map((s) => [
+    s.id,
+    { id: s.id, name: s.name, summary: s.summary, logo: localImage(s.logo), logoBg: s.logoBg ?? '#ffffff', collapse: Boolean(s.collapse) },
+  ]),
+);
+
+export function getAllSeries(): EventSeriesInfo[] {
+  return [...seriesById.values()];
+}
+
+export function getSeriesById(id: string): EventSeriesInfo | null {
+  return seriesById.get(id) ?? null;
 }
 
 /* ------------------------------------------------------------------ *
@@ -181,6 +200,7 @@ function build(
   isOccurrence: boolean,
 ): NexEvent {
   const doors = (rec.doors ?? '').trim();
+  const seriesInfo = rec.series ? seriesById.get(rec.series) : undefined;
   const timeRange = `${displayClock(timeOf(startTS))} – ${displayClock(timeOf(endTS))}`;
 
   const desc = rec.desc.trim();
@@ -210,7 +230,8 @@ function build(
     timeRange,
     timeLabel: doors ? `${timeRange}, doors open at ${doors}` : timeRange,
     isOccurrence,
-    series: rec.series || null,
+    seriesId: seriesInfo?.id ?? null,
+    series: seriesInfo?.name ?? null,
     seriesOrder: rec.seriesOrder ?? null,
     locationType,
     locationName,
@@ -233,6 +254,12 @@ function build(
 function valid(rec: EventRecord): boolean {
   const ok = Boolean(rec.title?.trim() && rec.slug?.trim() && TS_RE.test(rec.start) && TS_RE.test(rec.end));
   if (!ok) console.warn(`[events] skipping "${rec.title || rec.slug}": needs title, slug, start and end`);
+  if (ok && rec.series && !seriesById.has(rec.series)) {
+    console.warn(`[events] "${rec.title}": series "${rec.series}" is not defined in eventSeries`);
+  }
+  if (ok && seriesById.has(rec.slug)) {
+    console.warn(`[events] "${rec.title}": slug "${rec.slug}" is taken by a series page`);
+  }
   return ok;
 }
 
@@ -244,6 +271,7 @@ export interface EventsPayload {
   upcoming: NexEvent[];
   past: NexEvent[];
   all: NexEvent[];
+  /** Keyed by series id. */
   seriesMap: Record<string, NexEvent[]>;
 }
 
@@ -271,8 +299,8 @@ export async function getEvents(): Promise<EventsPayload> {
 
   const seriesMap: Record<string, NexEvent[]> = {};
   for (const e of unique) {
-    if (!e.series) continue;
-    (seriesMap[e.series] ??= []).push(e);
+    if (!e.seriesId) continue;
+    (seriesMap[e.seriesId] ??= []).push(e);
   }
   for (const k of Object.keys(seriesMap)) {
     seriesMap[k].sort(

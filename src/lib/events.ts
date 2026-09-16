@@ -30,6 +30,9 @@ export interface NexEvent {
   /** True when this is one occurrence of a recurring event. */
   isOccurrence: boolean;
 
+  /** Series id (see EventSeriesInfo), or null. */
+  seriesId: string | null;
+  /** Series display name, or null. */
   series: string | null;
   seriesOrder: number | null;
 
@@ -54,6 +57,17 @@ export interface NexEvent {
 
   /** True once endTS is in the past. */
   isPast: boolean;
+}
+
+export interface EventSeriesInfo {
+  id: string;
+  name: string;
+  summary: string;
+  /** Local logo path, or null when none is set or the file is not in public/ yet. */
+  logo: string | null;
+  /** CSS colour behind the logo. */
+  logoBg: string;
+  collapse: boolean;
 }
 
 /** Local-time Date from "YYYY-MM-DDTHH:mm" (avoids UTC shift from Date parsing). */

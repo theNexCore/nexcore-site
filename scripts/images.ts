@@ -30,7 +30,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { members } from '../src/data/members';
-import { events } from '../src/data/events';
+import { events, eventSeries } from '../src/data/events';
 import { measure, sniff } from './image-header';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -52,6 +52,9 @@ function collect(): Ref[] {
   for (const e of events) {
     if (e.img) refs.push({ src: e.img, owner: e.title, kind: 'event image' });
     for (const g of e.gallery ?? []) refs.push({ src: g, owner: e.title, kind: 'event gallery' });
+  }
+  for (const s of eventSeries) {
+    if (s.logo) refs.push({ src: s.logo, owner: s.name, kind: 'series logo' });
   }
   return refs;
 }

@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import type { NexEvent } from '@/lib/events';
+import type { EventSeriesInfo, NexEvent } from '@/lib/events';
 import { EventCard } from './EventCard';
+import { SeriesCard } from './SeriesCard';
 import { cn } from '@/lib/cn';
 
 const MONTHS = [
@@ -18,11 +19,54 @@ function localDate(ymd: string) {
   return new Date(y, m - 1, d);
 }
 
+type ListItem =
+  | { kind: 'event'; event: NexEvent }
+  | { kind: 'series'; series: EventSeriesInfo; next: NexEvent; count: number };
+
+/**
+ * Collapse every series marked `collapse` into one card, placed where its
+ * next date would have been. Everything else stays one card per event.
+ */
+function toListItems(events: NexEvent[], series: EventSeriesInfo[]): ListItem[] {
+  const collapsible = new Map(series.filter((s) => s.collapse).map((s) => [s.id, s]));
+  const counts = new Map<string, number>();
+  for (const e of events) {
+    if (e.seriesId && collapsible.has(e.seriesId)) {
+      counts.set(e.seriesId, (counts.get(e.seriesId) ?? 0) + 1);
+    }
+  }
+
+  const items: ListItem[] = [];
+  const placed = new Set<string>();
+  for (const e of events) {
+    const s = e.seriesId ? collapsible.get(e.seriesId) : undefined;
+    if (!s) {
+      items.push({ kind: 'event', event: e });
+    } else if (!placed.has(s.id)) {
+      placed.add(s.id);
+      items.push({ kind: 'series', series: s, next: e, count: counts.get(s.id) ?? 1 });
+    }
+  }
+  return items;
+}
+
 /**
  * Native calendar + list view. No third-party calendar library, no embeds.
+ *
+ * The calendar shows every date. The list collapses series marked `collapse`
+ * (see eventSeries in @/data/events) into a single card each.
  */
-export function EventsView({ upcoming, past }: { upcoming: NexEvent[]; past: NexEvent[] }) {
+export function EventsView({
+  upcoming,
+  past,
+  series = [],
+}: {
+  upcoming: NexEvent[];
+  past: NexEvent[];
+  series?: EventSeriesInfo[];
+}) {
   const [view, setView] = useState<'list' | 'calendar'>('list');
+  const listItems = useMemo(() => toListItems(upcoming, series), [upcoming, series]);
 
   // Anchor the calendar on the first upcoming event, else today.
   const initial = upcoming[0] ? localDate(upcoming[0].date) : new Date();
@@ -177,9 +221,18 @@ export function EventsView({ upcoming, past }: { upcoming: NexEvent[]; past: Nex
             </p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {upcoming.map((e) => (
-                <EventCard key={e.slug} event={e} />
-              ))}
+              {listItems.map((item) =>
+                item.kind === 'series' ? (
+                  <SeriesCard
+                    key={`series-${item.series.id}`}
+                    series={item.series}
+                    next={item.next}
+                    count={item.count}
+                  />
+                ) : (
+                  <EventCard key={item.event.slug} event={item.event} />
+                ),
+              )}
             </div>
           )}
         </>

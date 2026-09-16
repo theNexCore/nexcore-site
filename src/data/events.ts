@@ -39,6 +39,12 @@
  *   }
  *   "First Tuesday of every month": { freq: 'monthly', byWeekday: ['TU'], nth: 1 }
  *
+ * SERIES — group events under an entry in `eventSeries` (below the types) by
+ * setting `series: '<id>'` on each event. Every series gets a page at
+ * /events/<id> listing its events. With `collapse: true`, the list view on
+ * /events shows the whole series as one card linking to that page instead of
+ * a card per date; the calendar view always shows every date.
+ *
  * Images live in public/events/ as /events/<event-name>.jpg. A path whose file
  * is not in public/ yet renders the branded fallback, and `npm run images`
  * lists every missing file.
@@ -93,9 +99,37 @@ export interface EventRecord {
   link2?: string;
   link2Label?: string;
 
+  /** The `id` of an entry in `eventSeries`. */
   series?: string;
+  /** Position within the series, shown as "Part N". */
   seriesOrder?: number;
 }
+
+export interface EventSeries {
+  /** Page URL, /events/<id>, and the value events put in `series`. */
+  id: string;
+  name: string;
+  /** One or two sentences, shown on the collapsed card and the series page. */
+  summary: string;
+  /** Square-ish logo in public/events/series/. */
+  logo?: string;
+  /** CSS colour behind the logo, matching its artwork's edge. Defaults to white. */
+  logoBg?: string;
+  /** Show the series as a single card in the /events list view. */
+  collapse?: boolean;
+}
+
+export const eventSeries: EventSeries[] = [
+  {
+    id: 'businessgps',
+    name: 'BusinessGPS',
+    summary:
+      'A weekly Thursday-morning gathering of business owners and professionals building real relationships, not swapping cards. One seat per industry, and visiting is always free.',
+    logo: '/events/series/businessgps-logo.png',
+    logoBg: '#dce8fc',
+    collapse: true,
+  },
+];
 
 export const events: EventRecord[] = [
   {
@@ -148,6 +182,7 @@ export const events: EventRecord[] = [
     start: "2026-09-17T09:30",
     end: "2026-09-17T10:30",
     repeat: { freq: 'weekly', byWeekday: ['TH'] },
+    series: 'businessgps',
     doors: "9:30 AM",
     img: "/events/businessgps-weekly-networking.jpg",
     priceLabel: "Free",

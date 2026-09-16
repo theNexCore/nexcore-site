@@ -5,20 +5,42 @@ import { buildMetadata } from '@/lib/seo';
 import { Section, Eyebrow } from '@/components/Section';
 import { JsonLd } from '@/components/JsonLd';
 import { EventArt } from '@/components/events/EventArt';
+import { SeriesPage } from '@/components/events/SeriesPage';
 import { ButtonLink } from '@/components/Button';
 import { formatEventDate } from '@/lib/events';
-import { getEvents, getEventBySlug, eventJsonLd } from '@/lib/events-server';
+import {
+  getAllSeries,
+  getEvents,
+  getEventBySlug,
+  getSeriesById,
+  eventJsonLd,
+} from '@/lib/events-server';
 import { site, formattedAddress } from '@/data/site';
 
 export const revalidate = 300;
 
+/**
+ * This route serves both single events and series pages (/events/<series-id>).
+ * A series id wins; events-server warns if an event slug ever collides.
+ */
 export async function generateStaticParams() {
   const { all } = await getEvents();
-  return all.map((e) => ({ slug: e.slug }));
+  return [...getAllSeries().map((s) => ({ slug: s.id })), ...all.map((e) => ({ slug: e.slug }))];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  const series = getSeriesById(slug);
+  if (series) {
+    return buildMetadata({
+      title: `${series.name} — Events at NexCore`,
+      description: series.summary,
+      path: `/events/${series.id}`,
+      image: series.logo ?? '/og/default.png',
+    });
+  }
+
   const event = await getEventBySlug(slug);
   if (!event) {
     return buildMetadata({ title: 'Event not found', description: '', path: '/events', noIndex: true });
@@ -35,11 +57,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const { seriesMap } = await getEvents();
+
+  const series = getSeriesById(slug);
+  if (series) return <SeriesPage series={series} events={seriesMap[series.id] ?? []} />;
+
   const event = await getEventBySlug(slug);
   if (!event) notFound();
 
-  const { seriesMap } = await getEvents();
-  const siblings = event.series ? (seriesMap[event.series] ?? []).filter((e) => e.slug !== event.slug) : [];
+  const siblings = event.seriesId
+    ? (seriesMap[event.seriesId] ?? []).filter((e) => e.slug !== event.slug)
+    : [];
 
   // Descriptions are plain text with newlines.
   const paragraphs = event.desc.split(/\n{1,}/).map((p) => p.trim()).filter(Boolean);
@@ -144,6 +172,12 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href={`/events/${event.seriesId}`}
+                  className="mt-5 inline-block font-inter text-[14px] text-sky hover:text-sky-light"
+                >
+                  See all {event.series} events →
+                </Link>
               </section>
             )}
           </article>
