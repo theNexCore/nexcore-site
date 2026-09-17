@@ -36,6 +36,9 @@ export interface NexEvent {
   series: string | null;
   seriesOrder: number | null;
 
+  /** Slugs of the members who lead the event. */
+  hosts: string[];
+
   locationType: LocationType;
   locationName: string;
   locationAddress: string;
@@ -57,6 +60,13 @@ export interface NexEvent {
 
   /** True once endTS is in the past. */
   isPast: boolean;
+}
+
+/** The slice of an event a member's directory modal needs. */
+export interface HostedEvent {
+  slug: string;
+  title: string;
+  startTS: string;
 }
 
 export interface EventSeriesInfo {

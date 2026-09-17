@@ -11,6 +11,7 @@ import {
   type NexMember,
   type SocialKey,
 } from '@/lib/members';
+import { eventDateParts, type HostedEvent } from '@/lib/events';
 import { cn } from '@/lib/cn';
 
 /**
@@ -130,11 +131,17 @@ export function MemberDetail({
   member,
   as = 'page',
   titleId,
+  hosting = [],
 }: {
   member: NexMember;
   /** 'modal' adds the permalink and uses an h2; 'page' uses an h1. */
   as?: 'modal' | 'page';
   titleId?: string;
+  /**
+   * Upcoming events the member leads. Modal only: the member page shows them
+   * as full event cards in a section of its own.
+   */
+  hosting?: HostedEvent[];
 }) {
   const tier = tierConfig(member.tier);
   const Heading = as === 'modal' ? 'h2' : 'h1';
@@ -213,6 +220,30 @@ export function MemberDetail({
             {paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
+          </div>
+        )}
+
+        {as === 'modal' && hosting.length > 0 && (
+          <div className="mt-7">
+            <p className="font-inter text-[12px] font-semibold tracking-[0.12em] text-white/45">
+              HOSTING AT NEXCORE
+            </p>
+            <ul className="mt-2 space-y-1.5">
+              {hosting.slice(0, 3).map((e) => {
+                const d = eventDateParts(e.startTS);
+                return (
+                  <li key={e.slug} className="font-inter text-[15px]">
+                    <Link href={`/events/${e.slug}`} className="text-sky hover:text-sky-light">
+                      {e.title}
+                    </Link>
+                    <span className="text-white/50">
+                      {' '}
+                      · {d.month} {d.day}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         )}
 

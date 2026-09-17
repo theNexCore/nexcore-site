@@ -4,8 +4,12 @@ import { RRule, RRuleSet, type Options, type Weekday as RWeekday } from 'rrule';
 
 import { abs, site, formattedAddress } from '@/data/site';
 import { events as records, eventSeries, type EventRecord, type Weekday } from '@/data/events';
+import { members as memberRecords } from '@/data/members';
 import localImages from '@/data/local-images.json';
-import type { EventSeriesInfo, LocationType, NexEvent } from './events';
+import type { EventSeriesInfo, HostedEvent, LocationType, NexEvent } from './events';
+import type { NexMember } from './members';
+
+const memberSlugs = new Set(memberRecords.map((m) => m.slug));
 
 /**
  * Server-side event data access: reads @/data/events and expands recurring
@@ -233,6 +237,7 @@ function build(
     seriesId: seriesInfo?.id ?? null,
     series: seriesInfo?.name ?? null,
     seriesOrder: rec.seriesOrder ?? null,
+    hosts: (rec.hosts ?? []).filter((h) => memberSlugs.has(h)),
     locationType,
     locationName,
     locationAddress: rec.locationAddress || (locationType === 'online' ? '' : formattedAddress),
@@ -256,6 +261,9 @@ function valid(rec: EventRecord): boolean {
   if (!ok) console.warn(`[events] skipping "${rec.title || rec.slug}": needs title, slug, start and end`);
   if (ok && rec.series && !seriesById.has(rec.series)) {
     console.warn(`[events] "${rec.title}": series "${rec.series}" is not defined in eventSeries`);
+  }
+  for (const h of ok ? (rec.hosts ?? []) : []) {
+    if (!memberSlugs.has(h)) console.warn(`[events] "${rec.title}": host "${h}" is not a member slug`);
   }
   if (ok && seriesById.has(rec.slug)) {
     console.warn(`[events] "${rec.title}": slug "${rec.slug}" is taken by a series page`);
@@ -317,6 +325,28 @@ export async function getEventBySlug(slug: string): Promise<NexEvent | null> {
 }
 
 /* ------------------------------------------------------------------ *
+ * Hosts
+ * ------------------------------------------------------------------ */
+
+/** Upcoming events a member leads, soonest first. */
+export async function getEventsByHost(memberSlug: string): Promise<NexEvent[]> {
+  const { upcoming } = await getEvents();
+  return upcoming.filter((e) => e.hosts.includes(memberSlug));
+}
+
+/** Every host's upcoming events, keyed by member slug, for the directory modal. */
+export async function getHostedEventsMap(): Promise<Record<string, HostedEvent[]>> {
+  const { upcoming } = await getEvents();
+  const map: Record<string, HostedEvent[]> = {};
+  for (const e of upcoming) {
+    for (const h of e.hosts) {
+      (map[h] ??= []).push({ slug: e.slug, title: e.title, startTS: e.startTS });
+    }
+  }
+  return map;
+}
+
+/* ------------------------------------------------------------------ *
  * JSON-LD
  * ------------------------------------------------------------------ */
 
@@ -334,8 +364,19 @@ function streetLineOf(address: string): string {
   return address;
 }
 
-/** schema.org Event. Location is always emitted, so the payload stays valid. */
-export function eventJsonLd(e: NexEvent) {
+/**
+ * schema.org Event. Location is always emitted, so the payload stays valid.
+ * `hosts` are the resolved members from `e.hosts`, emitted as performers.
+ */
+export function eventJsonLd(e: NexEvent, hosts: NexMember[] = []) {
+  const performers = hosts.map((m) => ({
+    '@type': 'Person',
+    name: m.contactName || m.business,
+    url: abs(`/members/${m.slug}`),
+    ...(m.title ? { jobTitle: m.title } : {}),
+    ...(m.contactName ? { worksFor: { '@type': 'Organization', name: m.business } } : {}),
+  }));
+
   const location =
     e.locationType === 'online'
       ? {
@@ -374,6 +415,7 @@ export function eventJsonLd(e: NexEvent) {
     ...(e.img ? { image: [abs(e.img)] } : {}),
     url: abs(`/events/${e.slug}`),
     organizer: { '@type': 'Organization', name: site.name, url: abs('/') },
+    ...(performers.length ? { performer: performers } : {}),
     offers: {
       '@type': 'Offer',
       price: e.priceValue,

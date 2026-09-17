@@ -45,6 +45,10 @@
  * /events shows the whole series as one card linking to that page instead of
  * a card per date; the calendar view always shows every date.
  *
+ * HOSTS — set `hosts: ['<member-slug>']` to the members (see @/data/members)
+ * who lead an event. The event page shows them under "Led by", and each
+ * host's member page lists their upcoming events.
+ *
  * Images live in public/events/ as /events/<event-name>.jpg. A path whose file
  * is not in public/ yet renders the branded fallback, and `npm run images`
  * lists every missing file.
@@ -103,6 +107,9 @@ export interface EventRecord {
   series?: string;
   /** Position within the series, shown as "Part N". */
   seriesOrder?: number;
+
+  /** Slugs of the members who lead the event, e.g. ['swipe-aras']. */
+  hosts?: string[];
 }
 
 export interface EventSeries {
@@ -258,6 +265,7 @@ export const events: EventRecord[] = [
     start: "2026-10-22T18:00",
     end: "2026-10-22T20:00",
     doors: "5:30 PM",
+    hosts: ["swipe-aras"],
     img: "/events/one-decision-away.jpg",
     priceLabel: "Free",
     link: "https://www.eventbrite.com/e/2001272624292?aff=oddtdtcreator",

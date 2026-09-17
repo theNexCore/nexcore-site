@@ -6,8 +6,9 @@
  * the Apps Script feed on 2026-09-16.
  *
  * SERVER-ONLY DATA. Emails are stored raw here, so this file must only ever be
- * imported by src/lib/members-server.ts (which obfuscates them) and by
- * scripts/images.ts. Importing it from a client component would ship every
+ * imported by src/lib/members-server.ts (which obfuscates them), by
+ * src/lib/events-server.ts (which reads slugs only, to validate event hosts)
+ * and by scripts/images.ts. Importing it from a client component would ship every
  * address to the browser.
  *
  * Images live in public/members/ and are referenced site-absolute:

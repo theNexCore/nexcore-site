@@ -6,6 +6,7 @@ import { MemberModal } from './MemberModal';
 import { MemberWall } from './MemberWall';
 import { Section, Eyebrow } from '@/components/Section';
 import type { NexMember } from '@/lib/members';
+import type { HostedEvent } from '@/lib/events';
 import { cn } from '@/lib/cn';
 
 /**
@@ -35,10 +36,13 @@ export function MembersView({
   members,
   categories,
   letters,
+  hosting = {},
 }: {
   members: NexMember[];
   categories: string[];
   letters: string[];
+  /** Upcoming hosted events, keyed by member slug. */
+  hosting?: Record<string, HostedEvent[]>;
 }) {
   const [query, setQuery] = useState('');
   const [letter, setLetter] = useState<string | null>(null);
@@ -248,7 +252,11 @@ export function MembersView({
         )}
       </Section>
 
-      <MemberModal member={open} onClose={() => setOpen(null)} />
+      <MemberModal
+        member={open}
+        onClose={() => setOpen(null)}
+        hosting={open ? hosting[open.slug] : undefined}
+      />
     </>
   );
 }

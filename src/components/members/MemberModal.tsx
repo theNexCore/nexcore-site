@@ -3,13 +3,23 @@
 import { useEffect, useRef } from 'react';
 import { MemberDetail } from './MemberDetail';
 import type { NexMember } from '@/lib/members';
+import type { HostedEvent } from '@/lib/events';
 
 /**
  * Detail card as a modal. Conventions follow DayPassModal and Lightbox:
  * Escape closes, a backdrop click closes, and body scroll is locked while it
  * is open.
  */
-export function MemberModal({ member, onClose }: { member: NexMember | null; onClose: () => void }) {
+export function MemberModal({
+  member,
+  onClose,
+  hosting = [],
+}: {
+  member: NexMember | null;
+  onClose: () => void;
+  /** The open member's upcoming hosted events. */
+  hosting?: HostedEvent[];
+}) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,7 +64,7 @@ export function MemberModal({ member, onClose }: { member: NexMember | null; onC
           </span>
         </button>
 
-        <MemberDetail member={member} as="modal" titleId="member-modal-title" />
+        <MemberDetail member={member} as="modal" titleId="member-modal-title" hosting={hosting} />
       </div>
     </div>
   );

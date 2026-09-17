@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { buildMetadata } from '@/lib/seo';
-import { Section } from '@/components/Section';
+import { Section, Eyebrow } from '@/components/Section';
+import { EventCard } from '@/components/events/EventCard';
+import { getEventsByHost } from '@/lib/events-server';
+
+// Hosted events drop off once they pass; match the events pages' refresh.
+export const revalidate = 300;
 import { JsonLd } from '@/components/JsonLd';
 import { ButtonLink } from '@/components/Button';
 import { MemberDetail } from '@/components/members/MemberDetail';
@@ -48,6 +53,8 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
   const member = await getMemberBySlug(slug);
   if (!member) notFound();
 
+  const hosting = await getEventsByHost(member.slug);
+
   return (
     <>
       <JsonLd data={memberJsonLd(member)} />
@@ -62,7 +69,21 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
         </div>
       </Section>
 
-      <Section tone="lift" width="prose" className="text-center">
+      {hosting.length > 0 && (
+        <Section tone="lift">
+          <Eyebrow>UPCOMING AT NEXCORE</Eyebrow>
+          <h2 className="font-sora text-h3 font-semibold text-white">
+            Events led by <span className="o">{member.contactName || member.business}</span>
+          </h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {hosting.map((e) => (
+              <EventCard key={e.slug} event={e} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section tone={hosting.length > 0 ? 'ink' : 'lift'} width="prose" className="text-center">
         <h2 className="font-sora text-h3 font-semibold text-white">
           Find more <span className="o">NexCore members</span>.
         </h2>

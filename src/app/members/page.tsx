@@ -4,6 +4,10 @@ import { PageHero } from '@/components/PageHero';
 import { ButtonLink } from '@/components/Button';
 import { MembersView } from '@/components/members/MembersView';
 import { getMembers } from '@/lib/members-server';
+import { getHostedEventsMap } from '@/lib/events-server';
+
+// Hosted events drop off once they pass; match the events pages' refresh.
+export const revalidate = 300;
 
 export const metadata = buildMetadata({
   title: 'Member Directory — The businesses behind NexCore',
@@ -14,6 +18,7 @@ export const metadata = buildMetadata({
 
 export default async function MembersPage() {
   const { members, categories, letters } = await getMembers();
+  const hosting = await getHostedEventsMap();
 
   return (
     <>
@@ -29,6 +34,7 @@ export default async function MembersPage() {
         members={members}
         categories={categories}
         letters={letters}
+        hosting={hosting}
       />
 
       <Section tone="navy" width="prose" className="text-center">

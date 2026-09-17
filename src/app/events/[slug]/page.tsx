@@ -6,6 +6,9 @@ import { Section, Eyebrow } from '@/components/Section';
 import { JsonLd } from '@/components/JsonLd';
 import { EventArt } from '@/components/events/EventArt';
 import { SeriesPage } from '@/components/events/SeriesPage';
+import { MemberFace } from '@/components/members/MemberArt';
+import { getMemberBySlug } from '@/lib/members-server';
+import type { NexMember } from '@/lib/members';
 import { ButtonLink } from '@/components/Button';
 import { formatEventDate } from '@/lib/events';
 import {
@@ -65,6 +68,10 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const event = await getEventBySlug(slug);
   if (!event) notFound();
 
+  const hosts = (await Promise.all(event.hosts.map(getMemberBySlug))).filter(
+    (m): m is NexMember => m !== null,
+  );
+
   const siblings = event.seriesId
     ? (seriesMap[event.seriesId] ?? []).filter((e) => e.slug !== event.slug)
     : [];
@@ -79,7 +86,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
-      <JsonLd data={eventJsonLd(event)} />
+      <JsonLd data={eventJsonLd(event, hosts)} />
 
       <Section>
         <Link href="/events" className="font-inter text-[14px] text-sky hover:text-sky-light">
@@ -231,6 +238,38 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                   </dt>
                   <dd className="mt-1 font-inter text-[15px] text-white/85">{event.priceLabel}</dd>
                 </div>
+
+                {hosts.length > 0 && (
+                  <div>
+                    <dt className="font-inter text-[13px] font-semibold tracking-[0.08em] text-white/45">
+                      Led by
+                    </dt>
+                    {hosts.map((m) => (
+                      <dd key={m.slug} className="mt-3">
+                        <Link href={`/members/${m.slug}`} className="group flex items-center gap-3">
+                          <MemberFace
+                            src={m.photo}
+                            logo={m.logo}
+                            business={m.business}
+                            person={m.contactName}
+                            sizes="56px"
+                            className="h-12 w-12 shrink-0"
+                          />
+                          <span className="min-w-0">
+                            <span className="block font-inter text-[15px] font-semibold text-white/85 transition-colors group-hover:text-sky">
+                              {m.contactName || m.business}
+                            </span>
+                            {m.contactName && (
+                              <span className="block font-inter text-[13px] text-white/50">
+                                {m.title ? `${m.title}, ${m.business}` : m.business}
+                              </span>
+                            )}
+                          </span>
+                        </Link>
+                      </dd>
+                    ))}
+                  </div>
+                )}
               </dl>
 
               {/* Outbound ticket links only - no iframe embeds. */}
