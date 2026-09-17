@@ -254,12 +254,14 @@ export const events: EventRecord[] = [
   },
   {
     slug: "one-decision-away-2026-10-22",
-    title: "One Decision Away with Simon Yost",
+    title: "One Decision Away - a Free AI Working Session",
     start: "2026-10-22T18:00",
     end: "2026-10-22T20:00",
+    doors: "5:30 PM",
     img: "/events/one-decision-away.jpg",
     priceLabel: "Free",
-    summary: "A NexCore workshop for founders and solopreneurs. AI didn't change business fundamentals. It just removed the excuses.",
-    desc: "A NexCore workshop for founders and solopreneurs.\n\nAI didn't change business fundamentals. It just removed the excuses.\n\nBring one decision you keep circling. Leave with a clearer next move.\n\nMEET SIMON YOST\n\nSimon Yost is VP Product & Engineering at Swipe ARAS, the first member of NexCore South County, and one of the members of the original NexCore in Fox Park.\n\nEVENT DETAILS\n\nThursday, October 22, 2026\n\n6:00 PM – 8:00 PM\n\nAdmission is free.\n\nLOCATION\n\nNexCore\n11820 Tesson Ferry Road\nSt. Louis, MO 63128\n\nAt the corner of Baptist Church Road & Tesson Ferry Road.",
+    link: "https://www.eventbrite.com/e/2001272624292?aff=oddtdtcreator",
+    summary: "Bring one business decision you keep circling. Leave with a sharper way to work it forward.",
+    desc: "Overview\nBring one business decision you keep circling. Leave with a sharper way to work it forward.\n\nAI didn't change business fundamentals. It just removed the excuses.\n\nResearch is cheap now. Drafting is cheap. First versions of almost anything are cheap. What's still scarce is the work of actually deciding — and that's the part nobody can hand off.\n\nThis free session is the opening of One Decision Away, a NexCore series for founders and solopreneurs who want to use AI as an orchestrator — a tool that works the problem with you — instead of a magic trick they watch from the sidelines.\n\nIn two hours you'll get:\nThe five fundamentals that separate people getting real leverage from AI from people getting confident nonsense\nA working method you can apply to a live decision the same night\nA room full of founders working the same way — not an audience watching a demo\n\nYou stay in the driver's seat the whole time. The AI never decides for you. It makes your thinking sharper, faster, and harder to fool.\n\nLed by Simon Yost at the NexCore building. Simon is VP Product & Engineering at Swipe ARAS, the first member of NexCore South County, and one of the members of the original NexCore in Fox Park.\n\nBring one decision you keep circling. That's the only prep.\n\nEVENT DETAILS\n\nThursday, October 22, 2026\n\n5:30 PM — Doors Open\n\n6:00 PM – 8:00 PM — Session\n\nAges 16+. Free parking. Admission is free.\n\nLOCATION\n\nNexCore\n11820 Tesson Ferry Road\nSt. Louis, MO 63128\n\nAt the corner of Baptist Church Road & Tesson Ferry Road.",
   },
 ];
