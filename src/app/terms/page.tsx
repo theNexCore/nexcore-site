@@ -23,9 +23,10 @@ import { site, formattedAddress } from '@/data/site';
  * Reviewed and approved by counsel verbally, 2026-08-26, reported by Jim.
  *
  * ONE THING THAT CAN GO STALE: no refund policy is stated here — Square
- * deposits, day passes and Eventbrite registrations are deferred to those
- * providers. If refund handling changes, particularly for the $50 membership
- * deposit or a refundable vendor deposit, this page needs revisiting.
+ * membership subscriptions, day passes and Eventbrite registrations are
+ * deferred to those providers. If refund or cancellation handling changes,
+ * particularly for subscriptions or a refundable vendor deposit, this page
+ * needs revisiting.
  */
 
 const UPDATED = '26 August 2026';
@@ -77,7 +78,7 @@ export default function TermsPage() {
 
           <h2>Payments and registration</h2>
           <p>
-            Membership deposits and day passes are processed by <strong>Square</strong>. Event
+            Membership subscriptions and day passes are processed by <strong>Square</strong>. Event
             registration is handled by <strong>Eventbrite</strong>. Neither is embedded in this site — the
             buttons are ordinary links. When you follow them you
             leave this website and are subject to that provider&rsquo;s own terms, and to any refund

@@ -22,14 +22,9 @@ npm run images                 # list member/event images missing from public/
 | Variable | Required | Purpose |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | yes | Origin for canonical, OG, and JSON-LD absolute URLs |
-| `AVAILABILITY_URL` | no | Room availability lookup (coworking) |
-| `RESEND_API_KEY` | **yes, to send mail** | Resend API key |
-| `FORM_TO_EMAIL` | yes | Where form submissions land |
-| `FORM_FROM_EMAIL` | yes | Verified Resend sender |
-| `FORMS_SHEET_MIRROR_URL` | no | Mirrors submissions to the existing Sheet. Recommended ON |
 | `NEXT_PUBLIC_GA4_ID` | no | GA4 measurement ID. Analytics renders nothing when unset |
 
-**Forms fail loudly if Resend is unconfigured in production** and log to the console in development, so local work never needs a key.
+Forms need no configuration: they post to the Formspree endpoint in `src/lib/formspree.ts`.
 
 ---
 
@@ -87,7 +82,8 @@ Five server actions in `src/app/actions.ts`, all through one pipeline:
 - Honeypot field (`company_website`) plus a sub-2-second timing trap. Honeypot hits get a success-shaped response so bots learn nothing.
 - Zod schemas with length caps; the client never decides validity.
 - 5 submissions per IP per 10 minutes. In-memory and per-instance — swap `lib/rate-limit.ts` for KV if volume ever justifies it; `check()` keeps its signature.
-- Resend is the system of record. The Sheet mirror is best-effort and never blocks a submission.
+- Delivered server-side to Formspree (`lib/formspree.ts`), which is the system of record and sends the notification email. `_subject` names the form.
+- Membership and day pass then link out to Square; the two membership subscriptions open in a new tab.
 
 ### SEO
 
@@ -144,7 +140,7 @@ deploy automatically — no local upload.
 ## Before DNS cutover
 
 1. ~~**Legal review**~~ — done. `/terms` and `/privacy` are first-party pages replacing links that pointed at Thryv's boilerplate. Facts confirmed by Jim and approved by counsel, 2026-08-26.
-   Two commitments now need upkeep rather than review: the stated **24-month retention** is not enforced by any code, so old enquiries must actually be deleted from the inbox and the mirrored Sheet; and the "no advertising cookies" line holds only while `NEXT_PUBLIC_GA4_ID` is unset.
-2. Set `RESEND_API_KEY`, `FORM_TO_EMAIL`, `FORM_FROM_EMAIL` in Vercel and verify the sending domain.
+   Two commitments now need upkeep rather than review: the stated **24-month retention** is not enforced by any code, so old enquiries must actually be deleted from the inbox and the Formspree account; and the "no advertising cookies" line holds only while `NEXT_PUBLIC_GA4_ID` is unset.
+2. Submit each form once on staging and confirm it arrives in Formspree. If the Formspree form restricts allowed domains, submissions will be refused: they are sent server-side and carry no browser origin.
 3. Configure **apex → www** in Vercel; the Weebly site already 301s that way.
 4. Changemakers27 Night 2's ticket link in `src/data/events.ts` still points at the Night 3 Eventbrite page.

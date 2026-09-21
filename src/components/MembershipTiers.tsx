@@ -8,7 +8,7 @@ import { MembershipModal } from './form/MembershipModal';
 
 /**
  * Membership cards. Each CTA opens the two-step join modal pre-set to that
- * tier — details first, deposit second — matching the old site's
+ * tier — details first, Square subscription second — matching the old site's
  * #join-virtual / #join-nexcore / #join-founding anchors.
  */
 export function MembershipTiers() {

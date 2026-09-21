@@ -76,7 +76,10 @@ export const site = {
 
   /** Square payment links. Coworking only - events ticket via Eventbrite. */
   square: {
-    membershipDeposit: 'https://square.link/u/1bUKPibu',
+    /** Subscriptions. Checkout titles verified 2026-09-21. */
+    foundingMember: 'https://square.link/u/jR2mNfri', // "NexCore Founding Member"
+    member: 'https://square.link/u/X6dIw89g', // "NexCore Membership"
+    virtualMember: 'https://square.link/u/raqoQUgC', // "Virtual Membership"
     dayPass: 'https://square.link/u/ozTP4Yh0',
   },
 } as const;

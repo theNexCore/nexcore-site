@@ -12,40 +12,36 @@ import {
   officeSchema,
   botCheck,
   fieldErrors,
+  ONBOARD_SPECIFIC,
   type FormState,
 } from '@/lib/forms';
-import { postToAppsScript, type AppsScriptType } from '@/lib/apps-script';
+import { postToFormspree } from '@/lib/formspree';
 import { check, clientIp } from '@/lib/rate-limit';
-import { spaces } from '@/data/coworking';
-import { getAvailability, validateBookingDate } from '@/lib/availability';
+import { validateBookingDate } from '@/lib/booking-rules';
 
 const GENERIC_ERROR = 'Something went wrong on our end. Please try again, or call us directly.';
 
 /**
  * Shared submission pipeline:
- *   rate limit -> bot check -> schema validation -> POST to Apps Script
+ *   rate limit -> bot check -> schema validation -> POST to Formspree
  *
- * The Apps Script logs to the Sheet and sends its own notification email,
- * so there is no separate mail provider.
+ * Every form posts to the same Formspree form; `subject` tells them apart
+ * in the inbox.
  */
 async function handle<T extends z.ZodTypeAny>({
   schema,
   formData,
-  formName,
+  subject,
   bucket,
-  type,
   toFields,
-  fallback,
   allowDeliveryFailure = false,
 }: {
   schema: T;
   formData: FormData;
-  formName: string;
+  /** Email subject, and the label used in logs. */
+  subject: string;
   bucket: string;
-  type: AppsScriptType;
   toFields: (data: z.infer<T>) => Record<string, string | number | boolean>;
-  /** Used if the script does not recognise `type` yet. */
-  fallback?: { type: AppsScriptType; toFields: (data: z.infer<T>) => Record<string, string | number | boolean> };
   /** Payment paths proceed even if lead capture failed. */
   allowDeliveryFailure?: boolean;
 }): Promise<FormState> {
@@ -76,15 +72,10 @@ async function handle<T extends z.ZodTypeAny>({
     };
   }
 
-  const data = parsed.data as z.infer<T>;
-  const result = await postToAppsScript(
-    type,
-    toFields(data),
-    fallback ? { type: fallback.type, fields: fallback.toFields(data) } : undefined,
-  );
+  const result = await postToFormspree(subject, toFields(parsed.data as z.infer<T>));
 
   if (!result.ok) {
-    console.error(`[form:${formName}] Apps Script rejected:`, result.error);
+    console.error(`[form:${subject}] Formspree rejected:`, result.error);
     // On a payment path, blocking checkout because OUR logging failed would
     // cost a sale. Square captures name and email, so the customer is still
     // reachable. Everything else surfaces an honest error.
@@ -95,17 +86,12 @@ async function handle<T extends z.ZodTypeAny>({
   return { status: 'success' };
 }
 
-/* ------------------------------------------------------------------ *
- * type: "contact"
- * ------------------------------------------------------------------ */
-
 export async function submitContact(_prev: FormState, formData: FormData): Promise<FormState> {
   return handle({
     schema: contactSchema,
     formData,
-    formName: 'Contact',
+    subject: 'Contact',
     bucket: 'contact',
-    type: 'contact',
     toFields: (d) => ({
       firstName: d.firstName,
       lastName: d.lastName,
@@ -120,17 +106,12 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
   });
 }
 
-/* ------------------------------------------------------------------ *
- * type: "idea"
- * ------------------------------------------------------------------ */
-
 export async function submitIdea(_prev: FormState, formData: FormData): Promise<FormState> {
   return handle({
     schema: ideaSchema,
     formData,
-    formName: 'Event idea',
+    subject: 'Event idea',
     bucket: 'idea',
-    type: 'idea',
     toFields: (d) => ({
       firstName: d.firstName,
       lastName: d.lastName,
@@ -143,83 +124,45 @@ export async function submitIdea(_prev: FormState, formData: FormData): Promise<
   });
 }
 
-/* ------------------------------------------------------------------ *
- * type: "space"
- * ------------------------------------------------------------------ */
-
-/** Decimal hours between two "HH:mm" values; 0 when either is missing. */
-function hoursBetween(start: string, end: string): number {
-  if (!start || !end) return 0;
-  const [sh, sm] = start.split(':').map(Number);
-  const [eh, em] = end.split(':').map(Number);
-  if ([sh, sm, eh, em].some((n) => Number.isNaN(n))) return 0;
-  const mins = eh * 60 + em - (sh * 60 + sm);
-  return mins > 0 ? Math.round((mins / 60) * 100) / 100 : 0;
-}
-
-export async function submitSpace(_prev: FormState, formData: FormData): Promise<FormState> {
-  // Same building hours and booking window as the day pass.
-  const requested = String(formData.get('date') ?? '');
-  if (requested) {
-    const { busy } = await getAvailability();
-    const problem = validateBookingDate(requested, busy);
-    if (problem) {
-      return { status: 'error', errors: { date: problem } };
-    }
-  }
-
-  return handle({
-    schema: spaceSchema,
-    formData,
-    formName: 'Space reservation request',
-    bucket: 'space',
-    type: 'space',
-    toFields: (d) => {
-      const hours = hoursBetween(d.start, d.end);
-      const match = spaces.find((s) => s.name === d.space);
-      return {
-        name: d.name,
-        company: d.company,
-        email: d.email,
-        phone: d.phone,
-        smsConsent: d.smsConsent,
-        space: d.space,
-        date: d.date,
-        start: d.start,
-        end: d.end,
-        hours,
-        estPublic: match ? Math.round(match.rate * hours * 100) / 100 : 0,
-        estMember: match?.member ? Math.round(match.member * hours * 100) / 100 : 0,
-        notes: d.notes,
-      };
-    },
+/** "2026-10-05T14:30" -> "Mon, Oct 5, 2026, 2:30 PM". Falls back to the raw value. */
+function formatOnboardAt(value: string): string {
+  const d = new Date(`${value}:00Z`);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'UTC', // the value carries no zone; format it exactly as entered
   });
 }
 
-/* ------------------------------------------------------------------ *
- * Tour, membership and office
- *
- * These send their own type first. If the script has not been taught it yet
- * it answers with its unknown-type error, and lib/apps-script retries as
- * `contact` with the specifics carried in `reason` and `message`.
- *
- * That means this works either side of the script being updated, with no
- * coordinated deploy and no lead dropped in between. Once the script handles
- * these natively, the fallback simply stops firing — nothing here changes.
- * ------------------------------------------------------------------ */
-
-const splitName = (full: string) => {
-  const parts = full.trim().split(/\s+/);
-  return { firstName: parts[0] ?? '', lastName: parts.slice(1).join(' ') };
-};
+export async function submitSpace(_prev: FormState, formData: FormData): Promise<FormState> {
+  return handle({
+    schema: spaceSchema,
+    formData,
+    subject: 'Space booking request',
+    bucket: 'space',
+    toFields: (d) => ({
+      name: d.name,
+      email: d.email,
+      phone: d.phone,
+      smsConsent: d.smsConsent,
+      space: d.space,
+      onboard: d.onboard === ONBOARD_SPECIFIC ? formatOnboardAt(d.onboardAt) : d.onboard,
+      message: d.message,
+    }),
+  });
+}
 
 export async function submitTour(_prev: FormState, formData: FormData): Promise<FormState> {
   return handle({
     schema: tourSchema,
     formData,
-    formName: 'Tour request',
+    subject: 'Tour request',
     bucket: 'tour',
-    type: 'tour',
     toFields: (d) => ({
       name: d.name,
       email: d.email,
@@ -228,19 +171,6 @@ export async function submitTour(_prev: FormState, formData: FormData): Promise<
       business: d.business,
       brings: d.brings,
     }),
-    fallback: {
-      type: 'contact',
-      toFields: (d) => ({
-        ...splitName(d.name),
-        email: d.email,
-        phone: d.phone,
-        smsConsent: d.smsConsent,
-        business: d.business,
-        member: 'Considering joining',
-        reason: 'I want to tour or join',
-        message: `TOUR REQUEST\n\nWhat brings you to NexCore: ${d.brings || '(not given)'}`,
-      }),
-    },
   });
 }
 
@@ -248,9 +178,8 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
   return handle({
     schema: membershipSchema,
     formData,
-    formName: 'Membership enquiry',
+    subject: 'Membership signup',
     bucket: 'membership',
-    type: 'membership',
     allowDeliveryFailure: true,
     toFields: (d) => ({
       name: d.name,
@@ -260,19 +189,6 @@ export async function submitMembership(_prev: FormState, formData: FormData): Pr
       business: d.business,
       tier: d.tier,
     }),
-    fallback: {
-      type: 'contact',
-      toFields: (d) => ({
-        ...splitName(d.name),
-        email: d.email,
-        phone: d.phone,
-        smsConsent: d.smsConsent,
-        business: d.business,
-        member: 'Considering joining',
-        reason: 'I want to tour or join',
-        message: `MEMBERSHIP ENQUIRY\n\nTier: ${d.tier || '(not given)'}\nNext step: $50 deposit via Square.`,
-      }),
-    },
   });
 }
 
@@ -280,8 +196,7 @@ export async function submitDayPass(_prev: FormState, formData: FormData): Promi
   // Authoritative date check — the browser's version is a courtesy only.
   const requested = String(formData.get('date') ?? '');
   if (requested) {
-    const { busy } = await getAvailability();
-    const problem = validateBookingDate(requested, busy);
+    const problem = validateBookingDate(requested);
     if (problem) {
       return { status: 'error', errors: { date: problem } };
     }
@@ -290,9 +205,8 @@ export async function submitDayPass(_prev: FormState, formData: FormData): Promi
   return handle({
     schema: dayPassSchema,
     formData,
-    formName: 'Day pass',
+    subject: 'Day pass',
     bucket: 'daypass',
-    type: 'daypass',
     // Payment path: never block checkout because our own logging failed.
     allowDeliveryFailure: true,
     toFields: (d) => ({
@@ -303,19 +217,6 @@ export async function submitDayPass(_prev: FormState, formData: FormData): Promi
       business: d.business,
       date: d.date,
     }),
-    fallback: {
-      type: 'contact',
-      toFields: (d) => ({
-        ...splitName(d.name),
-        email: d.email,
-        phone: d.phone,
-        smsConsent: d.smsConsent,
-        business: d.business,
-        member: 'No',
-        reason: 'I want to tour or join',
-        message: `DAY PASS\n\nDay requested: ${d.date}\nNext step: $25 via Square.`,
-      }),
-    },
   });
 }
 
@@ -323,9 +224,8 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
   return handle({
     schema: officeSchema,
     formData,
-    formName: 'Office enquiry',
+    subject: 'Office enquiry',
     bucket: 'office',
-    type: 'office',
     toFields: (d) => ({
       name: d.name,
       company: d.company,
@@ -335,18 +235,5 @@ export async function submitOffice(_prev: FormState, formData: FormData): Promis
       office: d.office,
       notes: d.notes,
     }),
-    fallback: {
-      type: 'contact',
-      toFields: (d) => ({
-        ...splitName(d.name),
-        email: d.email,
-        phone: d.phone,
-        smsConsent: d.smsConsent,
-        business: d.company,
-        member: 'Considering joining',
-        reason: 'I want to tour or join',
-        message: `PRIVATE OFFICE ENQUIRY\n\nOffice: ${d.office || '(not specified)'}\n\nNotes: ${d.notes || '(none)'}`,
-      }),
-    },
   });
 }

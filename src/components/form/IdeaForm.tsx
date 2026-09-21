@@ -8,8 +8,7 @@ import { Button } from '@/components/Button';
 import { Input, Textarea, BotTrap, SmsConsent } from './Fields';
 
 /**
- * Event idea submission. Posts type:"idea" to the Apps Script, which logs to
- * the Event Ideas tab and sends its own notification.
+ * Event idea submission. Delivered to Formspree by the submitIdea action.
  */
 
 function SubmitButton() {

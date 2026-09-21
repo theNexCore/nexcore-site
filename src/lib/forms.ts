@@ -3,9 +3,7 @@ import { z } from 'zod';
 /**
  * Shared form plumbing: schemas, honeypot, bot checks.
  *
- * Delivery lives in lib/apps-script.ts — the Apps Script web app logs to the
- * Sheet and sends its own notification email, so there is no mail provider
- * dependency here.
+ * Delivery lives in lib/formspree.ts.
  * Every schema is validated server-side; the client never decides validity.
  */
 
@@ -91,19 +89,31 @@ export const membershipSchema = z.object({
   tier: optionalText(80),
 });
 
-export const spaceSchema = z.object({
-  ...baseFields,
-  name: z.string().trim().min(1, 'Name is required.').max(120),
-  email: z.string().trim().email('Enter a valid email address.').max(160),
-  phone: optionalText(40),
-  smsConsent,
-  company: optionalText(120),
-  space: optionalText(80),
-  date: optionalText(20),
-  start: optionalText(10),
-  end: optionalText(10),
-  notes: optionalText(2000),
-});
+/** "When would you like to onboard?" — ASAP, or a specific date and time. */
+export const ONBOARD_ASAP = 'ASAP';
+export const ONBOARD_SPECIFIC = 'Specific date & time';
+
+export const spaceSchema = z
+  .object({
+    ...baseFields,
+    name: z.string().trim().min(1, 'Name is required.').max(120),
+    email: z.string().trim().email('Enter a valid email address.').max(160),
+    phone: optionalText(40),
+    smsConsent,
+    space: optionalText(80),
+    onboard: z.enum([ONBOARD_ASAP, ONBOARD_SPECIFIC], {
+      errorMap: () => ({ message: 'Choose ASAP or a specific time.' }),
+    }),
+    /** datetime-local value, "YYYY-MM-DDTHH:mm". Only read when onboard is specific. */
+    onboardAt: optionalText(20),
+    message: optionalText(2000),
+  })
+  .superRefine((d, ctx) => {
+    if (d.onboard !== ONBOARD_SPECIFIC) return;
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(d.onboardAt)) {
+      ctx.addIssue({ code: 'custom', path: ['onboardAt'], message: 'Choose a date and time.' });
+    }
+  });
 
 export const officeSchema = z.object({
   ...baseFields,

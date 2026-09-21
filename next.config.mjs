@@ -2,8 +2,8 @@
 
 // Content-Security-Policy.
 // Eventbrite and Square are LINK-OUT only (no iframes), so neither needs a
-// frame-src entry. script.google.com is reached server-side for form
-// submissions and from the client only for the coworking availability lookup.
+// frame-src entry. Form submissions reach Formspree server-side, so the
+// browser never connects to it.
 const csp = [
   "default-src 'self'",
   // Next.js requires 'unsafe-inline' for its bootstrap script and
@@ -12,7 +12,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://www.thenexcore.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://script.google.com https://script.googleusercontent.com https://www.google-analytics.com https://va.vercel-scripts.com",
+  "connect-src 'self' https://www.google-analytics.com https://va.vercel-scripts.com",
   "form-action 'self'",
   "frame-ancestors 'none'",
   "frame-src 'none'",

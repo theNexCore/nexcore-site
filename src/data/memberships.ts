@@ -16,6 +16,8 @@ export interface Tier {
   includesLabel: string;
   includes: string[];
   cta: { label: string; tier: string };
+  /** Square subscription checkout, shown once the signup form is submitted. */
+  checkout: { label: string; href: string };
   featured?: boolean;
   badge?: string;
 }
@@ -40,6 +42,7 @@ export const tiers: Tier[] = [
       'One complimentary coworking day pass each month',
     ],
     cta: { label: 'Become a Virtual Member', tier: 'virtual' },
+    checkout: { label: 'Become a Virtual Member', href: site.square.virtualMember },
   },
   {
     id: 'nexcore',
@@ -59,6 +62,7 @@ export const tiers: Tier[] = [
       'Access to member events',
     ],
     cta: { label: 'Become a Coworking Member', tier: 'nexcore' },
+    checkout: { label: 'Become a Member', href: site.square.member },
   },
   {
     id: 'founding',
@@ -79,6 +83,7 @@ export const tiers: Tier[] = [
       'Recognition as a Founding Member of NexCore',
     ],
     cta: { label: 'Become a Founding Member', tier: 'founding' },
+    checkout: { label: 'Become a Founding Member', href: site.square.foundingMember },
   },
 ];
 
@@ -89,14 +94,6 @@ export const dayPass = {
   blurb:
     'One full day inside NexCore — open coworking seating, high-speed internet, coffee, and every member amenity.',
   checkoutUrl: site.square.dayPass,
-};
-
-export const foundingDeposit = {
-  amount: 50,
-  label: '$50 deposit',
-  blurb:
-    'A $50 deposit holds your spot and gets applied to your first month. Payment opens in a secure Square window.',
-  checkoutUrl: site.square.membershipDeposit,
 };
 
 export interface AmenityGroup {

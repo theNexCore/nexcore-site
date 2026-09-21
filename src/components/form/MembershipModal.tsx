@@ -1,36 +1,31 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitMembership } from '@/app/actions';
 import { idleState } from '@/lib/forms';
 import { Button } from '@/components/Button';
 import { Input, BotTrap, SmsConsent } from './Fields';
-import { tiers, foundingDeposit } from '@/data/memberships';
+import { tiers } from '@/data/memberships';
 import { cn } from '@/lib/cn';
 
 /**
- * Two-step membership join, matching the old Weebly modal.
+ * Two-step membership signup.
  *
  * STEP 1 captures the lead — name, business, email, phone — and submits it
- * through the normal server action (validation, honeypot, rate limit, then the
- * Apps Script, which logs to the Sheet and sends its own notification). This has to happen BEFORE payment: previously the tier
- * buttons went straight to Square, so anyone who abandoned checkout was lost
- * entirely.
+ * through the normal server action (validation, honeypot, rate limit, then
+ * Formspree). This has to happen BEFORE payment, so anyone who abandons
+ * checkout is still on record.
  *
- * STEP 2 opens the $50 deposit in a Square popup. All three tiers take the
- * same deposit, applied to the first month — that is how the old site worked,
- * and there is only one membership payment link.
+ * STEP 2 links to the chosen tier's Square subscription checkout in a new tab.
  */
-
-const SQUARE_POPUP = 'width=480,height=820,scrollbars=yes,resizable=yes';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" size="md" disabled={pending} className="w-full">
-      {pending ? 'Sending…' : 'Continue to Deposit'}
+      {pending ? 'Sending…' : 'Continue to Payment'}
     </Button>
   );
 }
@@ -45,12 +40,6 @@ export function MembershipModal({
   const [state, action] = useActionState(submitMembership, idleState);
   const dialogRef = useRef<HTMLDivElement>(null);
   const tier = tiers.find((t) => t.id === openTier);
-
-  const openSquare = useCallback(() => {
-    const w = window.open(foundingDeposit.checkoutUrl, 'nexcore-square-checkout', SQUARE_POPUP);
-    if (w) w.focus();
-    else window.open(foundingDeposit.checkoutUrl, '_blank', 'noopener,noreferrer');
-  }, []);
 
   // Escape to close, and lock the page behind the dialog.
   useEffect(() => {
@@ -100,7 +89,7 @@ export function MembershipModal({
 
         {/* Step indicator */}
         <ol className="mb-6 flex items-center gap-3 font-inter text-[12px] font-semibold tracking-[0.12em]">
-          {['1 YOUR DETAILS', '2 DEPOSIT'].map((label, i) => (
+          {['1 YOUR DETAILS', '2 PAYMENT'].map((label, i) => (
             <li
               key={label}
               className={cn(
@@ -186,14 +175,22 @@ export function MembershipModal({
               Welcome to NexCore.
             </h2>
             <p className="mt-3 font-inter text-[15px] leading-relaxed text-white/70">
-              A <strong className="text-white">{foundingDeposit.label}</strong> holds your spot and
-              gets applied to your first month. Payment opens in a secure Square window — this page
-              stays right here.
+              {tier.name} —{' '}
+              <strong className="text-white">
+                {tier.priceLabel}
+                {tier.cadence}
+              </strong>
+              . Payment opens in a secure Square checkout in a new tab.
             </p>
 
-            <Button onClick={openSquare} size="lg" className="mt-7 w-full">
-              Pay Deposit
-            </Button>
+            <a
+              href={tier.checkout.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 block rounded-[8px] bg-navy px-10 py-4 text-center font-sora text-[18px] font-semibold text-white"
+            >
+              {tier.checkout.label}
+            </a>
 
             <p className="mt-4 font-inter text-[13px] leading-relaxed text-white/45">
               We&rsquo;ve got your details either way — if you&rsquo;d rather pay later, we&rsquo;ll

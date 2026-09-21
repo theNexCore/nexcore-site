@@ -153,11 +153,13 @@ export function RadioGroup({
   label,
   options,
   error,
+  onValueChange,
 }: {
   name: string;
   label: string;
   options: string[];
   error?: string;
+  onValueChange?: (value: string) => void;
 }) {
   const id = useId();
   return (
@@ -169,7 +171,13 @@ export function RadioGroup({
             key={opt}
             className="cursor-pointer rounded-pill border border-white/15 px-4 py-2 font-inter text-[14px] text-white/75 transition-colors hover:border-sky has-[:checked]:border-sky has-[:checked]:bg-sky/10 has-[:checked]:text-white"
           >
-            <input type="radio" name={name} value={opt} className="sr-only" />
+            <input
+              type="radio"
+              name={name}
+              value={opt}
+              className="sr-only"
+              onChange={onValueChange && ((e) => onValueChange(e.target.value))}
+            />
             {opt}
           </label>
         ))}

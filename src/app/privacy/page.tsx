@@ -11,9 +11,10 @@ import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
  * former vendor's boilerplate that did not describe NexCore's practices.
  *
  * The technical description is verified against the code: enquiry forms
- * posted server-side to the NexCore Apps Script web app, which logs to the
- * Google Sheet and sends its own notification email; honeypot plus timing and
- * rate-limit checks; no cookies set by this site today.
+ * posted server-side to Formspree, which stores them and sends the
+ * notification email; honeypot plus timing and rate-limit checks; no cookies
+ * set by this site today. "Where it goes" was rewritten 2026-09-21 when forms
+ * moved off the Google Sheet to Formspree, after counsel's review.
  *
  * Facts confirmed by Jim, 2026-08-26: no data sharing (not sold, not shared
  * with any partner including the SOCO Chamber); 24-month retention; deletion
@@ -33,7 +34,7 @@ import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
  *
  *   1. The 24-month retention is a written commitment but nothing in this
  *      codebase enforces it. Old enquiries have to actually be deleted from
- *      the inbox and the mirrored Google Sheet by someone.
+ *      the inbox and the Formspree account by someone.
  *   2. "Does not use advertising cookies or cross-site tracking" holds only
  *      while NEXT_PUBLIC_GA4_ID is unset. Enabling GA4 makes that sentence
  *      inaccurate and likely requires a consent mechanism.
@@ -42,7 +43,7 @@ import { SMS_BRAND, SMS_MESSAGE_TYPES } from '@/data/sms';
  * staff changes do not require a policy edit.
  */
 
-const UPDATED = '12 September 2026';
+const UPDATED = '21 September 2026';
 
 export const metadata = buildMetadata({
   title: 'Privacy Policy',
@@ -114,9 +115,9 @@ export default function PrivacyPage() {
 
           <h2>Where it goes</h2>
           <p>
-            Form submissions are sent to a private NexCore application hosted on Google, which
-            records them in a private internal spreadsheet and emails the relevant NexCore staff.
-            Both the spreadsheet and the mailbox are accessible only to NexCore staff.
+            Form submissions are delivered through <strong>Formspree</strong>, a form-processing
+            service, which stores them in NexCore&rsquo;s private account and emails the relevant
+            NexCore staff. Both the account and the mailbox are accessible only to NexCore staff.
           </p>
 
           <h2>How we protect your information</h2>
@@ -143,7 +144,7 @@ export default function PrivacyPage() {
 
           <h2>Payments</h2>
           <p>
-            Membership deposits and day passes are processed by <strong>Square</strong>, and event
+            Membership subscriptions and day passes are processed by <strong>Square</strong>, and event
             registration is handled by <strong>Eventbrite</strong>. This site does not embed either
             one — the buttons are ordinary links that take you to their websites. We never see or store your full card details — payment information is handled
             entirely by those providers under their own privacy policies.
@@ -162,7 +163,7 @@ export default function PrivacyPage() {
             a timing check, and a limit on how many times a form can be submitted from the same
             connection in a short period. That last check reads the IP address your connection
             presents so it can count recent submissions. It is held only in memory, for about ten
-            minutes, and is never written to the spreadsheet, included in the notification email, or
+            minutes, and is never sent to Formspree, included in the notification email, or
             used to identify or profile you.
           </p>
 

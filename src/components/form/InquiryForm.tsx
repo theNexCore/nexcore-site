@@ -1,11 +1,11 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitTour, submitMembership, submitOffice, submitSpace } from '@/app/actions';
-import { idleState, type FormState } from '@/lib/forms';
+import { idleState, ONBOARD_ASAP, ONBOARD_SPECIFIC, type FormState } from '@/lib/forms';
 import { Button } from '@/components/Button';
-import { Input, Textarea, Select, BotTrap, SmsConsent } from './Fields';
+import { Input, Textarea, Select, RadioGroup, BotTrap, SmsConsent } from './Fields';
 
 type Kind = 'tour' | 'membership' | 'office' | 'space';
 
@@ -57,6 +57,7 @@ export function InquiryForm({
   defaultOption?: string;
 }) {
   const [state, action] = useActionState(actions[kind], idleState);
+  const [onboard, setOnboard] = useState('');
 
   if (state.status === 'success') {
     const copy = successCopy[kind];
@@ -116,13 +117,15 @@ export function InquiryForm({
           placeholder="Your phone number"
           error={err.phone}
         />
-        <Input
-          name={kind === 'office' || kind === 'space' ? 'company' : 'business'}
-          label="Business (optional)"
-          autoComplete="organization"
-          placeholder="Your business or organization"
-          error={err.business ?? err.company}
-        />
+        {kind !== 'space' && (
+          <Input
+            name={kind === 'office' ? 'company' : 'business'}
+            label="Business (optional)"
+            autoComplete="organization"
+            placeholder="Your business or organization"
+            error={err.business ?? err.company}
+          />
+        )}
         {/* Full width, so it sits directly under the phone field on mobile and
             spans the phone/business row on desktop. */}
         <SmsConsent className="sm:col-span-2" />
@@ -146,9 +149,32 @@ export function InquiryForm({
 
         {kind === 'space' && (
           <>
-            <Input name="date" label="Date" type="date" className="sm:col-span-2" error={err.date} />
-            <Input name="start" label="Start time" type="time" error={err.start} />
-            <Input name="end" label="End time" type="time" error={err.end} />
+            <div className="sm:col-span-2">
+              <RadioGroup
+                name="onboard"
+                label="When would you like to onboard?"
+                options={[ONBOARD_ASAP, ONBOARD_SPECIFIC]}
+                error={err.onboard}
+                onValueChange={setOnboard}
+              />
+            </div>
+            {onboard === ONBOARD_SPECIFIC && (
+              <Input
+                name="onboardAt"
+                label="Date and time"
+                type="datetime-local"
+                required
+                className="sm:col-span-2"
+                error={err.onboardAt}
+              />
+            )}
+            <Textarea
+              name="message"
+              label="Message (optional)"
+              rows={4}
+              className="sm:col-span-2"
+              error={err.message}
+            />
           </>
         )}
 
@@ -162,7 +188,7 @@ export function InquiryForm({
           />
         )}
 
-        {(kind === 'office' || kind === 'space') && (
+        {kind === 'office' && (
           <Textarea
             name="notes"
             label="Notes (optional)"
