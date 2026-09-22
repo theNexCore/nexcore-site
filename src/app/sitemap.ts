@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ['/', 'weekly', 1],
     ['/coworking', 'weekly', 0.9],
     ['/events', 'daily', 0.9],
+    ['/events/calendar', 'daily', 0.8],
     ['/members', 'weekly', 0.8],
     ['/beyond-coworking', 'monthly', 0.8],
     ['/about', 'monthly', 0.8],

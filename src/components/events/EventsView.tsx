@@ -60,12 +60,15 @@ export function EventsView({
   upcoming,
   past,
   series = [],
+  initialView = 'list',
 }: {
   upcoming: NexEvent[];
   past: NexEvent[];
   series?: EventSeriesInfo[];
+  /** /events opens on the list; /events/calendar opens on the calendar. */
+  initialView?: 'list' | 'calendar';
 }) {
-  const [view, setView] = useState<'list' | 'calendar'>('list');
+  const [view, setView] = useState<'list' | 'calendar'>(initialView);
   const listItems = useMemo(() => toListItems(upcoming, series), [upcoming, series]);
 
   // Anchor the calendar on the first upcoming event, else today.

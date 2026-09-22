@@ -117,7 +117,7 @@ export default async function EventsPage() {
         </div>
 
         {/* Idea CTA */}
-        <div className="mt-14 rounded-card border border-sky/25 bg-sky/[0.06] p-8">
+        <div id="idea" className="mt-14 rounded-card border border-sky/25 bg-sky/[0.06] p-8">
           <h3 className="font-sora text-xl font-semibold text-white">
             Got an event idea? Tell us.
           </h3>

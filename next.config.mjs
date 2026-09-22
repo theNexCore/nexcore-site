@@ -67,7 +67,7 @@ const nextConfig = {
       { source: '/systems.html', destination: '/systems', statusCode: 301 },
       { source: '/community.html', destination: '/community', statusCode: 301 },
       { source: '/events.html', destination: '/events', statusCode: 301 },
-      { source: '/event-calendar.html', destination: '/events', statusCode: 301 },
+      { source: '/event-calendar.html', destination: '/events/calendar', statusCode: 301 },
       { source: '/event-photo-gallery.html', destination: '/events/gallery', statusCode: 301 },
       { source: '/event-graphics.html', destination: '/events', statusCode: 301 },
       { source: '/what-is-nexcore.html', destination: '/about', statusCode: 301 },

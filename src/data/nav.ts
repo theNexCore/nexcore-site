@@ -58,12 +58,10 @@ export const mainNav: NavItem[] = [
     ],
   },
   {
-    // Top-level on the live site, with these two children.
-    // events.html and event-calendar.html merged into /events, so this
-    // deep-links to the calendar section while "Events" above lands on the
-    // narrative at the top of the same page.
+    // Top-level on the live site. Its own page, opening on the month grid;
+    // the same calendar also sits in the #calendar section of /events.
     label: 'Event Calendar',
-    href: '/events#calendar',
+    href: '/events/calendar',
     children: [
       { label: 'Event Photo Gallery', href: '/events/gallery' },
     ],
@@ -76,7 +74,7 @@ export const mainNav: NavItem[] = [
 
 /** Footer "Explore" column - matches the live site's footer links. */
 export const footerExplore: NavChild[] = [
-  { label: 'Event Calendar', href: '/events' },
+  { label: 'Event Calendar', href: '/events/calendar' },
   { label: 'Member Directory', href: '/members' },
   { label: 'Join NexCore', href: '/coworking#memberships' },
   { label: 'Contact Us', href: '/contact' },
