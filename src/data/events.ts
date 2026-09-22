@@ -272,4 +272,16 @@ export const events: EventRecord[] = [
     summary: "Bring one business decision you keep circling. Leave with a sharper way to work it forward.",
     desc: "Overview\nBring one business decision you keep circling. Leave with a sharper way to work it forward.\n\nAI didn't change business fundamentals. It just removed the excuses.\n\nResearch is cheap now. Drafting is cheap. First versions of almost anything are cheap. What's still scarce is the work of actually deciding — and that's the part nobody can hand off.\n\nThis free session is the opening of One Decision Away, a NexCore series for founders and solopreneurs who want to use AI as an orchestrator — a tool that works the problem with you — instead of a magic trick they watch from the sidelines.\n\nIn two hours you'll get:\nThe five fundamentals that separate people getting real leverage from AI from people getting confident nonsense\nA working method you can apply to a live decision the same night\nA room full of founders working the same way — not an audience watching a demo\n\nYou stay in the driver's seat the whole time. The AI never decides for you. It makes your thinking sharper, faster, and harder to fool.\n\nLed by Simon Yost at the NexCore building. Simon is VP Product & Engineering at Swipe ARAS, the first member of NexCore South County, and one of the members of the original NexCore in Fox Park.\n\nBring one decision you keep circling. That's the only prep.\n\nEVENT DETAILS\n\nThursday, October 22, 2026\n\n5:30 PM — Doors Open\n\n6:00 PM – 8:00 PM — Session\n\nAges 16+. Free parking. Admission is free.\n\nLOCATION\n\nNexCore\n11820 Tesson Ferry Road\nSt. Louis, MO 63128\n\nAt the corner of Baptist Church Road & Tesson Ferry Road.",
   },
+  {
+    slug: "businessgps-live-what-makes-it-different-2026-09-29",
+    title: "BusinessGPS Live: What Makes It Different?",
+    start: "2026-09-29T19:00",
+    end: "2026-09-29T19:30",
+    locationType: "online",
+    img: "/events/businessgps-live.jpg",
+    priceLabel: "Free",
+    link: "https://www.eventbrite.com/e/2001974392299?aff=oddtdtcreator",
+    summary: "Not another networking group. See the structured approach BusinessGPS was built on — free, live, online.",
+    desc: "Overview\nNot another networking group. See the structured approach BusinessGPS was built on — free, live, online.\n\nMost networking groups hand you a name tag and hope something happens. BusinessGPS was built to do more than that — and this live session shows you exactly how.\n\nIn 30 minutes, you'll see:\nA structured approach to real business growth\nHow BusinessGPS builds meaningful connections, not just name tags\nWhy it's a national model built for business leaders who are serious about more\n\nThis session is hosted live online, with open Q&A starting at 7:30 PM — bring your questions.\n\nTuesday, September 29, 2026 · 7:00–7:30 PM CT · Live online (link provided after registration)\n\nSee for yourself what makes BusinessGPS different. All it takes is showing up.\n\nFree — General Admission",
+  },
 ];
