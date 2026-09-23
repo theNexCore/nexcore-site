@@ -132,7 +132,7 @@ export const eventSeries: EventSeries[] = [
     name: 'BusinessGPS',
     summary:
       'A weekly Thursday-morning gathering of business owners and professionals building real relationships, not swapping cards. One seat per industry, and visiting is always free.',
-    logo: '/events/series/businessgps-logo.png',
+    logo: '/events/series/businessgps.jpg',
     logoBg: '#dce8fc',
     collapse: true,
   },

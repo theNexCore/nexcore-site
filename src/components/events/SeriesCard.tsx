@@ -31,9 +31,9 @@ export function SeriesCard({
           {series.logo ? (
             <Image
               src={series.logo}
-              alt={`${series.name} logo`}
-              width={400}
-              height={400}
+              alt={series.name}
+              width={1920}
+              height={1080}
               sizes="220px"
               className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
             />

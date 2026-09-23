@@ -19,19 +19,19 @@ export function SeriesPage({ series, events }: { series: EventSeriesInfo; events
           ← All events
         </Link>
 
-        <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col gap-8">
           {series.logo && (
             <div
-              className="w-40 shrink-0 overflow-hidden rounded-card sm:w-48"
+              className="max-w-3xl overflow-hidden rounded-card"
               style={{ backgroundColor: series.logoBg }}
             >
               <Image
                 src={series.logo}
-                alt={`${series.name} logo`}
-                width={400}
-                height={400}
+                alt={series.name}
+                width={1920}
+                height={1080}
                 priority
-                sizes="192px"
+                sizes="(max-width: 768px) 100vw, 768px"
                 className="h-auto w-full"
               />
             </div>
