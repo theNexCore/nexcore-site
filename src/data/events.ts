@@ -291,7 +291,7 @@ export const events: EventRecord[] = [
     end: "2026-10-13T10:40",
     doors: "9:00 AM",
     series: 'businessgps',
-    img: "/events/businessgps-weekly.jpg",
+    img: "/events/businessgps-chapter.jpg",
     priceLabel: "Free",
     link: "https://www.eventbrite.com/e/2002101690050?aff=oddtdtcreator",
     summary: "A weekly growth community is coming to NexCore. One seat per industry — come see if it's yours.",
