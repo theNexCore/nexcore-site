@@ -287,9 +287,9 @@ function valid(rec: EventRecord): boolean {
 
 export interface EventsPayload {
   upcoming: NexEvent[];
-  /** Finished events that get a card: one-offs, never recurring dates. */
+  /** Finished events that get a card: one-offs, plus each recurring event's most recent date. */
   past: NexEvent[];
-  /** Finished dates of recurring events. Calendar grid only — no cards, no URLs. */
+  /** Older finished dates of recurring events. Calendar grid only — no cards, no URLs. */
   pastOccurrences: NexEvent[];
   all: NexEvent[];
   /** Keyed by series id. */
@@ -314,19 +314,30 @@ export async function getEvents(): Promise<EventsPayload> {
     .filter((e) => !e.isPast)
     .sort((a, b) => a.startTS.localeCompare(b.startTS));
 
-  const past = unique
-    .filter((e) => e.isPast && !e.isOccurrence)
-    .sort((a, b) => b.startTS.localeCompare(a.startTS));
+  const newestFirst = (a: NexEvent, b: NexEvent) => b.startTS.localeCompare(a.startTS);
 
-  // A weekly meeting would otherwise put one card per past date under Past
-  // Events, burying the events that actually differ.
-  const pastOccurrences = unique
-    .filter((e) => e.isPast && e.isOccurrence)
-    .sort((a, b) => b.startTS.localeCompare(a.startTS));
+  // A weekly meeting would put one card per past date under Past Events,
+  // burying the events that actually differ. Each recurring event keeps its
+  // most recent date — one card per time slot — and the rest of its past
+  // dates fill the calendar grid only.
+  const finishedOccurrences = unique.filter((e) => e.isPast && e.isOccurrence).sort(newestFirst);
+  const baseSlug = (e: NexEvent) => e.slug.replace(/-\d{4}-\d{2}-\d{2}$/, '');
+  const latestPerSlot = new Map<string, NexEvent>();
+  for (const e of finishedOccurrences) {
+    if (!latestPerSlot.has(baseSlug(e))) latestPerSlot.set(baseSlug(e), e);
+  }
+  const kept = new Set([...latestPerSlot.values()].map((e) => e.slug));
 
-  // Everything that gets a page and a card. The backfilled dates are excluded,
-  // so they never reach the sitemap, the static params or a series page.
-  const all = unique.filter((e) => !(e.isPast && e.isOccurrence));
+  const past = [
+    ...unique.filter((e) => e.isPast && !e.isOccurrence),
+    ...latestPerSlot.values(),
+  ].sort(newestFirst);
+
+  const pastOccurrences = finishedOccurrences.filter((e) => !kept.has(e.slug));
+
+  // Everything that gets a page and a card. The older backfilled dates are
+  // excluded, so they never reach the sitemap, the static params or a series page.
+  const all = unique.filter((e) => !(e.isPast && e.isOccurrence) || kept.has(e.slug));
 
   const seriesMap: Record<string, NexEvent[]> = {};
   for (const e of all) {

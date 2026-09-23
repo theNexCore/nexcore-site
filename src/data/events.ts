@@ -297,4 +297,32 @@ export const events: EventRecord[] = [
     summary: "A weekly growth community is coming to NexCore. One seat per industry — come see if it's yours.",
     desc: "Overview\nA weekly growth community is coming to NexCore. One seat per industry — come see if it's yours.\n\nMost networking rooms are full of business cards and nobody you'd actually call.\n\nBusinessGPS is a weekly growth community — and Chapter #2 is forming now at NexCore.\n\nWe build people. People build relationships. Relationships build business.\n\nEverybody has something to teach. Everybody has something to learn.\nOne seat per industry — yours\nReal relationships, not card swaps\n\nHosted by the BusinessGPS team at NexCore.\n\nWhen:\nTuesday, October 13, 2026 · Doors open 9:00 AM · Meeting starts 9:30 AM\n\nWhere:\nNexCore, 11820 Tesson Ferry Rd, St. Louis, MO 63128 (2nd Floor, Stairs Required)\n\nVisiting is free. Always.\n\nTicket:\nFree — General Admission",
   },
+  {
+    slug: "businessgps-chapter-2-tuesdays",
+    title: "BusinessGPS Chapter #2 — Tuesday Mornings",
+    start: "2026-10-13T09:30",
+    end: "2026-10-13T10:40",
+    // The launch on the 13th is its own listing above, so the weekly run
+    // skips that date rather than putting two cards on it.
+    repeat: { freq: 'weekly', byWeekday: ['TU'] },
+    skip: ['2026-10-13'],
+    series: 'businessgps',
+    doors: "9:00 AM",
+    img: "/events/businessgps-chapter.jpg",
+    priceLabel: "Free",
+    summary: "Chapter #2 meets every Tuesday morning at NexCore. One seat per industry — come see if it's yours.",
+    desc: "BusinessGPS is a weekly growth community, and Chapter #2 meets every Tuesday morning at NexCore.\n\nWe build people. People build relationships. Relationships build business.\n\nEverybody has something to teach. Everybody has something to learn.\nOne seat per industry — yours\nReal relationships, not card swaps\n\nEVENT DETAILS\n\nEvery Tuesday\n\n9:00 AM — Doors Open\n\n9:30 AM – 10:40 AM — Meeting\n\nVisiting is free. Always.\n\nLOCATION\n\nNexCore\n11820 Tesson Ferry Road\nSt. Louis, MO 63128\n\n2nd Floor, stairs required.",
+  },
+  {
+    slug: "businessgps-friday-chapter",
+    title: "BusinessGPS — Friday Chapter",
+    start: "2026-10-23T11:30",
+    end: "2026-10-23T12:40",
+    repeat: { freq: 'weekly', byWeekday: ['FR'] },
+    series: 'businessgps',
+    img: "/events/businessgps-chapter-friday.jpg",
+    priceLabel: "Free",
+    summary: "The Friday chapter meets at 11:30 AM. Lunch can be ordered from Liliana's for delivery after the meeting.",
+    desc: "BusinessGPS is a weekly growth community, and the Friday chapter meets at 11:30 AM at NexCore.\n\nWe build people. People build relationships. Relationships build business.\n\nEverybody has something to teach. Everybody has something to learn.\nOne seat per industry — yours\nReal relationships, not card swaps\n\nLUNCH\n\nLunch can be ordered from Liliana's for delivery after the event concludes.\n\nEVENT DETAILS\n\nEvery Friday\n\n11:30 AM – 12:40 PM\n\nVisiting is free. Always.\n\nLOCATION\n\nNexCore\n11820 Tesson Ferry Road\nSt. Louis, MO 63128\n\n2nd Floor, stairs required.",
+  },
 ];
