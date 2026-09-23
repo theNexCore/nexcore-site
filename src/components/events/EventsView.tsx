@@ -75,15 +75,16 @@ export function EventsView({
   const initial = upcoming[0] ? localDate(upcoming[0].date) : new Date();
   const [cursor, setCursor] = useState({ y: initial.getFullYear(), m: initial.getMonth() });
 
+  // The grid carries past events too, dimmed, so earlier months are not blank.
   const byDate = useMemo(() => {
     const map = new Map<string, NexEvent[]>();
-    for (const e of upcoming) {
+    for (const e of [...past, ...upcoming]) {
       const list = map.get(e.date) ?? [];
       list.push(e);
       map.set(e.date, list);
     }
     return map;
-  }, [upcoming]);
+  }, [upcoming, past]);
 
   const grid = useMemo(() => {
     const first = new Date(cursor.y, cursor.m, 1);
@@ -190,7 +191,11 @@ export function EventsView({
                           <span
                             className={cn(
                               'font-inter text-[13px]',
-                              events.length ? 'font-semibold text-white' : 'text-white/35',
+                              events.some((e) => !e.isPast)
+                                ? 'font-semibold text-white'
+                                : events.length
+                                  ? 'text-white/55'
+                                  : 'text-white/35',
                             )}
                           >
                             {Number(ymd.slice(-2))}
@@ -200,7 +205,12 @@ export function EventsView({
                               <li key={e.slug}>
                                 <Link
                                   href={`/events/${e.slug}`}
-                                  className="block rounded bg-sky/15 px-1.5 py-1 font-inter text-[11px] leading-tight text-sky hover:bg-sky/25"
+                                  className={cn(
+                                    'block rounded px-1.5 py-1 font-inter text-[11px] leading-tight',
+                                    e.isPast
+                                      ? 'bg-white/[0.06] text-white/40 hover:bg-white/10 hover:text-white/65'
+                                      : 'bg-sky/15 text-sky hover:bg-sky/25',
+                                  )}
                                 >
                                   {e.title.length > 38 ? `${e.title.slice(0, 38)}…` : e.title}
                                 </Link>
