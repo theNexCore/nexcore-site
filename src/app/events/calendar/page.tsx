@@ -23,7 +23,7 @@ export const metadata = buildMetadata({
 });
 
 export default async function EventCalendarPage() {
-  const { upcoming, past } = await getEvents();
+  const { upcoming, past, pastOccurrences } = await getEvents();
 
   return (
     <>
@@ -38,6 +38,7 @@ export default async function EventCalendarPage() {
         <EventsView
           upcoming={upcoming}
           past={past}
+          pastOccurrences={pastOccurrences}
           series={getAllSeries()}
           initialView="calendar"
         />

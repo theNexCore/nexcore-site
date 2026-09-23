@@ -60,11 +60,14 @@ export function EventsView({
   upcoming,
   past,
   series = [],
+  pastOccurrences = [],
   initialView = 'list',
 }: {
   upcoming: NexEvent[];
   past: NexEvent[];
   series?: EventSeriesInfo[];
+  /** Finished dates of recurring events: they fill the grid, but get no card. */
+  pastOccurrences?: NexEvent[];
   /** /events opens on the list; /events/calendar opens on the calendar. */
   initialView?: 'list' | 'calendar';
 }) {
@@ -78,13 +81,13 @@ export function EventsView({
   // The grid carries past events too, dimmed, so earlier months are not blank.
   const byDate = useMemo(() => {
     const map = new Map<string, NexEvent[]>();
-    for (const e of [...past, ...upcoming]) {
+    for (const e of [...past, ...pastOccurrences, ...upcoming]) {
       const list = map.get(e.date) ?? [];
       list.push(e);
       map.set(e.date, list);
     }
     return map;
-  }, [upcoming, past]);
+  }, [upcoming, past, pastOccurrences]);
 
   const grid = useMemo(() => {
     const first = new Date(cursor.y, cursor.m, 1);

@@ -40,7 +40,7 @@ function EventKind({ label }: { label: string }) {
 }
 
 export default async function EventsPage() {
-  const { upcoming, past } = await getEvents();
+  const { upcoming, past, pastOccurrences } = await getEvents();
 
   return (
     <>
@@ -165,7 +165,12 @@ export default async function EventsPage() {
         </div>
 
         <div className="mt-12">
-          <EventsView upcoming={upcoming} past={past} series={getAllSeries()} />
+          <EventsView
+            upcoming={upcoming}
+            past={past}
+            pastOccurrences={pastOccurrences}
+            series={getAllSeries()}
+          />
         </div>
       </Section>
 

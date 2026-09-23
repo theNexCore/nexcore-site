@@ -22,6 +22,13 @@ const TIME_ZONE = 'America/Chicago';
 /** How far ahead recurring events are expanded, per approved spec. */
 const RECURRENCE_HORIZON_WEEKS = 8;
 
+/**
+ * How far BACK recurring events are expanded. These dates exist only to fill
+ * the calendar grid behind today — they are kept out of `all`, so they stay
+ * out of the sitemap, the static params and the Past Events card list.
+ */
+const RECURRENCE_BACKFILL_WEEKS = 8;
+
 /* ------------------------------------------------------------------ *
  * Helpers
  * ------------------------------------------------------------------ */
@@ -162,7 +169,10 @@ function occurrences(rec: EventRecord, now: string): NexEvent[] {
   const set = ruleSet(rec);
   if (!set) return [build(rec, rec.slug, rec.start, rec.end, false)];
 
-  const from = new Date(floating(now).getTime() - lengthOf(rec) * 60_000);
+  const from = new Date(
+    floating(now).getTime() -
+      Math.max(lengthOf(rec) * 60_000, RECURRENCE_BACKFILL_WEEKS * 7 * 86_400_000),
+  );
   const to = new Date(floating(now).getTime() + RECURRENCE_HORIZON_WEEKS * 7 * 86_400_000);
 
   let starts = set.between(from, to, true);
@@ -277,7 +287,10 @@ function valid(rec: EventRecord): boolean {
 
 export interface EventsPayload {
   upcoming: NexEvent[];
+  /** Finished events that get a card: one-offs, never recurring dates. */
   past: NexEvent[];
+  /** Finished dates of recurring events. Calendar grid only — no cards, no URLs. */
+  pastOccurrences: NexEvent[];
   all: NexEvent[];
   /** Keyed by series id. */
   seriesMap: Record<string, NexEvent[]>;
@@ -302,11 +315,21 @@ export async function getEvents(): Promise<EventsPayload> {
     .sort((a, b) => a.startTS.localeCompare(b.startTS));
 
   const past = unique
-    .filter((e) => e.isPast)
+    .filter((e) => e.isPast && !e.isOccurrence)
     .sort((a, b) => b.startTS.localeCompare(a.startTS));
 
+  // A weekly meeting would otherwise put one card per past date under Past
+  // Events, burying the events that actually differ.
+  const pastOccurrences = unique
+    .filter((e) => e.isPast && e.isOccurrence)
+    .sort((a, b) => b.startTS.localeCompare(a.startTS));
+
+  // Everything that gets a page and a card. The backfilled dates are excluded,
+  // so they never reach the sitemap, the static params or a series page.
+  const all = unique.filter((e) => !(e.isPast && e.isOccurrence));
+
   const seriesMap: Record<string, NexEvent[]> = {};
-  for (const e of unique) {
+  for (const e of all) {
     if (!e.seriesId) continue;
     (seriesMap[e.seriesId] ??= []).push(e);
   }
@@ -316,7 +339,7 @@ export async function getEvents(): Promise<EventsPayload> {
     );
   }
 
-  return { upcoming, past, all: unique, seriesMap };
+  return { upcoming, past, pastOccurrences, all, seriesMap };
 }
 
 export async function getEventBySlug(slug: string): Promise<NexEvent | null> {
